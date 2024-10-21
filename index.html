@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Menu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: serif;
+            color: #3a3a3a;
+        }
+        .container {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #d2b48c, #8b4513);
+            padding: 10vh 8px; /* Added vertical padding */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wooden-frame {
+            background-color: #deb887;
+            border: 4vmin solid #8b4513; /* Increased border thickness */
+            border-radius: 2px;
+            box-shadow: 0 0 5px 0 rgba(0,0,0,0.25) inset, 0 5px 10px 5px rgba(0,0,0,0.25);
+            display: inline-block;
+            width: 51.43vw;
+            height: 72vw;
+            max-width: 580px;
+            max-height: 750px;
+            padding: 2vmin;
+            position: relative;
+            text-align: center;
+        }
+        .wooden-frame::before {
+            content: "";
+            position: absolute;
+            border-radius: 2px;
+            bottom: -2vmin; /* Increased offset */
+            left: -2vmin; /* Increased offset */
+            right: -2vmin; /* Increased offset */
+            top: -2vmin; /* Increased offset */
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.25) inset;
+        }
+        .wooden-frame::after {
+            content: "";
+            position: absolute;
+            border-radius: 2px;
+            bottom: -3vmin; /* Increased offset */
+            left: -3vmin; /* Increased offset */
+            right: -3vmin; /* Increased offset */
+            top: -3vmin; /* Increased offset */
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
+        }
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 2vmin;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            margin-left: 4rem
+        }
+        .title {
+            display: flex;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        .menu-icon {
+            width: 5rem;
+            height: 5rem;
+            margin-left: auto;
+            margin-right: 4.5rem;
+        }
+        .subtitle {
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            text-align: left;
+            margin-left: 4rem;
+            margin-top: -0.1rem;
+        }
+        .menu-content {
+            display: flex;
+            flex-grow: 1;
+        }
+        .menu-image {
+            width: 75%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            order: 0; /* Changed to 0 to place it on the left */
+            margin-block-start: -11rem;
+        }
+        .menu-items {
+            width: 80%;
+            text-align: center;
+            padding-left: 1rem; /* Changed from padding-right to padding-left */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .menu-image svg {
+            max-height: 100%;
+            width: auto;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .menu-list {
+            margin-bottom: 1.5rem;
+            margin-top: -1.2rem;
+        }
+        .menu-list p, .additional-items p {
+            margin: 1.5rem 0;
+            font-size: 1rem;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .menu-list p:hover, .additional-items p:hover {
+            transform: scale(1.55);
+        }
+        .additional-items {
+            margin-bottom: 1.5rem;
+        }
+        .additional-items p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+        .footer {
+            font-style: italic;
+            font-size: 1rem;
+            margin-top: auto;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wooden-frame">
+            <div class="content">
+                <div class="header">
+                    <span id="current-datetime"></span>
+                    <span>Stanford, CA</span>
+                </div>
+                <div class="title-container">
+                    <div class="title">
+                        <h1>MENU</h1>
+                    </div>
+                    <svg viewBox="0 0 100 100" class="menu-icon">
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" />
+                        <path d="M30 50 Q50 30 70 50 Q50 70 30 50" fill="none" stroke="currentColor" stroke-width="2" />
+                        <circle cx="40" cy="45" r="5" fill="currentColor" />
+                        <circle cx="60" cy="45" r="5" fill="currentColor" />
+                    </svg>
+                </div>
+                <p class="subtitle">Ori Spector</p>
+                <div class="menu-content">
+                    <div class="menu-image">
+                        <svg viewBox="0 0 100 200">
+                            <path d="M20 180 Q50 20 80 180 M35 100 Q50 60 65 100 M40 140 Q50 120 60 140" fill="none" stroke="currentColor" stroke-width="2" />
+                            <circle cx="45" cy="80" r="3" fill="currentColor" />
+                            <circle cx="55" cy="80" r="3" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="menu-items">
+                        <h2>Today's Starters</h2>
+                        <div class="menu-list">
+                            <p onclick="window.location.href='about.html'">About Me</p>
+                            <p onclick="window.location.href='projects.html'">Projects</p>
+                            <p onclick="window.location.href='blog.html'">Blog</p>
+                            <p onclick="window.location.href='portfolios.html'">Portfolio</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <p>M.S Student in Computer Science @ Stanford</p>
+                    <p>&</p>
+                    <p>Product Engineer @ Luma AI</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const options = {
+                timeZone: 'America/Los_Angeles',
+                // year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            let pstDateTime = now.toLocaleString('en-US', options);
+            console.log(pstDateTime);
+            pstDateTime = pstDateTime.replace("at", "@");
+            document.getElementById('current-datetime').textContent = pstDateTime;
+        }
+    
+        // Update the date and time every second
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
