@@ -1,8 +1,10 @@
 function updateDateTime() {
+    const datetimeElement = document.getElementById('current-datetime');
+    if (!datetimeElement) return; // Skip if element doesn't exist
+    
     const now = new Date();
     const options = {
         timeZone: 'America/Los_Angeles',
-        // year: 'numeric',
         month: 'long',
         day: 'numeric',
         hour: '2-digit',
@@ -11,11 +13,24 @@ function updateDateTime() {
         hour12: true
     };
     let pstDateTime = now.toLocaleString('en-US', options);
-    console.log(pstDateTime);
     pstDateTime = pstDateTime.replace("at", "@");
-    document.getElementById('current-datetime').textContent = pstDateTime;
+    datetimeElement.textContent = pstDateTime;
 }
 
-// Update the date and time every second
-updateDateTime();
-setInterval(updateDateTime, 1000);
+// Only set up the timer if the element exists
+if (document.getElementById('current-datetime')) {
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const projectItems = document.querySelectorAll('.project-item');
+    console.log('Found project items:', projectItems.length);
+    
+    projectItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            console.log('Item clicked');
+            this.classList.toggle('flipped');
+        });
+    });
+});
