@@ -12,9 +12,22 @@ function updateDateTime() {
         second: '2-digit',
         hour12: true
     };
+    let daySuffix = getOrdinalSuffix(now.getDate());
     let pstDateTime = now.toLocaleString('en-US', options);
+    pstDateTime = pstDateTime.replace(/(\d+)/, `$1${daySuffix}`);
     pstDateTime = pstDateTime.replace("at", "@");
+
     datetimeElement.textContent = pstDateTime;
+}
+
+function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th'; // covers 11th to 19th
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
 }
 
 // Only set up the timer if the element exists
@@ -25,11 +38,9 @@ if (document.getElementById('current-datetime')) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const projectItems = document.querySelectorAll('.project-item');
-    console.log('Found project items:', projectItems.length);
-    
     projectItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            console.log('Item clicked');
+        item.addEventListener('click', function (e) {
+            e.stopPropagation();
             this.classList.toggle('flipped');
         });
     });
