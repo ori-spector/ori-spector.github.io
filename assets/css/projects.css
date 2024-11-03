@@ -3,6 +3,10 @@
     max-width: 1100px;
     height: 80vh;
     margin: 2em auto 15em; /* Added bottom margin */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .outerBevel {
@@ -282,4 +286,73 @@ nav ul li a:hover::after {
 
 .overlay.active {
     display: block;
+}
+
+.viewport {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px); /* Full height minus nav */
+    overflow: hidden;
+}
+
+.draggable-container {
+    position: absolute;
+    width: 400vw; /* Increased from 300vw */
+    height: 300vh; /* Increased from 200vh */
+    cursor: move;
+    user-select: none;
+    transform-origin: center center;
+}
+
+main {
+    position: relative; /* Change from absolute */
+}
+
+/* Position the frames */
+.frame-1 {
+    top: 20%;
+    left: 20%;
+}
+
+.frame-2 {
+    top: 55%;
+    left: 30%;
+}
+
+.frame-3 {
+    top: 15%;
+    left: 45%;
+}
+
+.frame-4 {
+    top: 25%;
+    left: 0%;
+}
+
+.frame-5 {
+    top: 65%;
+    left: 5%;
+}
+
+/* Adjust viewport if needed */
+.viewport {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.frame .project-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.frame .project-item.large {
+    width: 90%;
+    height: 90%;
+    margin: auto;
 }
