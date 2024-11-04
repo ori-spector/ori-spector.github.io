@@ -1,23 +1,27 @@
 .frame {
     width: 90%;
     max-width: 1100px;
-    height: 80vh;
-    margin: 2em auto 15em; /* Added bottom margin */
+    height: auto;
+    margin: 2em auto 15em;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .outerBevel {
-    box-shadow: 6px 8px 16px 0 black; /* Increased shadow for thicker frame */
-    border-width: 20px; /* Increased from 5px to 20px for a thicker frame */
+    box-shadow: 6px 8px 16px 0 black;
+    border-width: 20px;
     border-style: solid;
     border-color: rgb(109, 84, 58) rgb(24, 19, 13) rgb(24, 19, 13) rgb(109, 84, 58);
 }
 
 .flatSurface {
-    border: 16px solid rgb(65, 40, 16); /* Increased from 12px to 16px */
+    border: 16px solid rgb(65, 40, 16);
 }
 
 .innerBevel {
-    border-width: 10px; /* Increased from 5px to 10px */
+    border-width: 10px;
     border-style: solid;
     border-color: rgb(24, 19, 13) rgb(109, 84, 58) rgb(109, 84, 58) rgb(24, 19, 13);
 }
@@ -111,9 +115,9 @@
 
 nav {
     padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     top: 0;
-    z-index: 1000; /* Ensures it stays above other content */
+    z-index: 1000;
 }
 
 nav ul {
@@ -127,7 +131,7 @@ nav ul {
 
 nav ul li {
     margin: 0 35px;
-    position: relative; /* For the underline effect */
+    position: relative;
 }
 
 nav ul li a {
@@ -141,7 +145,7 @@ nav ul li a {
 
 nav ul li a:hover {
     color: #000;
-    transform: scale(1.1); /* Slightly enlarges the text on hover */
+    transform: scale(1.1);
 }
 
 nav ul li a::after {
@@ -157,14 +161,14 @@ nav ul li a::after {
 }
 
 nav ul li a:hover::after {
-    width: 100%; /* Underline effect on hover */
+    width: 100%;
 }
 
 @media (max-width: 768px) {
     .project-container {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(12, 1fr);
-        gap: 5px; /* Reduce gap for smaller screens */
+        gap: 5px;
     }
 
     .large, .medium, .medium-wide {
@@ -178,8 +182,8 @@ nav ul li a:hover::after {
     }
 
     .project-item {
-        padding: 8px; /* Adjust padding for smaller screens */
-        font-size: 0.9em; /* Adjust font size */
+        padding: 8px;
+        font-size: 0.9em;
     }
 }
 
@@ -187,23 +191,23 @@ nav ul li a:hover::after {
     .project-container {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
-        gap: 5px; /* Further reduce gap */
+        gap: 5px;
     }
 
     .project-item {
         grid-column: 1 / -1;
         grid-row: auto;
-        aspect-ratio: 16 / 9; /* Maintain aspect ratio */
-        padding: 5px; /* Further adjust padding */
-        font-size: 0.8em; /* Further adjust font size */
+        aspect-ratio: 16 / 9;
+        padding: 5px;
+        font-size: 0.8em;
     }
 
     .project-item h2 {
-        font-size: 1em; /* Adjust heading size */
+        font-size: 1em;
     }
 
     .project-item p {
-        font-size: 0.7em; /* Adjust paragraph size */
+        font-size: 0.7em;
     }
 }
 
@@ -253,8 +257,12 @@ nav ul li a:hover::after {
 .card-back p {
     font-size: 1em;
     line-height: 1.6;
-    margin: 15px 0;
-    text-align: left;
+    margin: 21px;
+    text-align: center;
+}
+
+.card-back p i {
+    font-weight: 600;
 }
 
 .close-button {
@@ -282,4 +290,117 @@ nav ul li a:hover::after {
 
 .overlay.active {
     display: block;
+}
+
+.viewport {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.draggable-container {
+    width: 2000px; 
+    height: 1500px;
+    position: relative; 
+    cursor: grab;
+    user-select: none;
+    transform-origin: 0 0; 
+}
+
+main {
+    position: relative;
+}
+
+.frame-1 {
+    top: 5%; 
+    left: 50%;
+}
+
+.frame-2 {
+    top: 72%;
+    left: 65%;
+}
+
+.frame-3 {
+    top: 15%;
+    left: 105%;
+}
+
+.frame-4 {
+    top: 25%;
+    left: -10%;
+}
+
+.frame-5 {
+    top: 85%;
+    left: 5%;
+}
+
+.frame .project-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.frame .project-item.large {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .frame-1 {
+        top: 15%;
+        left: 10%;
+    }
+
+    .frame-2 {
+        top: 50%;
+        left: 20%;
+    }
+
+    .frame-3 {
+        top: 10%;
+        left: 30%;
+    }
+
+    .frame-4 {
+        top: 20%;
+        left: 5%;
+    }
+
+    .frame-5 {
+        top: 60%;
+        left: 15%;
+    }
+}
+
+@media (max-width: 480px) {
+    .frame-1 {
+        top: 10%;
+        left: 5%;
+    }
+
+    .frame-2 {
+        top: 45%;
+        left: 10%;
+    }
+
+    .frame-3 {
+        top: 5%;
+        left: 20%;
+    }
+
+    .frame-4 {
+        top: 15%;
+        left: 0%;
+    }
+
+    .frame-5 {
+        top: 55%;
+        left: 10%;
+    }
 }

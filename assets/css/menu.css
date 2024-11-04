@@ -7,7 +7,7 @@ body {
 .container {
     min-height: 100vh;
     background: linear-gradient(to bottom, #d2b48c, #8b4513);
-    padding: 10vh 8px; /* Added vertical padding */
+    padding: 10vh 8px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,20 +33,20 @@ body {
     content: "";
     position: absolute;
     border-radius: 2px;
-    bottom: -2vmin; /* Increased offset */
-    left: -2vmin; /* Increased offset */
-    right: -2vmin; /* Increased offset */
-    top: -2vmin; /* Increased offset */
+    bottom: -2vmin;
+    left: -2vmin;
+    right: -2vmin;
+    top: -2vmin;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.25) inset;
 }
 .wooden-frame::after {
     content: "";
     position: absolute;
     border-radius: 2px;
-    bottom: -3vmin; /* Increased offset */
-    left: -3vmin; /* Increased offset */
-    right: -3vmin; /* Increased offset */
-    top: -3vmin; /* Increased offset */
+    bottom: -3vmin;
+    left: -3vmin; 
+    right: -3vmin; 
+    top: -3vmin; 
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
 }
 .content {
@@ -104,13 +104,13 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    order: 0; /* Changed to 0 to place it on the left */
+    order: 0;
     margin-block-start: -11rem;
 }
 .menu-items {
     width: 80%;
     text-align: center;
-    padding-left: 1rem; /* Changed from padding-right to padding-left */
+    padding-left: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -157,6 +157,6 @@ h2 {
 
 @media (max-width: 600px) {
     .header span:nth-child(2) {
-        display: none; /* Hide the time on smaller screens */
+        display: none; 
     }
 }
