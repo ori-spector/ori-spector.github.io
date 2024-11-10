@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Research Papers</title>
+    <link rel="stylesheet" href="../assets/css/menu.css">
+    <link rel="stylesheet" href="../assets/css/blog.css">
+    <style>
+        .paper-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .paper-item {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .paper-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .paper-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .paper-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .paper-abstract {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .paper-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+        
+        .paper-link:hover {
+            background: #333;
+        }
+    </style>
+</head>
+<body style="background-color: antiquewhite;">
+    <nav>
+        <ul>
+            <li><a href="index.html">Menu</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="projects.html">Museum</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="paper-container">
+            <article class="paper-item" onclick="window.location.href='../assets/papers/CS_224V_Final_Paper.pdf'">
+                <h2 class="paper-title">AI Essay Evaluator: Reviewing College Apps with LLMs</h2>
+                <div class="paper-meta">
+                    Ori Spector & Nick Walker • Conversational Virtual Assistants with Deep Learning • December 2023
+                </div>
+                <p class="paper-abstract">
+                    A comprehensive study on the development and evaluation of an LLM-driven tool designed to assist in the grading and constructive feedback of Common App personal essays.
+                </p>
+                <a href="../assets/papers/CS_224V_Final_Paper.pdf" class="paper-link" target="_blank">Read Paper</a>
+            </article>
+        </div>
+        <div class="paper-container">
+            <article class="paper-item" onclick="window.location.href='../assets/papers/CS231N_Final_Report.pdf'">
+                <h2 class="paper-title">An Exploration of ResNet Fine-tuning for Fitness Pose Classification</h2>
+                <div class="paper-meta">
+                    Ori Spector & Nick Walker • Deep Learning for Computer Vision • June 2023
+                </div>
+                <p class="paper-abstract">
+                    A novel methodology combining pose estimation techniques with deep learning models to accurately classify fitness exercises.
+                </p>
+                <a href="../assets/papers/CS231N_Final_Report.pdf" class="paper-link" target="_blank">Read Paper</a>
+            </article>
+        </div>
+        <div class="paper-container">
+            <article class="paper-item" onclick="window.location.href='../assets/papers/CS206 Team Planet Money Bot, Final Report.pdf'">
+                <h2 class="paper-title">Planet Money Bot</h2>
+                <div class="paper-meta">
+                    Ori Spector, Tara Parekh, Wenna Qin, & Millie Lin • Computational Journalism • March 2023
+                </div>
+                <p class="paper-abstract">
+                    Our goal was to build on OpenAI’s powerful generative language model optimize a RAG for Planet Money’s podcast archive.
+                </p>
+                <a href="../assets/papers/CS206 Team Planet Money Bot, Final Report.pdf" class="paper-link" target="_blank">Read Paper</a>
+            </article>
+        </div>
+        <div class="paper-container">
+            <article class="paper-item" onclick="window.location.href='../assets/papers/CS224N__Project_Final_Report.pdf'">
+                <h2 class="paper-title">Style Emulation with LORA in Text Generation</h2>
+                <div class="paper-meta">
+                    Ori Spector & Luke Mann • Natural Language Processing with Deep Learning • March 2023
+                </div>
+                <p class="paper-abstract">
+                    Investigating the potential of Low Rank Adaptation (LoRA) for style transfer text generation, with the aim of emulating the writing styles of two prominent politicians, Joe Biden and Donald Trump.
+                </p>
+                <a href="../assets/papers/CS224N__Project_Final_Report.pdf" class="paper-link" target="_blank">Read Paper</a>
+            </article>
+        </div>
+    </main>
+</body>
+</html>
