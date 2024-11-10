@@ -255,10 +255,13 @@ nav ul li a:hover::after {
 }
 
 .card-back p {
-    font-size: 1em;
-    line-height: 1.6;
-    margin: 21px;
+    font-size: clamp(0.8em, 2vw, 1em); 
+    line-height: 1.4;
+    margin: 3%; 
     text-align: center;
+    padding: 2%;  
+    max-height: 40%;  
+    overflow-y: auto; 
 }
 
 .card-back p i {
@@ -402,5 +405,19 @@ main {
     .frame-5 {
         top: 55%;
         left: 10%;
+    }
+
+    .card-back {
+        padding: 5%; 
+    }
+
+    .card-back p {
+        margin: 2%;
+        font-size: clamp(0.7em, 3vw, 0.9em); 
+    }
+
+    .card-back img {
+        max-height: 30%;  
+        margin: 10px 0;
     }
 }

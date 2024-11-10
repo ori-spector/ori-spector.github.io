@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Film and Writing Projects</title>
+    <link rel="stylesheet" href="../assets/css/menu.css">
+    <link rel="stylesheet" href="../assets/css/blog.css">
+    <style>
+        .paper-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .paper-item {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .paper-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .paper-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .paper-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .paper-abstract {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .paper-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+        
+        .paper-link:hover {
+            background: #333;
+        }
+    </style>
+</head>
+<body style="background-color: antiquewhite;">
+    <nav>
+        <ul>
+            <li><a href="index.html">Menu</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="projects.html">Museum</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="paper-container">
+            <article class="paper-item">
+                <h2 class="paper-title">Leverage</h2>
+                <div class="paper-meta">
+                    Ori Spector & David Mazouz • Screenplay • 2024
+                </div>
+                <p class="paper-abstract">
+                   Logic Doesn't Work, Leverage Does. <br> <strong>Coming Soon...</strong>
+                </p>
+            </article>
+        </div>
+        <div class="paper-container">
+            <article class="paper-item" onclick="window.location.href='../assets/papers/Niche Cinema.pdf'">
+                <h2 class="paper-title">Niche Cinema: The Impact of Netflix’s Recommendation System</h2>
+                <div class="paper-meta">
+                    Ori Spector • Research • March 2022
+                </div>
+                <p class="paper-abstract">
+                    A deep dive into the impact of Netflix's recommendation system and how it's homogenizing cinema.
+                </p>
+                <a href="../assets/papers/Niche Cinema.pdf" class="paper-link" target="_blank">Read Paper</a>
+            </article>
+        </div>
+        <div class="paper-container">
+            <article class="paper-item" onclick="window.location.href='https://www.youtube.com/watch?v=LQJwImkNi5E'">
+                <h2 class="paper-title">Caracal Valley</h2>
+                <div class="paper-meta">
+                    Ori Spector, Quinn Manning, & Hafez Mohseni • Screenplay & Film • 2021
+                </div>
+                <p class="paper-abstract">
+                    Creator, writer, actor, and producer for the pilot episode of "Caracal Valley", an independent student TV show
+                </p>
+                <a href="https://www.youtube.com/watch?v=LQJwImkNi5E" class="paper-link" target="_blank">Watch Pilot</a>
+            </article>
+        </div>
+        <div class="paper-container">
+            <article class="paper-item" onclick="window.location.href='../assets/papers/Truth and Reconciliation.pdf'">
+                <h2 class="paper-title">Truth and Reconciliation: The Philosophy of Film</h2>
+                <div class="paper-meta">
+                    Ori Spector • Research • August 2021
+                </div>
+                <p class="paper-abstract">
+                    A study on film's ability to evoke new philosophical perspectives.
+                </p>
+                <a href="../assets/papers/Truth and Reconciliation.pdf" class="paper-link" target="_blank">Read Paper</a>
+            </article>
+        </div>
+    </main>
+</body>
+</html>
