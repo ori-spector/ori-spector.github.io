@@ -1,0 +1,157 @@
+/* Styles for the About Me page */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #444;
+    background-color: #f9f9f9;
+}
+
+.about-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 20px;
+}
+
+header, footer {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+main {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.introduction p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #333;
+    border-bottom: 2px solid #ececec;
+    padding-bottom: 10px;
+}
+
+.beliefs ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.beliefs li {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.contact p {
+    font-size: 1.1em;
+}
+
+.contact a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+.contact a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 40px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .introduction p, .beliefs li, .contact p {
+        font-size: 1em;
+    }
+
+    .about-container {
+        padding: 15px;
+    }
+}
+
+/* Add these styles for the social links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.social-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+}
+
+.social-icon i {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.social-icon .fa-envelope {
+    color: #000000;
+}
+
+.social-icon .fa-linkedin {
+    color: #000;
+}   
+
+.social-icon .fa-github {
+    color: #000;
+}
+
+.social-icon .fa-x-twitter {
+    color: #000;
+}   
+
+/* Remove the colored hover effects */
+.social-icon:hover .fa-envelope { color: #000000; }
+.social-icon:hover .fa-linkedin { color: #0077b5; }
+.social-icon:hover .fa-github { color: #333; }
+.social-icon:hover .fa-x-twitter { color:#000; } 
+
+/* Make icons responsive */
+@media (max-width: 600px) {
+    .social-links {
+        gap: 1.5rem;
+    }
+    
+    .social-icon i {
+        font-size: 1.5rem;
+    }
+}
