@@ -2,57 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>My Story</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-    <link rel="stylesheet" href="assets/css/menu.css">
-    <link rel="stylesheet" href="assets/css/pages_styles.css">
+    <link rel="stylesheet" href="../assets/css/about.css">
+    <link rel="stylesheet" href="../assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="wooden-frame">
-            <div class="content">
-                <div class="header">
-                    <span id="current-datetime"></span>
-                    <span>Stanford, CA</span>
+    <nav>
+        <ul>
+            <li><a href="../pages/menu.html">Menu</a></li>
+            <li><a href="../pages/projects.html">Museum</a></li>
+            <li><a href="../pages/blog.html">Blog</a></li>
+        </ul>
+    </nav>
+    <div class="about-container">
+        <main style="padding: 20px 20px;">
+            <section class="introduction">
+                <p>Hello! I'm <strong>Ori Spector</strong>, a Master's student in Computer Science at Stanford University and a Product Engineer at <a href="https://lumalabs.ai/" target="_blank" style="color: #000;">Luma AI</a>.</p>
+            </section>
+            <section class="beliefs">
+                <h2>General Thoughts</h2>
+                <ul>
+                    <li>Storytelling is everything.</li>
+                    <li>The way we communicate shapes our ideas more than the content itself. Technology is opening up these new mediums.</li>
+                    <li>Nature, media, and art ground us. We need to use them.</li>
+                </ul>
+            </section>
+            <section class="contact">
+                <h2></h2>
+                <div class="social-links">
+                    <a href="mailto:orispec@stanford.edu" class="social-icon">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ori-spector-a96ba01aa/" target="_blank" class="social-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/ori-spector" target="_blank" class="social-icon">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://x.com/orispector" target="_blank" class="social-icon">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
                 </div>
-                <div class="title-container">
-                    <div class="title">
-                        <h1>MENU</h1>
-                    </div>
-                    <svg viewBox="0 0 100 100" class="menu-icon">
-                        <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" />
-                        <path d="M30 50 Q50 30 70 50 Q50 70 30 50" fill="none" stroke="currentColor" stroke-width="2" />
-                        <circle cx="40" cy="45" r="5" fill="currentColor" />
-                        <circle cx="60" cy="45" r="5" fill="currentColor" />
-                    </svg>
-                </div>
-                <p class="subtitle">Ori Spector</p>
-                <div class="menu-content">
-                    <div class="menu-image">
-                        <svg viewBox="0 0 100 200">
-                            <path d="M20 180 Q50 20 80 180 M35 100 Q50 60 65 100 M40 140 Q50 120 60 140" fill="none" stroke="currentColor" stroke-width="2" />
-                            <circle cx="45" cy="80" r="3" fill="currentColor" />
-                            <circle cx="55" cy="80" r="3" fill="currentColor" />
-                        </svg>
-                    </div>
-                    <div class="menu-items">
-                        <h2>Starters</h2>
-                        <div class="menu-list">
-                            <p onclick="window.location.href='../pages/about.html'">About Me</p>
-                            <p onclick="window.location.href='../pages/projects.html'">Museum</p>
-                            <p onclick="window.location.href='../pages/blog.html'">Blog</p>
-                            <p onclick="window.location.href='../pages/papers.html'">Research Papers</p>
-                            <p onclick="window.location.href='../pages/film.html'">Film</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer">
-                    <p>Master's Student in Computer Science @ Stanford</p>
-                    <p>&</p>
-                    <p>Product Engineer @ Luma AI</p>
-                </div>
-            </div>
-        </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 Ori Spector</p>
+        </footer>
     </div>
-    <script src="assets/js/script.js"></script>
 </body>
+</html>
