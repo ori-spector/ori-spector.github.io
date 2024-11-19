@@ -187,30 +187,6 @@ nav ul li a:hover::after {
     }
 }
 
-@media (max-width: 480px) {
-    .project-container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 5px;
-    }
-
-    .project-item {
-        grid-column: 1 / -1;
-        grid-row: auto;
-        aspect-ratio: 16 / 9;
-        padding: 5px;
-        font-size: 0.8em;
-    }
-
-    .project-item h2 {
-        font-size: 1em;
-    }
-
-    .project-item p {
-        font-size: 0.7em;
-    }
-}
-
 .project-item.expanded {
     position: absolute;
     width: 90%;
@@ -356,68 +332,28 @@ main {
 
 @media (max-width: 768px) {
     .frame-1 {
-        top: 15%;
-        left: 10%;
-    }
-
-    .frame-2 {
-        top: 50%;
-        left: 20%;
-    }
-
-    .frame-3 {
-        top: 10%;
-        left: 30%;
-    }
-
-    .frame-4 {
         top: 20%;
-        left: 5%;
-    }
-
-    .frame-5 {
-        top: 60%;
-        left: 15%;
-    }
-}
-
-@media (max-width: 480px) {
-    .frame-1 {
-        top: 10%;
-        left: 5%;
+        left: 10%;
     }
 
     .frame-2 {
-        top: 45%;
-        left: 10%;
+        top: 40%;
+        left: 68%;
     }
 
     .frame-3 {
-        top: 5%;
-        left: 20%;
+        top: 100%;
+        left: 100%;
     }
 
     .frame-4 {
-        top: 15%;
-        left: 0%;
+        top: 120%;
+        left: 45%;
     }
 
     .frame-5 {
-        top: 55%;
-        left: 10%;
+        top: 80%;
+        left: -10%;
     }
 
-    .card-back {
-        padding: 5%; 
-    }
-
-    .card-back p {
-        margin: 2%;
-        font-size: clamp(0.7em, 3vw, 0.9em); 
-    }
-
-    .card-back img {
-        max-height: 30%;  
-        margin: 10px 0;
-    }
 }
