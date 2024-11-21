@@ -71,11 +71,11 @@
 
 .project-item h2 {
     margin-bottom: 5px;
-    font-size: 1em;
+    font-size: 2em;
 }
 
 .project-item p {
-    font-size: 0.8em;
+    font-size: 1.8em;
 }
 
 .large {
@@ -231,13 +231,17 @@ nav ul li a:hover::after {
 }
 
 .card-back p {
-    font-size: clamp(0.8em, 2vw, 1em); 
+    font-size: clamp(1.2em, 2vw, 1em); 
     line-height: 1.4;
-    margin: 3%; 
     text-align: center;
     padding: 2%;  
     max-height: 40%;  
     overflow-y: auto; 
+}
+
+.card-back a {
+    font-size: 22px;
+    margin-bottom: 30px;
 }
 
 .card-back p i {
