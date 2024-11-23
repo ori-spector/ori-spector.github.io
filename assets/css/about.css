@@ -25,7 +25,7 @@ header h1 {
 main {
     background-color: #fff;
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
@@ -150,31 +150,6 @@ footer p {
     .social-icon i {
         font-size: 1.5rem;
     }
-}
-
-.projects ul {
-    list-style-type: disc;
-    margin-left: 20px;
-}
-
-.projects li {
-    font-size: 1.1em;
-    line-height: 1.6;
-    margin-bottom: 10px;
-    transition: transform 0.2s ease;
-}
-
-.projects li:hover {
-    transform: translateX(10px);
-}
-
-.projects a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.projects a:hover {
-    text-decoration: underline;
 }
 
 @media (max-width: 600px) {
