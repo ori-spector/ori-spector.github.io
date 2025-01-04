@@ -9,22 +9,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <!-- <nav>
-        <ul>
-            <li><a href="../pages/menu.html">Menu</a></li>
-            <li><a href="../pages/projects.html">Museum</a></li>
-            <li><a href="../pages/blog.html">Blog</a></li>
-        </ul>
-    </nav> -->
     <div class="about-container">
         <main style="padding: 20px 20px;">
-            <div class="profile-image-container">
+            <nav>
+                <ul>
+                    <li><a href="../pages/papers.html">Projects</a></li>
+                    <li><a href="../pages/film.html">Creative</a></li>
+                    <li><a href="../pages/blog.html">Blog</a></li>
+                </ul>
+            </nav>
+            <br>
+            <h2>About</h2>
+            <!-- <div class="profile-image-container">
                 <img src="../assets/images/profile.png" alt="Ori Spector" class="profile-image">
-            </div>
+            </div> -->
             <section class="introduction">
-                <p>Hello! I'm <strong>Ori Spector</strong>, a Master's Student in Computer Science at Stanford and a Product Engineer at <a href="https://lumalabs.ai/" target="_blank" style="color: #000;">Luma AI</a>.</p>
+                <p>Hello! I'm <strong>Ori Spector</strong>, a Master's Student in Computer Science at Stanford and a Product Engineer at <a href="https://lumalabs.ai/" target="_blank" style="color: #000;">Luma AI</a> working on AI Agent workstreams for creative tasks using LLMs and visual foundation models.</p>
             </section>
-            <section class="projects">
+            <section class="video-gallery">
+                <div class="video-container">
+                    <video src="../assets/videos/umbrella.mp4" class="profile-video" muted></video>
+                </div>
+                <div class="video-container">
+                    <video src="../assets/videos/stairs1.mp4" class="profile-video" muted></video>
+                </div>
+                <div class="video-container">
+                    <video src="../assets/videos/typewriter.mp4" class="profile-video" muted></video>
+                </div>
+            </section>
+            <!-- <section class="projects">
                 <h2>Previous Work</h2>
                 <nav>
                     <ul>
@@ -33,7 +46,7 @@
                         <li><a href="../pages/blog.html">Blog</a></li>
                     </ul>
                 </nav>
-            </section>
+            </section> -->
             <section class="beliefs">
                 <h2>General Thoughts</h2>
                 <ul>
@@ -62,5 +75,24 @@
             </section>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const videoContainers = document.querySelectorAll('.video-container');
+
+            videoContainers.forEach(container => {
+                const video = container.querySelector('.profile-video');
+
+                container.addEventListener('mouseenter', () => {
+                    video.play();
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
