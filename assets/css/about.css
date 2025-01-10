@@ -237,4 +237,8 @@ main .profile-image:hover {
         width: 150px;
         height: 150px;
     }
+
+    .video-gallery .video-container:not(:first-child) {
+        display: none;
+    }
 }
