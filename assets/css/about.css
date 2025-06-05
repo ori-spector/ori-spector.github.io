@@ -33,6 +33,47 @@ main {
     font-size: 1.2em;
     line-height: 1.6;
     margin-left: 30px;
+    margin-bottom: 1.5rem;
+}
+
+.introduction ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 30px;
+}
+
+.introduction li {
+    font-size: 1.1em;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+    color: #333;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.introduction li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.introduction li:hover {
+    color: #000;
+    transform: translateX(5px);
+}
+
+.introduction li:hover::before {
+    transform: scale(1.5);
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
 section {
@@ -47,14 +88,43 @@ h2 {
 }
 
 .beliefs ul {
-    list-style-type: disc;
-    margin-left: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 30px;
 }
 
 .beliefs li {
     font-size: 1.1em;
-    line-height: 1.6;
-    margin-bottom: 10px;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    padding-left: 2rem;
+    position: relative;
+    color: #333;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.beliefs li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.beliefs li:hover {
+    color: #000;
+    transform: translateX(5px);
+}
+
+.beliefs li:hover::before {
+    transform: scale(1.5);
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
 .contact p {
@@ -183,62 +253,288 @@ main .profile-image:hover {
     }
 }
 
-.video-gallery {
+.video-showcase {
     display: flex;
-    flex-direction: row; 
-    justify-content: center; 
+    flex-direction: column;
     align-items: center;
-    gap: 1.5rem; 
-    margin: 2rem 0;
-    flex-wrap: nowrap; 
+    margin: 3rem 0;
+    gap: 2rem;
+}
+
+.video-carousel {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    perspective: 1000px;
 }
 
 .video-container {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    overflow: hidden; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
-    background-color: #000;
+    opacity: 0;
+    transform: translateX(100px) rotateY(45deg);
+    pointer-events: none;
+}
+
+.video-container.active {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg);
+    pointer-events: all;
+    z-index: 2;
+}
+
+.video-container.prev {
+    opacity: 0.6;
+    transform: translateX(-50px) rotateY(-25deg) scale(0.85);
+    z-index: 1;
+}
+
+.video-container.next {
+    opacity: 0.6;
+    transform: translateX(50px) rotateY(25deg) scale(0.85);
+    z-index: 1;
 }
 
 .profile-video {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
+    transition: all 0.4s ease;
 }
 
-.video-container:hover {
+.video-container:hover .profile-video {
     transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.video-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 2rem 1.5rem 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.video-container.active:hover .video-overlay {
+    transform: translateY(0);
+}
+
+.video-label {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.video-nav {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-dot.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: scale(1.2);
+}
+
+.nav-dot:hover {
+    background: #888;
+    transform: scale(1.1);
+}
+
+.nav-dot.active:hover {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.work-navigation {
+    margin: 3rem 0;
+}
+
+.nav-cards {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.nav-card {
+    flex: 1;
+    min-width: 280px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.nav-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.nav-card:hover::before {
+    opacity: 0.05;
+}
+
+.nav-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    border-color: #667eea;
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.nav-card:hover .card-icon {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.card-content {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.card-content h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.card-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.nav-card:hover .card-content h3 {
+    color: #000;
+}
+
+.nav-card:hover .card-content p {
+    color: #555;
+}
+
+.card-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 0.9rem;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.nav-card:hover .card-arrow {
+    background: #667eea;
+    color: white;
+    transform: translateX(4px);
+}
+
+@media (max-width: 600px) {
+    .nav-cards {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-card {
+        min-width: auto;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .card-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .card-content p {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 900px) {
-    .video-gallery {
-        flex-direction: row; 
-        flex-wrap: wrap; 
-        justify-content: center;
-    }
-
-    .video-container {
-        width: 150px;
-        height: 150px;
+    .video-carousel {
+        width: 250px;
+        height: 250px;
     }
 }
 
 @media (max-width: 600px) {
-    .video-gallery {
-        flex-direction: column; 
+    .video-carousel {
+        width: 200px;
+        height: 200px;
     }
-
-    .video-container {
-        width: 150px;
-        height: 150px;
+    
+    .video-showcase {
+        margin: 2rem 0;
     }
-
-    .video-gallery .video-container:not(:first-child) {
-        display: none;
+    
+    .introduction li {
+        font-size: 1rem;
+        padding-left: 1.5rem;
     }
 }
