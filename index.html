@@ -13,21 +13,39 @@
     <div class="about-container">
         <main style="padding: 20px 20px;">
             <h2>About</h2>
-            <!-- <div class="profile-image-container">
-                <img src="../assets/images/profile.png" alt="Ori Spector" class="profile-image">
-            </div> -->
             <section class="introduction">
-                <p>Hello, I'm <strong>Ori Spector</strong>! I hold an M.S. in Computer Science (AI) & B.S. in Symbolic Systems (AI) from Stanford University. Currently, I'm a Product Engineer at <a href="https://lumalabs.ai/" target="_blank" style="color: #000;">Luma AI</a> working on multi-modal AI Agent workstreams for creativity.</p>
+                <p>Hi, I'm <strong>Ori Spector</strong></p>
+                <ul>
+                    <li>M.S. Computer Science & B.S. Symbolic Systems @ Stanford</li>
+                    <li>Product Engineer @ <a href="https://lumalabs.ai/" target="_blank" style="color: #000;">Luma AI</a> building surreal workflow for multi-modal creative intelligence</li>
+                    <li>Dabbling in film</li>
+                </ul>
             </section>
-            <section class="video-gallery">
-                <div class="video-container">
-                    <video src="../assets/videos/umbrella.mp4" class="profile-video" muted></video>
+            <section class="video-showcase">
+                <div class="video-carousel">
+                    <div class="video-container active" data-video="0">
+                        <video src="../assets/videos/umbrella.mp4" class="profile-video" muted loop></video>
+                        <div class="video-overlay">
+                            <span class="video-label">Perspective</span>
+                        </div>
+                    </div>
+                    <div class="video-container" data-video="1">
+                        <video src="../assets/videos/stairs1.mp4" class="profile-video" muted loop></video>
+                        <div class="video-overlay">
+                            <span class="video-label">Ideation</span>
+                        </div>
+                    </div>
+                    <div class="video-container" data-video="2">
+                        <video src="../assets/videos/typewriter.mp4" class="profile-video" muted loop></video>
+                        <div class="video-overlay">
+                            <span class="video-label">Creation</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="video-container">
-                    <video src="../assets/videos/stairs1.mp4" class="profile-video" muted></video>
-                </div>
-                <div class="video-container">
-                    <video src="../assets/videos/typewriter.mp4" class="profile-video" muted></video>
+                <div class="video-nav">
+                    <div class="nav-dot active" data-target="0"></div>
+                    <div class="nav-dot" data-target="1"></div>
+                    <div class="nav-dot" data-target="2"></div>
                 </div>
             </section>
             <section class="beliefs">
@@ -38,14 +56,35 @@
                     <li>Intellectual depth is created from pushing back against majority assumptions.</li>
                 </ul>
             </section>
-            <h2></h2>
-            <nav>
-                <ul>
-                    <li><a href="../pages/papers.html">Projects</a></li>
-                    <li><a href="../pages/film.html">Creative</a></li>
-                    <!-- <li><a href="../pages/blog.html">Blog</a></li> -->
-                </ul>
-            </nav>
+            <section class="work-navigation">
+                <h2>Explore</h2>
+                <div class="nav-cards">
+                    <a href="../pages/papers.html" class="nav-card">
+                        <div class="card-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Projects</h3>
+                            <p>Technical work & research</p>
+                        </div>
+                        <div class="card-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                    <a href="../pages/film.html" class="nav-card">
+                        <div class="card-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Creative</h3>
+                            <p>Visual storytelling & film</p>
+                        </div>
+                        <div class="card-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </section>
             <section class="contact">
                 <h2></h2>
                 <div class="social-links">
@@ -69,18 +108,87 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const videoContainers = document.querySelectorAll('.video-container');
+            const navDots = document.querySelectorAll('.nav-dot');
+            let currentIndex = 0;
+            let autoplayInterval;
 
-            videoContainers.forEach(container => {
-                const video = container.querySelector('.profile-video');
-
-                container.addEventListener('mouseenter', () => {
-                    video.play();
-                });
-
-                container.addEventListener('mouseleave', () => {
+            function updateVideoDisplay() {
+                videoContainers.forEach((container, index) => {
+                    const video = container.querySelector('.profile-video');
+                    
+                    container.classList.remove('active', 'prev', 'next');
                     video.pause();
                     video.currentTime = 0;
+                    
+                    if (index === currentIndex) {
+                        container.classList.add('active');
+                        setTimeout(() => video.play(), 300);
+                    } else if (index === (currentIndex - 1 + videoContainers.length) % videoContainers.length) {
+                        container.classList.add('prev');
+                    } else if (index === (currentIndex + 1) % videoContainers.length) {
+                        container.classList.add('next');
+                    }
                 });
+
+                navDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            function nextVideo() {
+                currentIndex = (currentIndex + 1) % videoContainers.length;
+                updateVideoDisplay();
+            }
+
+            function goToVideo(index) {
+                currentIndex = index;
+                updateVideoDisplay();
+                resetAutoplay();
+            }
+
+            function resetAutoplay() {
+                clearInterval(autoplayInterval);
+                autoplayInterval = setInterval(nextVideo, 4000);
+            }
+
+            // Initialize
+            updateVideoDisplay();
+            resetAutoplay();
+
+            // Add click handlers for navigation dots
+            navDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => goToVideo(index));
+            });
+
+            // Add click handler for video containers
+            videoContainers.forEach((container, index) => {
+                container.addEventListener('click', () => {
+                    if (index !== currentIndex) {
+                        goToVideo(index);
+                    }
+                });
+            });
+
+            // Pause autoplay on hover
+            const videoCarousel = document.querySelector('.video-carousel');
+            videoCarousel.addEventListener('mouseenter', () => {
+                clearInterval(autoplayInterval);
+            });
+
+            videoCarousel.addEventListener('mouseleave', () => {
+                resetAutoplay();
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + videoContainers.length) % videoContainers.length;
+                    updateVideoDisplay();
+                    resetAutoplay();
+                } else if (e.key === 'ArrowRight') {
+                    nextVideo();
+                    resetAutoplay();
+                }
             });
         });
     </script>

@@ -2,120 +2,345 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Film & Writing</title>
-    <link rel="stylesheet" href="../assets/css/menu.css">
-    <link rel="stylesheet" href="../assets/css/blog.css">
+    <title>Creative Work | Ori Spector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png">
     <style>
-        .paper-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        body {
+            background-color: #f9f9f9;
         }
         
-        .paper-item {
-            background: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s ease;
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
         
-        .paper-item:hover {
-            transform: translateY(-3px);
-        }
-        
-        .paper-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             color: #333;
+            font-weight: 600;
         }
         
-        .paper-meta {
-            font-size: 0.9rem;
+        .page-subtitle {
+            font-size: 1.2rem;
             color: #666;
-            margin-bottom: 1rem;
-        }
-        
-        .paper-abstract {
-            margin-bottom: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.6;
         }
         
-        .paper-link {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #1a1a1a;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.2s ease;
+        .back-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
         }
         
-        .paper-link:hover {
-            background: #333;
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        
+        .back-link:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+        
+        .creative-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .creative-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0f0f0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .creative-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .creative-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .creative-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: #ff6b6b;
+        }
+        
+        .creative-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .creative-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .creative-card:hover .creative-icon {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            transform: scale(1.1) rotate(-5deg);
+        }
+        
+        .creative-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0 0 0.75rem 0;
+            line-height: 1.3;
+        }
+        
+        .creative-meta {
+            font-size: 1rem;
+            color: #888;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .creative-description {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .creative-status {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2rem;
+        }
+        
+        .creative-status.coming-soon {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+        }
+        
+        .creative-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+        }
+        
+        .btn-secondary:hover {
+            background: #ff6b6b;
+            color: white;
+            border-color: #ff6b6b;
+            transform: translateY(-3px);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (max-width: 768px) {
+            .back-nav {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 2rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .creative-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .creative-card {
+                padding: 2.5rem;
+            }
+            
+            .creative-header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
         }
     </style>
 </head>
-<body style="background-color: antiquewhite;">
-    <nav>
-        <ul>
-            <!-- <li><a href="../pages/menu.html">Menu</a></li> -->
-            <li><a href="../index.html">About Me</a></li>
-            <li><a href="../pages/papers.html">Projects</a></li>
-            <!-- <li><a href="../pages/blog.html">Blog</a></li> -->
-            <!-- <li><a href="../pages/projects.html">Museum</a></li> -->
-        </ul>
-    </nav>
+<body>
+    <div class="about-container">
+        <div class="back-nav">
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to About</span>
+            </a>
+        </div>
+        
+        <main style="padding: 20px 20px;">
+            <div class="page-header">
+                <h1 class="page-title">Creative Work</h1>
+                <p class="page-subtitle">Visual storytelling, film, and philosophical explorations through media</p>
+            </div>
+            
+            <div class="creative-grid">
+                <article class="creative-card">
+                    <div class="creative-header">
+                        <div class="creative-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div>
+                            <h2 class="creative-title">Leverage</h2>
+                            <p class="creative-meta">Ori Spector & David Mazouz • Screenplay • 2024</p>
+                        </div>
+                    </div>
+                    <div class="creative-status coming-soon">Coming Soon</div>
+                    <p class="creative-description">
+                        Logic Doesn't Work, Leverage Does. 
+                    </p>
+                </article>
 
-    <main>
-        <div class="paper-container">
-            <article class="paper-item">
-                <h2 class="paper-title">Leverage</h2>
-                <div class="paper-meta">
-                    Ori Spector & David Mazouz • Screenplay • 2024
-                </div>
-                <p class="paper-abstract">
-                   Logic Doesn't Work, Leverage Does. <br> <strong>Coming Soon...</strong>
-                </p>
-            </article>
-        </div>
-        <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='https://www.youtube.com/watch?v=LQJwImkNi5E'">
-                <h2 class="paper-title">Caracal Valley</h2>
-                <div class="paper-meta">
-                    Ori Spector, Quinn Manning, & Hafez Mohseni • Screenplay & Film • 2021
-                </div>
-                <p class="paper-abstract">
-                    Creator, writer, actor, and producer for the pilot episode of "Caracal Valley", an independent student TV show
-                </p>
-                <a href="https://www.youtube.com/watch?v=LQJwImkNi5E" class="paper-link" target="_blank">Watch Pilot</a>
-            </article>
-        </div>
-        <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='../assets/papers/Niche Cinema.pdf'">
-                <h2 class="paper-title">Niche Cinema: The Impact of Netflix’s Recommendation System</h2>
-                <div class="paper-meta">
-                    Ori Spector • Research • March 2022
-                </div>
-                <p class="paper-abstract">
-                    A deep dive into the impact of Netflix's recommendation system and how it's homogenizing cinema.
-                </p>
-                <a href="../assets/papers/Niche Cinema.pdf" class="paper-link" target="_blank">Read Paper</a>
-            </article>
-        </div>
-        <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='../assets/papers/Truth and Reconciliation.pdf'">
-                <h2 class="paper-title">Truth and Reconciliation: The Philosophy of Film</h2>
-                <div class="paper-meta">
-                    Ori Spector • Research • August 2021
-                </div>
-                <p class="paper-abstract">
-                    A study on film's ability to evoke new philosophical perspectives.
-                </p>
-                <a href="../assets/papers/Truth and Reconciliation.pdf" class="paper-link" target="_blank">Read Paper</a>
-            </article>
-        </div>
-    </main>
+                <article class="creative-card" onclick="window.location.href='https://www.youtube.com/watch?v=LQJwImkNi5E'">
+                    <div class="featured-badge">Featured</div>
+                    <div class="creative-header">
+                        <div class="creative-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div>
+                            <h2 class="creative-title">Caracal Valley</h2>
+                            <p class="creative-meta">Ori Spector, Quinn Manning, & Hafez Mohseni • TV Show • 2021</p>
+                        </div>
+                    </div>
+                    <p class="creative-description">
+                        Creator, writer, actor, and producer for the pilot episode of "Caracal Valley", an independent student TV show exploring themes of identity and community in a surreal desert setting.
+                    </p>
+                    <div class="creative-actions">
+                        <a href="https://www.youtube.com/watch?v=LQJwImkNi5E" class="action-btn btn-primary" target="_blank">Watch Pilot</a>
+                    </div>
+                </article>
+
+                <article class="creative-card" onclick="window.location.href='../assets/papers/Niche Cinema.pdf'">
+                    <div class="creative-header">
+                        <div class="creative-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div>
+                            <h2 class="creative-title">Niche Cinema: The Impact of Netflix's Recommendation System</h2>
+                            <p class="creative-meta">Ori Spector • Research • March 2022</p>
+                        </div>
+                    </div>
+                    <p class="creative-description">
+                        A critical examination of how Netflix's algorithmic recommendation system is fundamentally reshaping cinema, exploring the tension between personalization and artistic diversity in the streaming age.
+                    </p>
+                    <div class="creative-actions">
+                        <a href="../assets/papers/Niche Cinema.pdf" class="action-btn btn-primary" target="_blank">Read Paper</a>
+                    </div>
+                </article>
+
+                <article class="creative-card" onclick="window.location.href='../assets/papers/Truth and Reconciliation.pdf'">
+                    <div class="creative-header">
+                        <div class="creative-icon">
+                            <i class="fas fa-theater-masks"></i>
+                        </div>
+                        <div>
+                            <h2 class="creative-title">Truth and Reconciliation: The Philosophy of Film</h2>
+                            <p class="creative-meta">Ori Spector • Research • August 2021</p>
+                        </div>
+                    </div>
+                    <p class="creative-description">
+                        An exploration of cinema's unique capacity to evoke new philosophical perspectives, examining how visual narrative can challenge and reshape our understanding of truth, memory, and human experience.
+                    </p>
+                    <div class="creative-actions">
+                        <a href="../assets/papers/Truth and Reconciliation.pdf" class="action-btn btn-primary" target="_blank">Read Paper</a>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

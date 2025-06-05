@@ -2,157 +2,430 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Research & Projects</title>
-    <link rel="stylesheet" href="../assets/css/menu.css">
-    <link rel="stylesheet" href="../assets/css/blog.css">
+    <title>Research & Projects | Ori Spector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png">
     <style>
-        .paper-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        body {
+            background-color: #f9f9f9;
         }
         
-        .paper-item {
-            background: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s ease;
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
         
-        .paper-item:hover {
-            transform: translateY(-3px);
-        }
-        
-        .paper-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             color: #333;
+            font-weight: 600;
         }
         
-        .paper-meta {
-            font-size: 0.9rem;
+        .page-subtitle {
+            font-size: 1.2rem;
             color: #666;
-            margin-bottom: 1rem;
-        }
-        
-        .paper-abstract {
-            margin-bottom: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.6;
         }
         
-        .paper-link {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #1a1a1a;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.2s ease;
+        .back-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
         }
         
-        .paper-link:hover {
-            background: #333;
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        
+                 .back-link:hover {
+             transform: translateX(-3px);
+             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+             border-color: #ff6b6b;
+         }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .project-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f0f0f0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+                 .project-card::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             right: 0;
+             height: 4px;
+             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+             transform: scaleX(0);
+             transform-origin: left;
+             transition: transform 0.4s ease;
+         }
+         
+         .project-card:hover::before {
+             transform: scaleX(1);
+         }
+         
+         .project-card:hover {
+             transform: translateY(-8px);
+             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+             border-color: #ff6b6b;
+         }
+        
+        .project-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+                 .project-icon {
+             width: 48px;
+             height: 48px;
+             border-radius: 12px;
+             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             color: white;
+             font-size: 1.2rem;
+             flex-shrink: 0;
+             transition: all 0.3s ease;
+         }
+         
+         .project-card:hover .project-icon {
+             background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+             transform: scale(1.1) rotate(5deg);
+         }
+        
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.3;
+        }
+        
+        .project-meta {
+            font-size: 0.9rem;
+            color: #888;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .project-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+                 .tag {
+             padding: 0.4rem 0.8rem;
+             background: #f8f9fa;
+             color: #ff6b6b;
+             border-radius: 20px;
+             font-size: 0.85rem;
+             font-weight: 500;
+             border: 1px solid #e9ecef;
+         }
+        
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+                 .btn-primary {
+             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+             color: white;
+         }
+         
+         .btn-primary:hover {
+             background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+             transform: translateY(-2px);
+             box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+         }
+        
+                 .featured-badge {
+             position: absolute;
+             top: 1.5rem;
+             right: 1.5rem;
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+             color: white;
+             padding: 0.4rem 0.8rem;
+             border-radius: 20px;
+             font-size: 0.8rem;
+             font-weight: 600;
+             text-transform: uppercase;
+             letter-spacing: 0.5px;
+         }
+        
+        @media (max-width: 768px) {
+            .back-nav {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 2rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .project-card {
+                padding: 2rem;
+            }
+            
+            .project-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
-<body style="background-color: antiquewhite;">
-    <nav>
-        <ul>
-            <!-- <li><a href="../pages/menu.html">Menu</a></li> -->
-            <li><a href="../index.html">About Me</a></li>
-            <li><a href="../pages/film.html">Creative</a></li>
-            <!-- <li><a href="../pages/blog.html">Blog</a></li> -->
-            <!-- <li><a href="../pages/projects.html">Museum</a></li> -->
-        </ul>
-    </nav>
+<body>
+    <div class="about-container">
+        <div class="back-nav">
+            <a href="../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to About</span>
+            </a>
+        </div>
+        
+        <main style="padding: 20px 20px;">
+            <div class="page-header">
+                <h1 class="page-title">Research & Projects</h1>
+                <p class="page-subtitle">Technical work spanning AI, machine learning, and software engineering</p>
+            </div>
+            
+            <div class="projects-grid">
+                <article class="project-card" onclick="window.location.href='https://podbot.org/'">
+                    <div class="featured-badge">Featured</div>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-podcast"></i>
+                        </div>
+                        <div>
+                            <h2 class="project-title">PodBot: Podcast Archive Search Engine</h2>
+                            <p class="project-meta">Founding Product Engineer • PodBot • June 2023 - June 2024</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Developed an automatic system utilizing LLMs to semantically parse media archives from RSS feeds and interactively engage users with reliable, real source attribution. Primarily worked on retrieval search mechanisms (RAGs), LLMs, database management, and product strategy. Oversaw multiple live tests in partnership with NPR.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">React Native</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">LLMs</span>
+                        <span class="tag">RAG</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://podbot.org/" class="action-btn btn-primary" target="_blank">Try it Out!</a>
+                    </div>
+                </article>
 
-    <main>
-        <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='https://podbot.org/'">
-                <h2 class="paper-title">PodBot: Podcast Archive Search Engine</h2>
-                <div class="paper-meta">
-                    Founding Product Engineer • PodBot • June 2023 - June 2024
-                </div>
-                <p class="paper-abstract">
-                    Developed an automatic system utilizing LLMs to semantically parse media archives from RSS feeds and interactively engage users with reliable, real source attribution (using real audio). Primarily worked on retrieval search mechanisms (RAGs), LLMs, database management, and product strategy. Oversaw multiple live tests in partnership with NPR. <br><br> <i>Python</i> - <i>React Native</i> - <i>Firebase</i>
-                </p>
-                <a href="https://podbot.org/" class="paper-link" target="_blank">Try it Out!</a>
-            </article>
-        </div>
-        <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='../assets/papers/CS_224V_Final_Paper.pdf'">
-                <h2 class="paper-title">AI Essay Evaluator: Reviewing College Apps with LLMs</h2>
-                <div class="paper-meta">
-                    Ori Spector & Nick Walker • Conversational Virtual Assistants with Deep Learning • December 2023
-                </div>
-                <p class="paper-abstract">
-                    A comprehensive study on the development and evaluation of an LLM-driven tool designed to assist in the grading and constructive feedback of Common App personal essays.
-                </p>
-                <a href="../assets/papers/CS_224V_Final_Paper.pdf" class="paper-link" target="_blank">Read Paper</a>
-            </article>
-        </div>
-        <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='../assets/papers/CS224N__Project_Final_Report.pdf'">
-                <h2 class="paper-title">Style Emulation with LORA in Text Generation</h2>
-                <div class="paper-meta">
-                    Ori Spector & Luke Mann • Natural Language Processing with Deep Learning • March 2023
-                </div>
-                <p class="paper-abstract">
-                    Investigating the potential of Low Rank Adaptation (LoRA) for style transfer text generation, with the aim of emulating the writing styles of two prominent politicians, Joe Biden and Donald Trump.
-                </p>
-                <a href="../assets/papers/CS224N__Project_Final_Report.pdf" class="paper-link" target="_blank">Read Paper</a>
-            </article>
-        </div>
-         <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='../assets/papers/CS_326__Final_Project_Paper.pdf'">
-                <h2 class="paper-title">Improving LLM code generated policies using Multi-Agent Reasoning Frameworks</h2>
-                <div class="paper-meta">
-                    Ori Spector • Topics in Advanced Robotic Manipulation • December 2024
-                </div>
-                <p class="paper-abstract">
-                    Multi-agent reasoning chain-of-thought framework to improve code policy generation for robotic tasks, building upon previous Code as Policies research.
-                </p>
-                <a href="../assets/papers/CS_326__Final_Project_Paper.pdf" class="paper-link" target="_blank">Read Paper</a>
-            </article>
-        </div>
-        <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='../assets/papers/CS206 Team Planet Money Bot, Final Report.pdf'">
-                <h2 class="paper-title">Planet Money Bot</h2>
-                <div class="paper-meta">
-                    Ori Spector, Tara Parekh, Wenna Qin, & Millie Lin • Computational Journalism • March 2023
-                </div>
-                <p class="paper-abstract">
-                    Our goal was to build on OpenAI’s powerful generative language model optimize a RAG for Planet Money’s podcast archive.
-                </p>
-                <a href="../assets/papers/CS206 Team Planet Money Bot, Final Report.pdf" class="paper-link" target="_blank">Read Paper</a>
-            </article>
-        </div>
-        <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='../assets/papers/CS231N_Final_Report.pdf'">
-                <h2 class="paper-title">An Exploration of ResNet Fine-tuning for Fitness Pose Classification</h2>
-                <div class="paper-meta">
-                    Ori Spector & Nick Walker • Deep Learning for Computer Vision • June 2023
-                </div>
-                <p class="paper-abstract">
-                    A novel methodology combining pose estimation techniques with deep learning models to accurately classify fitness exercises.
-                </p>
-                <a href="../assets/papers/CS231N_Final_Report.pdf" class="paper-link" target="_blank">Read Paper</a>
-            </article>
-        </div>
-        <div class="paper-container">
-            <article class="paper-item" onclick="window.location.href='../assets/papers/cs238_final_paper.pdf'">
-                <h2 class="paper-title">Turning Pages with Reinforcement: An MDP Approach to Book Recommendations</h2>
-                <div class="paper-meta">
-                    Ori Spector & Pannisy Zhao • Decision Making Under Uncertainty • December 2024
-                </div>
-                <p class="paper-abstract">
-                    A MDP modeling approach addressing the sequential decision-making problem of recommending books to users based on their historical interactions. 
-                </p>
-                <a href="../assets/papers/cs238_final_paper.pdf" class="paper-link" target="_blank">Read Paper</a>
-            </article>
-        </div>
-    </main>
+                <article class="project-card" onclick="window.location.href='../assets/papers/CS_326__Final_Project_Paper.pdf'">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h2 class="project-title">Improving LLM Code Generated Policies Using Multi-Agent Reasoning</h2>
+                            <p class="project-meta">Ori Spector • Advanced Robotic Manipulation • December 2024</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Multi-agent reasoning chain-of-thought framework to improve code policy generation for robotic tasks, building upon previous Code as Policies research.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Robotics</span>
+                        <span class="tag">LLMs</span>
+                        <span class="tag">Multi-Agent</span>
+                        <span class="tag">Code Generation</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="../assets/papers/CS_326__Final_Project_Paper.pdf" class="action-btn btn-primary" target="_blank">Read Paper</a>
+                    </div>
+                </article>
+
+                <article class="project-card" onclick="window.location.href='../assets/papers/cs238_final_paper.pdf'">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div>
+                            <h2 class="project-title">Turning Pages with Reinforcement: An MDP Approach to Book Recommendations</h2>
+                            <p class="project-meta">Ori Spector & Pannisy Zhao • Decision Making Under Uncertainty • December 2024</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        A MDP modeling approach addressing the sequential decision-making problem of recommending books to users based on their historical interactions.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Reinforcement Learning</span>
+                        <span class="tag">MDP</span>
+                        <span class="tag">Recommendation Systems</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="../assets/papers/cs238_final_paper.pdf" class="action-btn btn-primary" target="_blank">Read Paper</a>
+                    </div>
+                </article>
+
+                <article class="project-card" onclick="window.location.href='../assets/papers/CS_224V_Final_Paper.pdf'">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h2 class="project-title">AI Essay Evaluator: Reviewing College Apps with LLMs</h2>
+                            <p class="project-meta">Ori Spector & Nick Walker • Conversational Virtual Assistants • December 2023</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        A comprehensive study on the development and evaluation of an LLM-driven tool designed to assist in the grading and constructive feedback of Common App personal essays.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">NLP</span>
+                        <span class="tag">LLMs</span>
+                        <span class="tag">Education</span>
+                        <span class="tag">Evaluation</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="../assets/papers/CS_224V_Final_Paper.pdf" class="action-btn btn-primary" target="_blank">Read Paper</a>
+                    </div>
+                </article>
+
+                <article class="project-card" onclick="window.location.href='../assets/papers/CS224N__Project_Final_Report.pdf'">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <div>
+                            <h2 class="project-title">Style Emulation with LORA in Text Generation</h2>
+                            <p class="project-meta">Ori Spector & Luke Mann • Natural Language Processing • March 2023</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Investigating the potential of Low Rank Adaptation (LoRA) for style transfer text generation, with the aim of emulating the writing styles of prominent politicians.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">NLP</span>
+                        <span class="tag">LoRA</span>
+                        <span class="tag">Style Transfer</span>
+                        <span class="tag">Text Generation</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="../assets/papers/CS224N__Project_Final_Report.pdf" class="action-btn btn-primary" target="_blank">Read Paper</a>
+                    </div>
+                </article>
+
+                <article class="project-card" onclick="window.location.href='../assets/papers/CS231N_Final_Report.pdf'">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div>
+                            <h2 class="project-title">ResNet Fine-tuning for Fitness Pose Classification</h2>
+                            <p class="project-meta">Ori Spector & Nick Walker • Deep Learning for Computer Vision • June 2023</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        A novel methodology combining pose estimation techniques with deep learning models to accurately classify fitness exercises.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">ResNet</span>
+                        <span class="tag">Pose Estimation</span>
+                        <span class="tag">Classification</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="../assets/papers/CS231N_Final_Report.pdf" class="action-btn btn-primary" target="_blank">Read Paper</a>
+                    </div>
+                </article>
+
+                <article class="project-card" onclick="window.location.href='../assets/papers/CS206 Team Planet Money Bot, Final Report.pdf'">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h2 class="project-title">Planet Money Bot</h2>
+                            <p class="project-meta">Ori Spector, Tara Parekh, Wenna Qin, & Millie Lin • Computational Journalism • March 2023</p>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Building on OpenAI's powerful generative language model to optimize a RAG for Planet Money's podcast archive.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Journalism</span>
+                        <span class="tag">RAG</span>
+                        <span class="tag">OpenAI</span>
+                        <span class="tag">Podcast</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="../assets/papers/CS206 Team Planet Money Bot, Final Report.pdf" class="action-btn btn-primary" target="_blank">Read Paper</a>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
