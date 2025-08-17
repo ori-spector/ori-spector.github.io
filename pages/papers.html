@@ -58,7 +58,7 @@
                  .back-link:hover {
              transform: translateX(-3px);
              box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-             border-color: #ff6b6b;
+             border-color: #333;
          }
         
         .projects-grid {
@@ -87,7 +87,7 @@
              left: 0;
              right: 0;
              height: 4px;
-             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+             background: linear-gradient(135deg, #333 0%, #000 100%);
              transform: scaleX(0);
              transform-origin: left;
              transition: transform 0.4s ease;
@@ -100,7 +100,7 @@
          .project-card:hover {
              transform: translateY(-8px);
              box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-             border-color: #ff6b6b;
+             border-color: #333;
          }
         
         .project-header {
@@ -114,7 +114,7 @@
              width: 48px;
              height: 48px;
              border-radius: 12px;
-             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+             background: linear-gradient(135deg, #333 0%, #000 100%);
              display: flex;
              align-items: center;
              justify-content: center;
@@ -125,7 +125,7 @@
          }
          
          .project-card:hover .project-icon {
-             background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+             background: linear-gradient(135deg, #666 0%, #333 100%);
              transform: scale(1.1) rotate(5deg);
          }
         
@@ -161,7 +161,7 @@
                  .tag {
              padding: 0.4rem 0.8rem;
              background: #f8f9fa;
-             color: #ff6b6b;
+             color: #333;
              border-radius: 20px;
              font-size: 0.85rem;
              font-weight: 500;
@@ -188,28 +188,14 @@
         }
         
                  .btn-primary {
-             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+             background: linear-gradient(135deg, #333 0%, #000 100%);
              color: white;
          }
          
          .btn-primary:hover {
-             background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+             background: linear-gradient(135deg, #666 0%, #333 100%);
              transform: translateY(-2px);
              box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-         }
-        
-                 .featured-badge {
-             position: absolute;
-             top: 1.5rem;
-             right: 1.5rem;
-             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-             color: white;
-             padding: 0.4rem 0.8rem;
-             border-radius: 20px;
-             font-size: 0.8rem;
-             font-weight: 600;
-             text-transform: uppercase;
-             letter-spacing: 0.5px;
          }
         
         @media (max-width: 768px) {
@@ -257,7 +243,6 @@
             
             <div class="projects-grid">
                 <article class="project-card" onclick="window.location.href='https://podbot.org/'">
-                    <div class="featured-badge">Featured</div>
                     <div class="project-header">
                         <div class="project-icon">
                             <i class="fas fa-podcast"></i>

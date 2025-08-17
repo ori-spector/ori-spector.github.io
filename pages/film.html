@@ -58,7 +58,7 @@
         .back-link:hover {
             transform: translateX(-3px);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            border-color: #667eea;
+            border-color: #333;
         }
         
         .creative-grid {
@@ -87,7 +87,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            background: linear-gradient(135deg, #333 0%, #000 100%);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.4s ease;
@@ -100,7 +100,7 @@
         .creative-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-            border-color: #ff6b6b;
+            border-color: #333;
         }
         
         .creative-header {
@@ -114,7 +114,7 @@
             width: 56px;
             height: 56px;
             border-radius: 16px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            background: linear-gradient(135deg, #333 0%, #000 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -125,7 +125,7 @@
         }
         
         .creative-card:hover .creative-icon {
-            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            background: linear-gradient(135deg, #666 0%, #333 100%);
             transform: scale(1.1) rotate(-5deg);
         }
         
@@ -154,7 +154,7 @@
         .creative-status {
             display: inline-block;
             padding: 0.6rem 1.2rem;
-            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            background: linear-gradient(135deg, #555 0%, #222 100%);
             color: white;
             border-radius: 25px;
             font-size: 0.9rem;
@@ -165,7 +165,7 @@
         }
         
         .creative-status.coming-soon {
-            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            background: linear-gradient(135deg, #777 0%, #444 100%);
         }
         
         .creative-actions {
@@ -188,12 +188,12 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            background: linear-gradient(135deg, #333 0%, #000 100%);
             color: white;
         }
         
         .btn-primary:hover {
-            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            background: linear-gradient(135deg, #666 0%, #333 100%);
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
         }
@@ -205,9 +205,9 @@
         }
         
         .btn-secondary:hover {
-            background: #ff6b6b;
+            background: #333;
             color: white;
-            border-color: #ff6b6b;
+            border-color: #333;
             transform: translateY(-3px);
         }
         
@@ -215,7 +215,7 @@
             position: absolute;
             top: 2rem;
             right: 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #333 0%, #000 100%);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 25px;
@@ -264,8 +264,8 @@
         
         <main style="padding: 20px 20px;">
             <div class="page-header">
-                <h1 class="page-title">Creative Work</h1>
-                <p class="page-subtitle">Visual storytelling, film, and philosophical explorations through media</p>
+                <h1 class="page-title">Creative</h1>
+                <p class="page-subtitle">Screenplays, films, and philosophical explorations through media</p>
             </div>
             
             <div class="creative-grid">
@@ -286,7 +286,6 @@
                 </article>
 
                 <article class="creative-card" onclick="window.location.href='https://www.youtube.com/watch?v=LQJwImkNi5E'">
-                    <div class="featured-badge">Featured</div>
                     <div class="creative-header">
                         <div class="creative-icon">
                             <i class="fas fa-video"></i>

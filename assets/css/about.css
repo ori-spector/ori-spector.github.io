@@ -61,7 +61,7 @@ main {
     top: 0.7em;
     width: 6px;
     height: 6px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #333 0%, #000 100%);
     border-radius: 50%;
     transition: all 0.3s ease;
 }
@@ -73,7 +73,7 @@ main {
 
 .introduction li:hover::before {
     transform: scale(1.5);
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #666 0%, #333 100%);
 }
 
 section {
@@ -112,7 +112,7 @@ h2 {
     top: 0.7em;
     width: 6px;
     height: 6px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #333 0%, #000 100%);
     border-radius: 50%;
     transition: all 0.3s ease;
 }
@@ -124,7 +124,7 @@ h2 {
 
 .beliefs li:hover::before {
     transform: scale(1.5);
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #666 0%, #333 100%);
 }
 
 .contact p {
@@ -355,7 +355,7 @@ main .profile-image:hover {
 }
 
 .nav-dot.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #333 0%, #000 100%);
     transform: scale(1.2);
 }
 
@@ -365,7 +365,7 @@ main .profile-image:hover {
 }
 
 .nav-dot.active:hover {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #666 0%, #333 100%);
 }
 
 .work-navigation {
@@ -404,7 +404,7 @@ main .profile-image:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #333 0%, #000 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: 0;
@@ -417,14 +417,14 @@ main .profile-image:hover {
 .nav-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-    border-color: #667eea;
+    border-color: #333;
 }
 
 .card-icon {
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #333 0%, #000 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -437,7 +437,7 @@ main .profile-image:hover {
 }
 
 .nav-card:hover .card-icon {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #666 0%, #333 100%);
     transform: scale(1.1) rotate(5deg);
 }
 
@@ -488,7 +488,7 @@ main .profile-image:hover {
 }
 
 .nav-card:hover .card-arrow {
-    background: #667eea;
+    background: #333;
     color: white;
     transform: translateX(4px);
 }
