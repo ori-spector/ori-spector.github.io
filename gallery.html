@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Ori Spector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/gallery.css">
+</head>
+<body>
+    <div class="gallery-container">
+        <header class="gallery-header">
+            <h1>Gallery</h1>
+            <button id="back-home" class="back-button" aria-label="Back to home">
+                <i class="fas fa-arrow-left"></i> Back to Studio
+            </button>
+        </header>
+        
+        <main class="gallery-grid">
+            <div class="media-item video-item" data-src="assets/media/typewriter.mp4" data-title="Typewriter">
+                <video muted loop>
+                    <source src="assets/media/typewriter.mp4" type="video/mp4">
+                </video>
+                <div class="media-overlay">
+                    <h3>Typewriter</h3>
+                    <p>Click to play</p>
+                </div>
+            </div>
+            
+            <div class="media-item video-item" data-src="assets/media/stairs1.mp4" data-title="Stairs I">
+                <video muted loop>
+                    <source src="assets/media/stairs1.mp4" type="video/mp4">
+                </video>
+                <div class="media-overlay">
+                    <h3>Stairs I</h3>
+                    <p>Click to play</p>
+                </div>
+            </div>
+            
+            <div class="media-item video-item" data-src="assets/media/stairs2.mp4" data-title="Stairs II">
+                <video muted loop>
+                    <source src="assets/media/stairs2.mp4" type="video/mp4">
+                </video>
+                <div class="media-overlay">
+                    <h3>Stairs II</h3>
+                    <p>Click to play</p>
+                </div>
+            </div>
+            
+            <div class="media-item video-item" data-src="assets/media/umbrella.mp4" data-title="Umbrella">
+                <video muted loop>
+                    <source src="assets/media/umbrella.mp4" type="video/mp4">
+                </video>
+                <div class="media-overlay">
+                    <h3>Umbrella</h3>
+                    <p>Click to play</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close video">&times;</button>
+            <video id="modal-video" controls>
+                <source src="" type="video/mp4">
+            </video>
+            <h3 id="modal-title"></h3>
+        </div>
+    </div>
+    
+    <script src="assets/js/gallery.js"></script>
+</body>
+</html>

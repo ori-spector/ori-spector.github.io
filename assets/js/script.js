@@ -240,18 +240,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Handle input
                 xtermInstance.onData((data) => {
                     if (data === '\r') { // Enter key
-                        if (currentLine.trim() === 'cat ~/.ssh/beliefs') {
-                            xtermInstance.write('\r\n');
+                        const command = currentLine.trim();
+                        xtermInstance.write('\r\n');
+                        
+                        if (command === '/help') {
+                            xtermInstance.writeln('Available commands:');
+                            xtermInstance.writeln('  /help                 - Show this help message');
+                            xtermInstance.writeln('  cat ~/.ssh/beliefs    - Display my core beliefs');
+                            xtermInstance.writeln('  show gallery          - Open media gallery');
+                            xtermInstance.writeln('  clear                 - Clear terminal');
+                        } else if (command === 'cat ~/.ssh/beliefs') {
+                            xtermInstance.writeln('');
+                            xtermInstance.writeln('╭─────────────────────────────────────────────────────────────╮');
+                            xtermInstance.writeln('│                        CORE BELIEFS                         │');
+                            xtermInstance.writeln('├─────────────────────────────────────────────────────────────┤');
                             const beliefs = [
-                                'Mediums matter. The visual domain is the most powerful alignment tool.',
-                                'Intellectual depth is created from pushing back against majority assumptions.',
-                                'Nature, media, and art ground us. We need to use them.'
+                                '│ • Mediums matter. The visual domain is the most powerful    │',
+                                '│   alignment tool.                                           │',
+                                '│                                                             │',
+                                '│ • Intellectual depth is created from pushing back against   │',
+                                '│   majority assumptions.                                     │',
+                                '│                                                             │',
+                                '│ • Nature, media, and art ground us. We need to use them.    │'
                             ];
                             beliefs.forEach(belief => {
                                 xtermInstance.writeln(belief);
                             });
-                            xtermInstance.write('\r\nori@studio ~ % ');
-                        } else {
+                            xtermInstance.writeln('╰─────────────────────────────────────────────────────────────╯');
+                        } else if (command === 'show gallery') {
+                            xtermInstance.writeln('Opening gallery...');
+                            setTimeout(() => {
+                                window.location.href = 'gallery.html';
+                            }, 1000);
+                        } else if (command === 'clear') {
+                            xtermInstance.clear();
+                        } else if (command !== '') {
+                            xtermInstance.writeln(`Command not found: ${command}`);
+                            xtermInstance.writeln('Type /help for available commands');
+                        }
+                        
+                        if (command !== 'clear' && command !== 'show gallery') {
                             xtermInstance.write('\r\nori@studio ~ % ');
                         }
                         currentLine = '';
@@ -269,8 +297,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (xtermInstance) {
                 xtermInstance.clear();
-                xtermInstance.write('ori@studio ~ % cat ~/.ssh/beliefs');
-                currentLine = 'cat ~/.ssh/beliefs';
+                xtermInstance.writeln('Welcome to Ori\'s Terminal');
+                xtermInstance.writeln('Type /help to see available commands');
+                xtermInstance.write('\r\nori@studio ~ % ');
+                currentLine = '';
                 xtermInstance.focus();
             }
         }
