@@ -2,192 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ori Spector</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/about.css">
-    <link rel="stylesheet" href="../assets/css/blog.css">
+    <title>Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.css">
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
-    <div class="about-container">
-        <main style="padding: 20px 20px;">
-            <h2>About</h2>
-            <section class="introduction">
-                <p>Hi, I'm <strong>Ori Spector</strong></p>
-                <ul>
-                    <li>M.S. Computer Science & B.S. Symbolic Systems from Stanford</li>
-                    <li>Product Engineer @ <a href="https://lumalabs.ai/" target="_blank" style="color: #000;">Luma AI</a> building multimodal creative intelligence</li>
-                    <li>Dabbling in screenplays, film, & philosophy</li>
-                </ul>
-            </section>
-            <section class="video-showcase">
-                <div class="video-carousel">
-                    <div class="video-container active" data-video="0">
-                        <video src="../assets/videos/umbrella.mp4" class="profile-video" muted loop></video>
-                        <div class="video-overlay">
-                            <span class="video-label">Perspective</span>
-                        </div>
-                    </div>
-                    <div class="video-container" data-video="1">
-                        <video src="../assets/videos/stairs1.mp4" class="profile-video" muted loop></video>
-                        <div class="video-overlay">
-                            <span class="video-label">Ideation</span>
-                        </div>
-                    </div>
-                    <div class="video-container" data-video="2">
-                        <video src="../assets/videos/typewriter.mp4" class="profile-video" muted loop></video>
-                        <div class="video-overlay">
-                            <span class="video-label">Creation</span>
-                        </div>
+    <div class="container">
+        <div class="wooden-frame">
+            <div class="content">
+                <div class="header status-bar">
+                    <span class="name">Ori Spector</span>
+                    <div class="location-time">
+                        <span class="location">San Francisco, CA</span>
+                        <span id="current-datetime"></span>
                     </div>
                 </div>
-                <div class="video-nav">
-                    <div class="nav-dot active" data-target="0"></div>
-                    <div class="nav-dot" data-target="1"></div>
-                    <div class="nav-dot" data-target="2"></div>
+                <div class="canvas">
+                    <div class="hero-typewriter">
+                        <span id="bullet-rotator"></span>
+                    </div>
+                    <button id="terminal-trigger" class="terminal-trigger" aria-haspopup="dialog" aria-controls="terminal-overlay" aria-label="Open terminal">
+                        <span class="terminal-prompt">ori@studio ~ % </span><span class="terminal-cursor">_</span>
+                    </button>
                 </div>
-            </section>
-            <section class="beliefs">
-                <h2>General Thoughts</h2>
-                <ul>
-                    <li>Mediums Matter. The visual domain is the most powerful alignment tool.</li>
-                    <li>Intellectual depth is created from pushing back against majority assumptions.</li>
-                    <li>Nature, media, and art ground us. We need to use them.</li>
-                </ul>
-            </section>
-            <section class="work-navigation">
-                <h2>Explore</h2>
-                <div class="nav-cards">
-                    <a href="../pages/papers.html" class="nav-card">
-                        <div class="card-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Projects</h3>
-                            <p>Technical work & research</p>
-                        </div>
-                        <div class="card-arrow">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </a>
-                    <a href="../pages/film.html" class="nav-card">
-                        <div class="card-icon">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Creative</h3>
-                            <p>Visual storytelling & film</p>
-                        </div>
-                        <div class="card-arrow">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </a>
+                <div class="footer-elements">
+                    <div class="social-stack">
+                        <a class="social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="social-icon" href="https://x.com/orispector" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                    </div>
                 </div>
-            </section>
-            <section class="contact">
-                <h2></h2>
-                <div class="social-links">
-                    <a href="https://github.com/ori-spector" target="_blank" class="social-icon">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://x.com/orispector" target="_blank" class="social-icon">
-                        <i class="fab fa-x-twitter"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/ori-spector-a96ba01aa/" target="_blank" class="social-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
-            </section>
-        </main>
+            </div>
+        </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const videoContainers = document.querySelectorAll('.video-container');
-            const navDots = document.querySelectorAll('.nav-dot');
-            let currentIndex = 0;
-            let autoplayInterval;
-
-            function updateVideoDisplay() {
-                videoContainers.forEach((container, index) => {
-                    const video = container.querySelector('.profile-video');
-                    
-                    container.classList.remove('active', 'prev', 'next');
-                    video.pause();
-                    video.currentTime = 0;
-                    
-                    if (index === currentIndex) {
-                        container.classList.add('active');
-                        setTimeout(() => video.play(), 300);
-                    } else if (index === (currentIndex - 1 + videoContainers.length) % videoContainers.length) {
-                        container.classList.add('prev');
-                    } else if (index === (currentIndex + 1) % videoContainers.length) {
-                        container.classList.add('next');
-                    }
-                });
-
-                navDots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentIndex);
-                });
-            }
-
-            function nextVideo() {
-                currentIndex = (currentIndex + 1) % videoContainers.length;
-                updateVideoDisplay();
-            }
-
-            function goToVideo(index) {
-                currentIndex = index;
-                updateVideoDisplay();
-                resetAutoplay();
-            }
-
-            function resetAutoplay() {
-                clearInterval(autoplayInterval);
-                autoplayInterval = setInterval(nextVideo, 4000);
-            }
-
-            // Initialize
-            updateVideoDisplay();
-            resetAutoplay();
-
-            // Add click handlers for navigation dots
-            navDots.forEach((dot, index) => {
-                dot.addEventListener('click', () => goToVideo(index));
-            });
-
-            // Add click handler for video containers
-            videoContainers.forEach((container, index) => {
-                container.addEventListener('click', () => {
-                    if (index !== currentIndex) {
-                        goToVideo(index);
-                    }
-                });
-            });
-
-            // Pause autoplay on hover
-            const videoCarousel = document.querySelector('.video-carousel');
-            videoCarousel.addEventListener('mouseenter', () => {
-                clearInterval(autoplayInterval);
-            });
-
-            videoCarousel.addEventListener('mouseleave', () => {
-                resetAutoplay();
-            });
-
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') {
-                    currentIndex = (currentIndex - 1 + videoContainers.length) % videoContainers.length;
-                    updateVideoDisplay();
-                    resetAutoplay();
-                } else if (e.key === 'ArrowRight') {
-                    nextVideo();
-                    resetAutoplay();
-                }
-            });
-        });
-    </script>
+    
+    <!-- Terminal Modal - Outside Frame -->
+    <div id="terminal-overlay" class="terminal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="terminal-window" role="document">
+            <div class="terminal-header">
+                <div class="term-controls" aria-hidden="true">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <span class="term-title">ori@studio — bash</span>
+                <button class="terminal-close" aria-label="Close terminal">&times;</button>
+            </div>
+            <div id="terminal-body" class="terminal-body">
+                <div id="xterm" class="xterm-mount"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
+    <script src="assets/js/script.js?v=9"></script>
 </body>
 </html>

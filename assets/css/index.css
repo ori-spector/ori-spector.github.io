@@ -1,0 +1,312 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+    color: #111;
+}
+
+.container {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #f5f5f5, #333);
+    padding: 10vh 8px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wooden-frame {
+    background-image: url('../media/paper.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 4vmin solid #333;
+    border-radius: 2px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.25) inset, 0 5px 10px 5px rgba(0,0,0,0.25);
+    display: inline-block;
+    width: 51.43vw;
+    height: 72vw;
+    max-width: 580px;
+    max-height: 750px;
+    position: relative;
+    text-align: center;
+}
+
+.wooden-frame::before {
+    content: "";
+    position: absolute;
+    border-radius: 2px;
+    bottom: -2vmin;
+    left: -2vmin;
+    right: -2vmin;
+    top: -2vmin;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.25) inset;
+}
+
+.wooden-frame::after {
+    content: "";
+    position: absolute;
+    border-radius: 2px;
+    bottom: -3vmin;
+    left: -3vmin; 
+    right: -3vmin; 
+    top: -3vmin; 
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 3vmin 4vmin;
+}
+
+/* Header layout */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 0.875rem;
+    margin-bottom: 0;
+}
+
+.name {
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+.location-time {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.location {
+    font-size: 0.875rem;
+}
+
+/* Main canvas */
+.canvas {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Hero typewriter */
+.hero-typewriter {
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    text-align: center;
+    line-height: 1.4;
+    text-transform: lowercase;
+    letter-spacing: -0.3px;
+    margin-bottom: 10rem;
+    margin-top: -3rem;
+}
+
+/* Cursor for typewriter */
+.cursor {
+    display: inline-block;
+    width: 0.08em;
+    height: 1em;
+    margin-left: 2px;
+    background: currentColor;
+    animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* Terminal button - centered below typewriter */
+.terminal-trigger {
+    background: transparent;
+    color: #333;
+    border: 1px solid #333;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 3px;
+    width: 75%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.terminal-trigger:hover {
+    background: #333;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.terminal-prompt {
+    color: inherit;
+}
+
+.terminal-cursor {
+    animation: terminalBlink 1.5s infinite;
+}
+
+@keyframes terminalBlink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+/* Footer elements */
+.footer-elements {
+    position: absolute;
+    bottom: 10vmin;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.social-stack {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icon {
+    color: #000;
+    opacity: 0.8;
+    font-size: 1.1rem;
+    transition: opacity 0.2s;
+}
+
+.social-icon:hover { 
+    opacity: 1; 
+}
+
+/* Terminal overlay - floating */
+.terminal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease;
+    z-index: 1000;
+}
+
+.terminal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.terminal-window {
+    width: min(85vw, 720px);
+    height: min(70vh, 500px);
+    background: #0a0e14;
+    border-radius: 12px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 300ms ease;
+}
+
+.terminal-overlay.open .terminal-window {
+    transform: translateY(0);
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: #0e1218;
+    border-bottom: 1px solid #1a1f29;
+    gap: 12px;
+}
+
+.term-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.term-title {
+    flex: 1;
+    text-align: center;
+    color: #8892a0;
+    font-size: 0.875rem;
+}
+
+.terminal-close {
+    background: none;
+    border: none;
+    color: #8892a0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.terminal-close:hover {
+    color: #ff5f56;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 0;
+    overflow: hidden;
+}
+
+.xterm-mount {
+    height: 100%;
+}
+
+/* Remove old styles */
+.menu-content,
+.beliefs-block,
+.signature,
+.rotator {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .content {
+        padding: 2vmin 3vmin;
+    }
+    
+    .header {
+        font-size: 0.8rem;
+    }
+    
+    .hero-typewriter {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+        margin-bottom: 1.5rem;
+        margin-top: -2rem;
+    }
+    
+    .terminal-trigger {
+        width: 85%;
+    }
+    
+    .terminal-window {
+        width: 95vw;
+        height: 85vh;
+    }
+}

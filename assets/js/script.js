@@ -1,23 +1,17 @@
 function updateDateTime() {
     const datetimeElement = document.getElementById('current-datetime');
-    if (!datetimeElement) return; 
-    
-    const now = new Date();
-    const options = {
-        timeZone: 'America/Los_Angeles',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-    };
-    let daySuffix = getOrdinalSuffix(now.getDate());
-    let pstDateTime = now.toLocaleString('en-US', options);
-    pstDateTime = pstDateTime.replace(/(\d+)/, `$1${daySuffix}`);
-    pstDateTime = pstDateTime.replace("at", "@");
+    if (!datetimeElement) return;
 
-    datetimeElement.textContent = pstDateTime;
+    const now = new Date();
+    const timeZone = 'America/Los_Angeles';
+
+    const weekday = now.toLocaleString('en-US', { timeZone, weekday: 'short' });
+    const month = now.toLocaleString('en-US', { timeZone, month: 'short' });
+    const day = now.toLocaleString('en-US', { timeZone, day: 'numeric' });
+    const daySuffix = getOrdinalSuffix(now.getDate());
+    const time = now.toLocaleString('en-US', { timeZone, hour: '2-digit', minute: '2-digit', hour12: true }).toLowerCase();
+    const pretty = `${weekday}, ${month} ${day}${daySuffix} • ${time}`;
+    datetimeElement.textContent = pretty;
 }
 
 function getOrdinalSuffix(day) {
@@ -44,112 +38,339 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Projects canvas interactions (guarded if elements are absent)
     const draggableContainer = document.querySelector('.draggable-container');
-    let isDragging = false;
-    let currentX;
-    let currentY;
-    let initialX;
-    let initialY;
-    let xOffset = 0;
-    let yOffset = 0;
-    let scale = 1;
-    const MIN_SCALE = 0.2; 
-    const MAX_SCALE = 1.5; 
-
     const viewport = document.querySelector('.viewport');
-    
-    function dragStart(e) {
-        if (e.target.closest('.project-item')) return;
+    if (draggableContainer && viewport) {
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+        let scale = 1;
+        const MIN_SCALE = 0.2;
+        const MAX_SCALE = 1.5;
 
-        isDragging = true;
+        function dragStart(e) {
+            if (e.target.closest('.project-item')) return;
 
-        const rect = viewport.getBoundingClientRect();
+            isDragging = true;
 
-        if (e.type === "touchstart") {
-            initialX = e.touches[0].clientX - rect.left - xOffset;
-            initialY = e.touches[0].clientY - rect.top - yOffset;
-        } else {
-            initialX = e.clientX - rect.left - xOffset;
-            initialY = e.clientY - rect.top - yOffset;
-        }
-    }
-
-    function dragEnd() {
-        isDragging = false;
-    }
-
-    function drag(e) {
-        if (!isDragging) return;
-        
-        e.preventDefault();
-
-        const rect = viewport.getBoundingClientRect();
-        
-        let clientX, clientY;
-
-        if (e.type === "touchmove") {
-            clientX = e.touches[0].clientX - rect.left;
-            clientY = e.touches[0].clientY - rect.top;
-        } else {
-            clientX = e.clientX - rect.left;
-            clientY = e.clientY - rect.top;
-        }
-
-        currentX = clientX - initialX;
-        currentY = clientY - initialY;
-
-        xOffset = currentX;
-        yOffset = currentY;
-        
-        updateTransform();
-    }
-
-    function handleWheel(e) {
-        e.preventDefault();
-        const delta = e.deltaY * -0.005;
-        const newScale = Math.min(Math.max(scale + delta, MIN_SCALE), MAX_SCALE);
-
-        if (newScale !== scale) {
             const rect = viewport.getBoundingClientRect();
 
-            const mouseX = (e.clientX - rect.left - xOffset) / scale;
-            const mouseY = (e.clientY - rect.top - yOffset) / scale;
+            if (e.type === "touchstart") {
+                initialX = e.touches[0].clientX - rect.left - xOffset;
+                initialY = e.touches[0].clientY - rect.top - yOffset;
+            } else {
+                initialX = e.clientX - rect.left - xOffset;
+                initialY = e.clientY - rect.top - yOffset;
+            }
+        }
 
-            xOffset -= (mouseX * (newScale - scale));
-            yOffset -= (mouseY * (newScale - scale));
+        function dragEnd() {
+            isDragging = false;
+        }
 
-            scale = newScale;
+        function drag(e) {
+            if (!isDragging) return;
+
+            e.preventDefault();
+
+            const rect = viewport.getBoundingClientRect();
+
+            let clientX, clientY;
+
+            if (e.type === "touchmove") {
+                clientX = e.touches[0].clientX - rect.left;
+                clientY = e.touches[0].clientY - rect.top;
+            } else {
+                clientX = e.clientX - rect.left;
+                clientY = e.clientY - rect.top;
+            }
+
+            currentX = clientX - initialX;
+            currentY = clientY - initialY;
+
+            xOffset = currentX;
+            yOffset = currentY;
+
             updateTransform();
         }
-    }
 
-    function updateTransform() {
-        draggableContainer.style.transform = `translate(${xOffset}px, ${yOffset}px) scale(${scale})`;
-    }
+        function handleWheel(e) {
+            e.preventDefault();
+            const delta = e.deltaY * -0.005;
+            const newScale = Math.min(Math.max(scale + delta, MIN_SCALE), MAX_SCALE);
 
-    function adjustInitialScale() {
-        if (window.innerWidth <= 480) { 
-            scale = 0.5;
-        } else if (window.innerWidth <= 768) {
-            scale = 0.75;
-        } else {
-            scale = 1;
+            if (newScale !== scale) {
+                const rect = viewport.getBoundingClientRect();
+
+                const mouseX = (e.clientX - rect.left - xOffset) / scale;
+                const mouseY = (e.clientY - rect.top - yOffset) / scale;
+
+                xOffset -= (mouseX * (newScale - scale));
+                yOffset -= (mouseY * (newScale - scale));
+
+                scale = newScale;
+                updateTransform();
+            }
         }
-        updateTransform();
+
+        function updateTransform() {
+            draggableContainer.style.transform = `translate(${xOffset}px, ${yOffset}px) scale(${scale})`;
+        }
+
+        function adjustInitialScale() {
+            if (window.innerWidth <= 480) {
+                scale = 0.5;
+            } else if (window.innerWidth <= 768) {
+                scale = 0.75;
+            } else {
+                scale = 1;
+            }
+            updateTransform();
+        }
+
+        adjustInitialScale();
+
+        window.addEventListener('resize', adjustInitialScale);
+
+        viewport.addEventListener("touchstart", dragStart, false);
+        viewport.addEventListener("touchend", dragEnd, false);
+        viewport.addEventListener("touchmove", drag, false);
+
+        viewport.addEventListener("mousedown", dragStart, false);
+        viewport.addEventListener("mouseup", dragEnd, false);
+        viewport.addEventListener("mousemove", drag, false);
+        viewport.addEventListener("mouseleave", dragEnd, false);
+
+        viewport.addEventListener('wheel', handleWheel, { passive: false });
     }
 
-    adjustInitialScale();
+    // Bullet rotator on menu page (type-and-erase)
+    const rotatorRoot = document.getElementById('bullet-rotator');
+    if (rotatorRoot) {
+        const bullets = [
+            'm.s. computer science and b.s. symbolic systems from stanford',
+            'product engineer at luma ai',
+            'building tools for multimodal creative intelligence',
+            'dabbling in screenplays, film, and philosophy'
+        ];
+        let index = 0;
+        let text = '';
+        let pos = 0;
+        let erasing = false;
+        const cursor = '<span class="cursor">\u00A0</span>';
 
-    window.addEventListener('resize', adjustInitialScale);
+        function render() {
+            rotatorRoot.innerHTML = text + cursor;
+        }
 
-    viewport.addEventListener("touchstart", dragStart, false);
-    viewport.addEventListener("touchend", dragEnd, false);
-    viewport.addEventListener("touchmove", drag, false);
+        function tick() {
+            const current = bullets[index];
+            if (!erasing) {
+                // typing forward
+                text = current.slice(0, pos + 1);
+                pos += 1;
+                render();
+                if (pos < current.length) {
+                    setTimeout(tick, 28 + Math.random() * 36);
+                } else {
+                    // hold before erasing
+                    setTimeout(() => { erasing = true; tick(); }, 2000);
+                }
+            } else {
+                // erasing backward
+                text = current.slice(0, Math.max(0, pos - 1));
+                pos -= 1;
+                render();
+                if (pos > 0) {
+                    setTimeout(tick, 20 + Math.random() * 28);
+                } else {
+                    // move to next bullet
+                    erasing = false;
+                    index = (index + 1) % bullets.length;
+                    setTimeout(tick, 500);
+                }
+            }
+        }
 
-    viewport.addEventListener("mousedown", dragStart, false);
-    viewport.addEventListener("mouseup", dragEnd, false);
-    viewport.addEventListener("mousemove", drag, false);
-    viewport.addEventListener("mouseleave", dragEnd, false);
+        // start
+        setTimeout(tick, 400);
+    }
 
-    viewport.addEventListener('wheel', handleWheel, { passive: false });
+    // Secret terminal overlay on menu page
+    const terminalTrigger = document.getElementById('terminal-trigger');
+    const terminalOverlay = document.getElementById('terminal-overlay');
+    const terminalClose = terminalOverlay ? terminalOverlay.querySelector('.terminal-close') : null;
+    const xtermMount = document.getElementById('xterm');
+    let xtermInstance = null;
+    let currentLine = '';
+    let cursorPosition = 0;
+
+    if (terminalTrigger && terminalOverlay && terminalClose && xtermMount) {
+        function openTerminal() {
+            terminalOverlay.classList.add('open');
+            terminalOverlay.setAttribute('aria-hidden', 'false');
+            
+            // Create xterm instance if not exists
+            if (window.Terminal && !xtermInstance) {
+                xtermInstance = new window.Terminal({
+                    cursorBlink: true,
+                    fontFamily: 'Courier Prime, Courier New, monospace',
+                    fontSize: 14,
+                    theme: {
+                        background: '#0a0e14',
+                        foreground: '#d4d4d4',
+                        cursor: '#d4d4d4',
+                        black: '#0a0e14',
+                        brightBlack: '#686868',
+                        red: '#ff5f56',
+                        green: '#27c93f',
+                        yellow: '#ffbd2e',
+                        blue: '#5abbed',
+                        magenta: '#ff6ac1',
+                        cyan: '#5abbed',
+                        white: '#d4d4d4'
+                    }
+                });
+                xtermInstance.open(xtermMount);
+                
+                // Handle input
+                xtermInstance.onData((data) => {
+                    const code = data.charCodeAt(0);
+                    
+                    if (data === '\r') { // Enter key
+                        const command = currentLine.trim();
+                        xtermInstance.write('\r\n');
+                        
+                        if (command === '/help') {
+                            xtermInstance.writeln('Available commands:');
+                            xtermInstance.writeln('  /help                 - Show this help message');
+                            xtermInstance.writeln('  cat ~/.ssh/beliefs    - Display my core beliefs');
+                            xtermInstance.writeln('  show gallery          - Open media gallery');
+                            xtermInstance.writeln('  clear                 - Clear terminal');
+                        } else if (command === 'cat ~/.ssh/beliefs') {
+                            xtermInstance.writeln('');
+                            xtermInstance.writeln('╭─────────────────────────────────────────────────────────────╮');
+                            xtermInstance.writeln('│                        CORE BELIEFS                         │');
+                            xtermInstance.writeln('├─────────────────────────────────────────────────────────────┤');
+                            const beliefs = [
+                                '│ • Mediums matter. The visual domain is the most powerful    │',
+                                '│   alignment tool.                                           │',
+                                '│                                                             │',
+                                '│ • Intellectual depth is created from pushing back against   │',
+                                '│   majority assumptions.                                     │',
+                                '│                                                             │',
+                                '│ • Nature, media, and art ground us. We need to use them.    │'
+                            ];
+                            beliefs.forEach(belief => {
+                                xtermInstance.writeln(belief);
+                            });
+                            xtermInstance.writeln('╰─────────────────────────────────────────────────────────────╯');
+                        } else if (command === 'show gallery') {
+                            xtermInstance.writeln('Opening gallery...');
+                            setTimeout(() => {
+                                window.location.href = 'gallery.html';
+                            }, 1000);
+                        } else if (command === 'clear') {
+                            xtermInstance.clear();
+                            xtermInstance.write('ori@studio ~ % ');
+                        } else if (command !== '') {
+                            xtermInstance.writeln(`Command not found: ${command}`);
+                            xtermInstance.writeln('Type /help for available commands');
+                        }
+                        
+                        if (command !== 'clear' && command !== 'show gallery') {
+                            xtermInstance.write('\r\nori@studio ~ % ');
+                        }
+                        currentLine = '';
+                        cursorPosition = 0;
+                    } else if (data === '\u007F') { // Backspace
+                        if (cursorPosition > 0) {
+                            currentLine = currentLine.slice(0, cursorPosition - 1) + currentLine.slice(cursorPosition);
+                            cursorPosition--;
+                            // Simple backspace - move back, write space, move back again
+                            xtermInstance.write('\b \b');
+                            // If there's text after cursor, redraw only that part
+                            if (cursorPosition < currentLine.length) {
+                                const remainingText = currentLine.slice(cursorPosition);
+                                xtermInstance.write(remainingText + ' ');
+                                // Move cursor back to correct position
+                                xtermInstance.write('\x1b[' + (remainingText.length + 1) + 'D');
+                            }
+                        }
+                    } else if (data === '\x1b[D') { // Left arrow
+                        if (cursorPosition > 0) {
+                            cursorPosition--;
+                            xtermInstance.write('\x1b[D');
+                        }
+                    } else if (data === '\x1b[C') { // Right arrow
+                        if (cursorPosition < currentLine.length) {
+                            cursorPosition++;
+                            xtermInstance.write('\x1b[C');
+                        }
+                    } else if (data === '\x1b[A' || data === '\x1b[B') { // Up/Down arrows
+                        // Ignore for now (could implement command history later)
+                    } else if (code >= 32 && code <= 126) { // Printable characters
+                        currentLine = currentLine.slice(0, cursorPosition) + data + currentLine.slice(cursorPosition);
+                        
+                        if (cursorPosition === currentLine.length - 1) {
+                            // Simple case: adding at the end
+                            xtermInstance.write(data);
+                        } else {
+                            // Inserting in middle: write character and remaining text
+                            const remainingText = currentLine.slice(cursorPosition + 1);
+                            xtermInstance.write(data + remainingText);
+                            // Move cursor back to correct position
+                            if (remainingText.length > 0) {
+                                xtermInstance.write('\x1b[' + remainingText.length + 'D');
+                            }
+                        }
+                        cursorPosition++;
+                    }
+                });
+            }
+            
+            if (xtermInstance) {
+                xtermInstance.clear();
+                xtermInstance.writeln('Welcome to Ori\'s Terminal');
+                xtermInstance.writeln('Type /help to see available commands');
+                xtermInstance.write('\r\nori@studio ~ % ');
+                currentLine = '';
+                cursorPosition = 0;
+                xtermInstance.focus();
+            }
+        }
+
+        function closeTerminal() {
+            terminalOverlay.classList.remove('open');
+            terminalOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        terminalTrigger.addEventListener('click', openTerminal);
+        terminalClose.addEventListener('click', closeTerminal);
+        terminalOverlay.addEventListener('click', (e) => {
+            if (e.target === terminalOverlay) closeTerminal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && terminalOverlay.classList.contains('open')) {
+                closeTerminal();
+            }
+        });
+    }
 });
+
+function getPacificAbbreviation(date) {
+    try {
+        const fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', timeZoneName: 'short' });
+        const parts = fmt.formatToParts(date);
+        const name = parts.find(p => p.type === 'timeZoneName')?.value || '';
+        if (/^PDT$|^PST$/.test(name)) return name;
+        return 'PT';
+    } catch (_) {
+        return 'PT';
+    }
+}
