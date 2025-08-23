@@ -208,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const xtermMount = document.getElementById('xterm');
     let xtermInstance = null;
     let currentLine = '';
+    let cursorPosition = 0;
 
     if (terminalTrigger && terminalOverlay && terminalClose && xtermMount) {
         function openTerminal() {
@@ -239,6 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Handle input
                 xtermInstance.onData((data) => {
+                    const code = data.charCodeAt(0);
+                    
                     if (data === '\r') { // Enter key
                         const command = currentLine.trim();
                         xtermInstance.write('\r\n');
@@ -274,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             }, 1000);
                         } else if (command === 'clear') {
                             xtermInstance.clear();
+                            xtermInstance.write('ori@studio ~ % ');
                         } else if (command !== '') {
                             xtermInstance.writeln(`Command not found: ${command}`);
                             xtermInstance.writeln('Type /help for available commands');
@@ -283,14 +287,49 @@ document.addEventListener('DOMContentLoaded', () => {
                             xtermInstance.write('\r\nori@studio ~ % ');
                         }
                         currentLine = '';
+                        cursorPosition = 0;
                     } else if (data === '\u007F') { // Backspace
-                        if (currentLine.length > 0) {
-                            currentLine = currentLine.slice(0, -1);
+                        if (cursorPosition > 0) {
+                            currentLine = currentLine.slice(0, cursorPosition - 1) + currentLine.slice(cursorPosition);
+                            cursorPosition--;
+                            // Simple backspace - move back, write space, move back again
                             xtermInstance.write('\b \b');
+                            // If there's text after cursor, redraw only that part
+                            if (cursorPosition < currentLine.length) {
+                                const remainingText = currentLine.slice(cursorPosition);
+                                xtermInstance.write(remainingText + ' ');
+                                // Move cursor back to correct position
+                                xtermInstance.write('\x1b[' + (remainingText.length + 1) + 'D');
+                            }
                         }
-                    } else if (data >= ' ') { // Printable characters
-                        currentLine += data;
-                        xtermInstance.write(data);
+                    } else if (data === '\x1b[D') { // Left arrow
+                        if (cursorPosition > 0) {
+                            cursorPosition--;
+                            xtermInstance.write('\x1b[D');
+                        }
+                    } else if (data === '\x1b[C') { // Right arrow
+                        if (cursorPosition < currentLine.length) {
+                            cursorPosition++;
+                            xtermInstance.write('\x1b[C');
+                        }
+                    } else if (data === '\x1b[A' || data === '\x1b[B') { // Up/Down arrows
+                        // Ignore for now (could implement command history later)
+                    } else if (code >= 32 && code <= 126) { // Printable characters
+                        currentLine = currentLine.slice(0, cursorPosition) + data + currentLine.slice(cursorPosition);
+                        
+                        if (cursorPosition === currentLine.length - 1) {
+                            // Simple case: adding at the end
+                            xtermInstance.write(data);
+                        } else {
+                            // Inserting in middle: write character and remaining text
+                            const remainingText = currentLine.slice(cursorPosition + 1);
+                            xtermInstance.write(data + remainingText);
+                            // Move cursor back to correct position
+                            if (remainingText.length > 0) {
+                                xtermInstance.write('\x1b[' + remainingText.length + 'D');
+                            }
+                        }
+                        cursorPosition++;
                     }
                 });
             }
@@ -301,6 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 xtermInstance.writeln('Type /help to see available commands');
                 xtermInstance.write('\r\nori@studio ~ % ');
                 currentLine = '';
+                cursorPosition = 0;
                 xtermInstance.focus();
             }
         }
