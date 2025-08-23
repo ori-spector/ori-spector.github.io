@@ -214,6 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
         function openTerminal() {
             terminalOverlay.classList.add('open');
             terminalOverlay.setAttribute('aria-hidden', 'false');
+            // Disable body scroll on mobile
+            document.body.classList.add('terminal-open');
             
             // Create xterm instance if not exists
             if (window.Terminal && !xtermInstance) {
@@ -348,6 +350,8 @@ document.addEventListener('DOMContentLoaded', () => {
         function closeTerminal() {
             terminalOverlay.classList.remove('open');
             terminalOverlay.setAttribute('aria-hidden', 'true');
+            // Re-enable body scroll
+            document.body.classList.remove('terminal-open');
         }
 
         terminalTrigger.addEventListener('click', openTerminal);
