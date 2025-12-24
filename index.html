@@ -3,44 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Menu</title>
+    <title>Ori Spector</title>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.css">
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
     <div class="container">
-        <div class="wooden-frame">
-            <div class="content">
-                <div class="header status-bar">
-                    <span class="name">Ori Spector</span>
-                    <div class="location-time">
-                        <span class="location">San Francisco, CA</span>
-                        <span id="current-datetime"></span>
+        <!-- Braun-style Record Player -->
+        <div class="record-player">
+            <!-- Main body -->
+            <div class="player-body">
+                <!-- Left section: Speaker -->
+                <div class="speaker-section">
+                    <!-- Glass display window -->
+                    <div class="display-window">
+                        <div class="display-content">
+                            <span class="display-text">NOW PLAYING</span>
+                            <div class="display-bars">
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Speaker and indicator grouped at bottom -->
+                    <div class="speaker-bottom">
+                        <div class="speaker-grille">
+                            <!-- Dots generated via CSS -->
+                        </div>
+                        <div class="indicator-light"></div>
                     </div>
                 </div>
-                <div class="canvas">
-                    <div class="hero-typewriter">
-                        <span id="bullet-rotator"></span>
+                
+                <!-- Right section: Turntable -->
+                <div class="turntable-section">
+                    <!-- Vinyl Record -->
+                    <div class="vinyl-container">
+                        <div class="vinyl" id="vinyl">
+                            <div class="vinyl-grooves"></div>
+                            <div class="vinyl-label">
+                                <div class="label-text">
+                                    <!-- Circular text using SVG -->
+                                    <svg viewBox="0 0 130 130" class="circular-text-svg">
+                                        <defs>
+                                            <path id="topArc" d="M 15,65 A 50,50 0 0,1 115,65" fill="none"/>
+                                            <path id="bottomArc" d="M 115,65 A 50,50 0 0,1 15,65" fill="none"/>
+                                        </defs>
+                                        <text class="arc-text arc-text-top">
+                                            <textPath href="#topArc" startOffset="50%" text-anchor="middle">ORI SPECTOR • SF</textPath>
+                                        </text>
+                                        <text class="arc-text arc-text-bottom">
+                                            <textPath id="date-time-path" href="#bottomArc" startOffset="50%" text-anchor="middle"></textPath>
+                                        </text>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="vinyl-center"></div>
+                        </div>
+                        <!-- Tonearm / Stylus -->
+                        <div class="tonearm" id="tonearm">
+                            <div class="tonearm-base"></div>
+                            <div class="tonearm-arm"></div>
+                            <div class="tonearm-head"></div>
+                        </div>
                     </div>
-                    <button id="terminal-trigger" class="terminal-trigger" aria-haspopup="dialog" aria-controls="terminal-overlay" aria-label="Open terminal">
-                        <span class="terminal-prompt">ori@studio ~ % </span><span class="terminal-cursor">_</span>
-                    </button>
                 </div>
-                <div class="footer-elements">
-                    <div class="social-stack">
-                        <a class="social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a class="social-icon" href="https://x.com/orispector" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
-                    </div>
-                </div>
+                
+                <!-- Music credit -->
+                <span class="music-credit">music inspired by vegyn</span>
+            </div>
+        </div>
+        
+        <!-- Bio section -->
+        <div class="bio-section">
+            <p class="bio-line">product engineer at luma ai</p>
+            <p class="bio-line">m.s. computer science and b.s. symbolic systems from stanford</p>
+            <p class="bio-line accent">building tools for multimodal creative intelligence</p>
+            <p class="bio-line subtle">dabbling in screenplays, film, and philosophy</p>
+        </div>
+        
+        <!-- Footer with terminal and socials -->
+        <div class="footer-section">
+            <button id="terminal-trigger" class="terminal-trigger" aria-label="Open terminal">
+                <span class="terminal-prompt">ori@studio ~ % </span><span class="terminal-cursor">_</span>
+            </button>
+            <div class="social-stack">
+                <a class="social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a class="social-icon" href="https://x.com/orispector" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
             </div>
         </div>
     </div>
     
-    <!-- Terminal Modal - Outside Frame -->
+    <!-- Terminal Modal -->
     <div id="terminal-overlay" class="terminal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
         <div class="terminal-window" role="document">
             <div class="terminal-header">
@@ -58,7 +120,20 @@
         </div>
     </div>
     
+    <!-- Document Viewer Overlay -->
+    <div id="doc-viewer" class="doc-viewer-overlay" aria-hidden="true">
+        <div class="doc-paper">
+            <button class="doc-close" aria-label="Close document">&times;</button>
+            <div class="doc-header">
+                <span class="doc-filename">beliefs.txt</span>
+            </div>
+            <div class="doc-content" id="doc-content">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
-    <script src="assets/js/script.js?v=9"></script>
+    <script src="assets/js/script.js?v=24"></script>
 </body>
 </html>
