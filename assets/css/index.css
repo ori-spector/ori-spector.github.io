@@ -1,162 +1,780 @@
+/* ========================================
+   Braun-inspired Record Player - Ori Spector
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Courier Prime', 'Courier New', Courier, monospace;
-    color: #111;
-}
-
-body.terminal-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #B5C4B1;
+    min-height: 100vh;
+    color: #2C2416;
 }
 
 .container {
     min-height: 100vh;
-    background: linear-gradient(to bottom, #f5f5f5, #333);
-    padding: 10vh 8px; 
+    padding: 5vh 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+/* ========================================
+   Record Player
+   ======================================== */
+.record-player {
+    position: relative;
+    perspective: 1000px;
+}
+
+/* Main Player Body */
+.player-body {
+    width: min(92vw, 750px);
+    height: min(70vw, 460px);
+    background: linear-gradient(180deg, #DDD8CC 0%, #CFC9BA 100%);
+    border-radius: 12px;
+    box-shadow:
+        /* Outer shadow */
+        0 25px 70px rgba(0,0,0,0.35),
+        0 12px 35px rgba(0,0,0,0.25),
+        /* Inner highlights */
+        inset 0 2px 4px rgba(255,255,255,0.8),
+        inset 0 -2px 4px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    grid-template-rows: 1fr;
+    padding: 30px;
+    gap: 25px;
+    position: relative;
+}
+
+/* Wooden frame edge */
+.player-body::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    background: linear-gradient(180deg, 
+        #8B7355 0%, 
+        #6B5344 20%, 
+        #5A4535 50%, 
+        #6B5344 80%, 
+        #7A6349 100%
+    );
+    border-radius: 16px;
+    z-index: -1;
+    box-shadow:
+        inset 2px 2px 6px rgba(255,255,255,0.15),
+        inset -2px -2px 6px rgba(0,0,0,0.4),
+        0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ========================================
+   Speaker Section
+   ======================================== */
+.speaker-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10px;
+    padding-bottom: 25px;
+}
+
+.speaker-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Glass Display Window */
+.display-window {
+    width: 100px;
+    height: 50px;
+    margin-top: 30px;
+    background: #0A0C0A;
+    border-radius: 4px;
+    border: 3px solid #888;
+    box-shadow:
+        /* Outer bezel highlight */
+        0 -1px 0 #AAA,
+        0 2px 0 #555,
+        /* Depth shadow */
+        0 4px 8px rgba(0,0,0,0.4),
+        /* Inner deep recess */
+        inset 0 3px 12px rgba(0,0,0,0.9),
+        inset 0 -2px 6px rgba(0,0,0,0.6),
+        inset 2px 0 6px rgba(0,0,0,0.4),
+        inset -2px 0 6px rgba(0,0,0,0.4);
+    overflow: hidden;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.wooden-frame {
-    background-image: url('../media/paper.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: 4vmin solid #333;
-    border-radius: 2px;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.25) inset, 0 5px 10px 5px rgba(0,0,0,0.25);
-    display: inline-block;
-    width: 51.43vw;
-    height: 72vw;
-    max-width: 580px;
-    max-height: 750px;
-    position: relative;
-    text-align: center;
-}
-
-.wooden-frame::before {
-    content: "";
+/* Glass overlay layer */
+.display-window::before {
+    content: '';
     position: absolute;
-    border-radius: 2px;
-    bottom: -2vmin;
-    left: -2vmin;
-    right: -2vmin;
-    top: -2vmin;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.25) inset;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.08) 0%,
+        rgba(255,255,255,0.02) 20%,
+        transparent 50%,
+        rgba(0,0,0,0.1) 100%
+    );
+    pointer-events: none;
+    z-index: 10;
 }
 
-.wooden-frame::after {
-    content: "";
+/* Glass reflection highlight */
+.display-window::after {
+    content: '';
     position: absolute;
-    border-radius: 2px;
-    bottom: -3vmin;
-    left: -3vmin; 
-    right: -3vmin; 
-    top: -3vmin; 
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
+    top: 2px;
+    left: 10%;
+    width: 80%;
+    height: 8px;
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.15) 0%,
+        rgba(255,255,255,0.05) 50%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 11;
 }
 
-.content {
-    position: relative;
-    z-index: 1;
-    height: 100%;
+.display-content {
     display: flex;
     flex-direction: column;
-    padding: 3vmin 4vmin;
+    align-items: center;
+    gap: 5px;
+    opacity: 0.25;
+    transition: opacity 0.5s ease;
+    transform: translateY(2px);
+    z-index: 1;
 }
 
-/* Header layout */
-.header {
+.display-window.active .display-content {
+    opacity: 1;
+}
+
+.display-text {
+    font-size: 0.4rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: #7A9A76;
+    text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(122, 154, 118, 0.5);
+}
+
+.display-window.active .display-text {
+    color: #A8C8A4;
+    text-shadow: 0 0 10px rgba(168, 200, 164, 0.6);
+}
+
+/* Audio visualizer bars */
+.display-bars {
     display: flex;
+    gap: 3px;
+    align-items: flex-end;
+    height: 16px;
+}
+
+.display-bars .bar {
+    width: 4px;
+    background: #7A9A76;
+    border-radius: 1px;
+    height: 4px;
+    transition: height 0.1s ease;
+    box-shadow: 0 0 4px rgba(122, 154, 118, 0.3);
+}
+
+.display-window.active .display-bars .bar {
+    background: #A8C8A4;
+    box-shadow: 0 0 6px rgba(168, 200, 164, 0.5);
+}
+
+.display-window.active .bar {
+    animation: equalizer 0.8s ease-in-out infinite;
+}
+
+.display-window.active .bar:nth-child(1) { animation-delay: 0s; }
+.display-window.active .bar:nth-child(2) { animation-delay: 0.3s; }
+.display-window.active .bar:nth-child(3) { animation-delay: 0.6s; }
+.display-window.active .bar:nth-child(4) { animation-delay: 0.4s; }
+.display-window.active .bar:nth-child(5) { animation-delay: 0.15s; }
+
+@keyframes equalizer {
+    0%, 100% { height: 4px; }
+    50% { height: 14px; }
+}
+
+.speaker-grille {
+    width: 130px;
+    height: 130px;
+    background: transparent;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Speaker dots with depth */
+.speaker-grille::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        /* Darker inner shadow for depth */
+        radial-gradient(circle, #1A1510 2px, transparent 2px),
+        /* Main dot */
+        radial-gradient(circle, #3A3530 3.5px, transparent 3.5px);
+    background-size: 13px 13px, 13px 13px;
+    background-position: 0.5px 0.5px, 0 0;
+    border-radius: 3px;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
+}
+
+.indicator-light {
+    width: 10px;
+    height: 10px;
+    background: #4A4A4A;
+    border-radius: 50%;
+    border: 2px solid #5A5A5A;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.indicator-light.active {
+    background: #B5C4B1;
+    border-color: #8A9A86;
+    box-shadow: 
+        inset 0 1px 2px rgba(255,255,255,0.4),
+        0 0 6px rgba(181, 196, 177, 0.4);
+}
+
+/* ========================================
+   Turntable Section
+   ======================================== */
+.turntable-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.vinyl-container {
+    position: relative;
+    width: 340px;
+    height: 340px;
+}
+
+/* The Vinyl Record */
+.vinyl {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #1a1a1a;
+    position: relative;
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.4),
+        inset 0 0 60px rgba(0,0,0,0.8);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.vinyl:hover {
+    box-shadow:
+        0 6px 25px rgba(0,0,0,0.5),
+        0 0 0 3px rgba(181, 196, 177, 0.3),
+        inset 0 0 60px rgba(0,0,0,0.8);
+}
+
+/* Vinyl spinning state - animation controlled by JS */
+.vinyl.spinning {
+    /* Animation handled by JavaScript for position persistence */
+}
+
+/* Vinyl grooves effect - more realistic */
+.vinyl-grooves {
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    background: 
+        /* Fine groove lines */
+        repeating-radial-gradient(
+            circle at center,
+            transparent 0px,
+            transparent 1px,
+            rgba(50, 50, 50, 0.6) 1px,
+            rgba(35, 35, 35, 0.8) 1.5px,
+            rgba(50, 50, 50, 0.6) 2px,
+            transparent 2px,
+            transparent 3px
+        );
+}
+
+/* Vinyl shine/reflection overlay */
+.vinyl::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: 
+        /* Main reflection arc */
+        linear-gradient(
+            135deg,
+            transparent 0%,
+            transparent 35%,
+            rgba(255,255,255,0.08) 40%,
+            rgba(255,255,255,0.12) 45%,
+            rgba(255,255,255,0.08) 50%,
+            transparent 55%,
+            transparent 100%
+        ),
+        /* Secondary subtle reflection */
+        linear-gradient(
+            -45deg,
+            transparent 0%,
+            transparent 60%,
+            rgba(255,255,255,0.04) 70%,
+            transparent 80%,
+            transparent 100%
+        );
+    pointer-events: none;
+}
+
+/* Record label (center) */
+.vinyl-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #F8F5F0 0%, #EAE5DC 50%, #DDD8CF 100%);
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.3),
+        inset 0 1px 3px rgba(255,255,255,0.9),
+        inset 0 -1px 3px rgba(0,0,0,0.1);
+}
+
+/* Circular text container */
+.label-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Hide the old spans, we'll use SVG */
+.label-title, .label-subtitle {
+    display: none;
+}
+
+/* Circular text SVG */
+.circular-text-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.arc-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    fill: #2A2520;
+    text-transform: uppercase;
+}
+
+.arc-text-top {
+    font-size: 8px;
+}
+
+.arc-text-bottom {
+    font-size: 7px;
+    letter-spacing: 1.5px;
+}
+
+/* Center spindle hole - more metallic */
+.vinyl-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: 
+        radial-gradient(circle at 30% 30%, #E8E8E8 0%, #B0B0B0 40%, #808080 70%, #606060 100%);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 2px 4px rgba(255,255,255,0.6),
+        inset 0 -2px 4px rgba(0,0,0,0.4),
+        0 1px 3px rgba(0,0,0,0.3);
+    z-index: 5;
+}
+
+/* Inner ring on spindle */
+.vinyl-center::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle at 30% 30%, #909090 0%, #505050 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* ========================================
+   Tonearm / Stylus
+   ======================================== */
+.tonearm {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    transform-origin: 100% 0;
+    transform: rotate(-30deg);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 20;
+    pointer-events: none;
+}
+
+.tonearm.playing {
+    transform: rotate(8deg);
+}
+
+/* Base/pivot point - wood */
+.tonearm-base {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle at 40% 40%, #8B7355 0%, #6B5344 50%, #4A3728 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 2px 5px rgba(0,0,0,0.4),
+        inset 0 1px 2px rgba(255,255,255,0.2),
+        inset 0 -1px 2px rgba(0,0,0,0.3);
+}
+
+/* Main arm - wood, extends down-left from pivot */
+.tonearm-arm {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 150px;
+    background: linear-gradient(90deg, #6B5344 0%, #8B7355 40%, #7A6349 60%, #5A4535 100%);
+    border-radius: 2px;
+    box-shadow: 
+        1px 0 2px rgba(0,0,0,0.3),
+        -1px 0 2px rgba(0,0,0,0.2);
+}
+
+/* Headshell / cartridge - at end of arm */
+.tonearm-head {
+    position: absolute;
+    top: 145px;
+    right: -4px;
+    width: 12px;
+    height: 18px;
+    background: linear-gradient(90deg, #5A4535 0%, #6B5344 50%, #4A3728 100%);
+    border-radius: 2px 2px 3px 3px;
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.4),
+        inset 0 1px 1px rgba(255,255,255,0.1);
+}
+
+/* Stylus/needle - small metal tip */
+.tonearm-head::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 6px;
+    background: linear-gradient(180deg, #606060 0%, #303030 100%);
+    border-radius: 0 0 1px 1px;
+}
+
+/* ========================================
+   Control Strip
+   ======================================== */
+.control-strip {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: flex-start;
-    font-size: 0.875rem;
-    margin-bottom: 0;
+    padding: 10px 15px;
+    background: linear-gradient(180deg, #D5D1CC 0%, #C8C4BF 100%);
+    border-radius: 6px;
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,0.5),
+        inset 0 -1px 2px rgba(0,0,0,0.1);
 }
 
-.name {
-    font-weight: 400;
-    letter-spacing: 0.3px;
+.player-info, .player-meta {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #5A5550;
 }
 
-.location-time {
+.player-name {
+    font-weight: 500;
+    color: #3A3530;
+}
+
+.player-meta {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 2px;
+    font-size: 0.6rem;
 }
 
-.location {
-    font-size: 0.875rem;
-}
 
-/* Main canvas */
-.canvas {
-    flex: 1;
+/* ========================================
+   Footer Section
+   ======================================== */
+.footer-section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    position: relative;
-    min-height: 0; /* Allow flex shrinking */
+    gap: 1.5rem;
 }
 
-/* Hero typewriter */
-.hero-typewriter {
-    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-    text-align: center;
-    line-height: 1.4;
-    text-transform: lowercase;
-    letter-spacing: -0.3px;
-    margin-bottom: 10rem;
-    margin-top: -3rem;
-}
-
-/* Cursor for typewriter */
-.cursor {
-    display: inline-block;
-    width: 0.08em;
-    height: 1em;
-    margin-left: 2px;
-    background: currentColor;
-    animation: blink 1s steps(1) infinite;
-}
-
-@keyframes blink {
-    50% { opacity: 0; }
-}
-
-/* Terminal button - centered below typewriter */
-.terminal-trigger {
-    background: transparent;
-    color: #333;
-    border: 1px solid #333;
-    padding: 8px 16px;
-    font-family: inherit;
+/* Collection Trigger */
+.collection-trigger {
+    background: rgba(60,46,32,0.06);
+    color: #6B5B4A;
+    border: 1px solid rgba(60,46,32,0.15);
+    padding: 12px 24px;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem;
     cursor: pointer;
-    transition: all 0.3s;
-    border-radius: 3px;
-    width: 75%;
-    margin: 0 auto;
-    text-align: left;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
 }
 
-.terminal-trigger:hover {
-    background: #333;
-    color: #fff;
+.collection-trigger:hover {
+    background: rgba(60,46,32,0.1);
+    border-color: rgba(60,46,32,0.25);
+    color: #4A3D30;
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(60,46,32,0.1);
 }
 
-.terminal-prompt {
-    color: inherit;
+/* ========================================
+   Shared Modal System
+   ======================================== */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 18, 15, 0.92);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
-.terminal-cursor {
-    animation: terminalBlink 1.5s infinite;
+.modal-backdrop.open {
+    opacity: 1; 
+    pointer-events: auto;
+}
+
+.modal-panel {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.modal-panel.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-btn {
+    position: fixed;
+    top: 25px;
+    left: 30px;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+.back-btn:hover {
+    color: rgba(255,255,255,0.8);
+}
+
+/* ========================================
+   Collection Panel
+   ======================================== */
+
+.collection-crate {
+    text-align: center;
+}
+
+.crate-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+}
+
+.sleeve-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Record Sleeve */
+.record-sleeve {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.record-sleeve:hover {
+    transform: translateY(-8px) rotate(-2deg);
+}
+
+.sleeve-cover {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #E8E4DC 0%, #D8D4CC 50%, #C8C4BC 100%);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 20px rgba(0,0,0,0.4),
+        0 2px 8px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Worn edge effect */
+.sleeve-cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 3%, transparent 97%, rgba(0,0,0,0.05) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.03) 0%, transparent 5%, transparent 95%, rgba(0,0,0,0.08) 100%);
+    pointer-events: none;
+}
+
+.sleeve-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #3A3530;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.sleeve-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    color: #7A7570;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+/* ========================================
+   Gallery Panel
+   ======================================== */
+.gallery-panel {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 60px 20px;
+}
+
+.gallery-container {
+    max-width: 1300px;
+    width: 100%;
+}
+
+.gallery-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.gallery-item {
+    aspect-ratio: 16 / 9;
+    background: #2A2520;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+.gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @keyframes terminalBlink {
@@ -164,302 +782,274 @@ body.terminal-open {
     50%, 100% { opacity: 0; }
 }
 
-/* Footer elements */
-.footer-elements {
-    position: absolute;
-    bottom: 10vmin;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
+/* Social Icons */
 .social-stack {
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
 }
 
 .social-icon {
-    color: #000;
-    opacity: 0.8;
-    font-size: 1.1rem;
-    transition: opacity 0.2s;
+    color: #6B5B4A;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+    text-decoration: none;
 }
 
 .social-icon:hover { 
     opacity: 1; 
+    color: #4A3D30;
+    transform: translateY(-1px);
 }
 
-/* Terminal overlay - floating */
-.terminal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 300ms ease;
-    z-index: 1000;
-    overflow: hidden; /* Prevent body scroll bleed-through */
-}
 
-.terminal-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.terminal-window {
-    width: min(85vw, 720px);
-    height: min(70vh, 500px);
-    background: #0a0e14;
-    border-radius: 12px;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transform: translateY(20px);
-    transition: transform 300ms ease;
-}
-
-.terminal-overlay.open .terminal-window {
-    transform: translateY(0);
-}
-
-.terminal-header {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    background: #0e1218;
-    border-bottom: 1px solid #1a1f29;
-    gap: 12px;
-}
-
-.term-controls {
-    display: flex;
-    gap: 8px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.dot.red { background: #ff5f56; }
-.dot.yellow { background: #ffbd2e; }
-.dot.green { background: #27c93f; }
-
-.term-title {
-    flex: 1;
-    text-align: center;
-    color: #8892a0;
-    font-size: 0.875rem;
-}
-
-.terminal-close {
-    background: none;
-    border: none;
-    color: #8892a0;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.2s;
-}
-
-.terminal-close:hover {
-    color: #ff5f56;
-}
-
-.terminal-body {
-    flex: 1;
-    padding: 0;
-    overflow: auto;
-}
-
-.xterm-mount {
-    height: 100%;
-    overflow: auto;
-}
-
-.xterm-mount .xterm-viewport {
-    overflow-x: auto !important;
-    overflow-y: auto !important;
-}
-
-.xterm-mount .xterm-screen {
-    overflow-x: auto !important;
-}
-
-/* Remove old styles */
-.menu-content,
-.beliefs-block,
-.signature,
-.rotator {
-    display: none;
-}
-
-/* Responsive */
+/* ========================================
+   Responsive
+   ======================================== */
 @media (max-width: 768px) {
     .container {
-        padding: 5vh 4px;
+        padding: 3vh 10px;
+        gap: 2rem;
     }
     
-    .wooden-frame {
-        width: 90vw;
-        height: 85vh;
-        max-width: none;
-        max-height: none;
+    .player-body {
+        width: 95vw;
+        height: auto;
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 15px;
     }
     
-    .content {
-        padding: 4vmin 5vmin;
+    .speaker-section {
+        display: none; /* Hide speaker on mobile */
     }
     
-    .header {
-        font-size: 0.75rem;
-        margin-bottom: 1rem;
+    .turntable-section {
+        grid-column: 1;
     }
     
-    .name {
-        font-size: 0.75rem;
+    .vinyl-container {
+        width: 280px;
+        height: 280px;
     }
     
-    .location-time {
-        font-size: 0.7rem;
+    .vinyl-label {
+        width: 110px;
+        height: 110px;
     }
     
-    .hero-typewriter {
-        font-size: clamp(1.1rem, 4vw, 1.6rem);
-        margin-bottom: 3rem;
-        margin-top: -1rem;
-        line-height: 1.3;
+    .arc-text {
+        font-size: 7px;
     }
     
-    .terminal-trigger {
-        width: 90%;
-        padding: 10px 12px;
-        font-size: 0.8rem;
+    .label-date {
+        font-size: 0.45rem;
+        bottom: 18px;
     }
     
-    .footer-elements {
-        bottom: 8vmin;
+    .control-strip {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
     }
     
-    .social-stack {
-        gap: 0.8rem;
-    }
-    
-    .social-icon {
-        font-size: 1rem;
+    .player-info, .player-meta {
+        font-size: 0.6rem;
     }
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 3vh 2px;
+    .vinyl-container {
+        width: 240px;
+        height: 240px;
     }
     
-    .wooden-frame {
-        width: 95vw;
-        height: 90vh;
-        border-width: 2vmin;
+    .vinyl-label {
+        width: 95px;
+        height: 95px;
     }
     
-    .content {
-        padding: 3vmin 4vmin;
+    .arc-text {
+        font-size: 6px;
+        letter-spacing: 1px;
     }
     
-    .header {
-        font-size: 0.7rem;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
+    .label-date {
+        font-size: 0.4rem;
+        bottom: 15px;
     }
     
-    .name {
-        font-size: 0.85rem;
-        font-weight: 500;
-    }
-    
-    .location-time {
-        align-items: flex-end;
-        font-size: 0.65rem;
-    }
-    
-    .hero-typewriter {
-        font-size: clamp(1rem, 5vw, 1.4rem);
-        margin-bottom: 2rem;
-        margin-top: 0;
-    }
-    
-    .terminal-trigger {
-        width: 95%;
-        padding: 12px 8px;
-        font-size: 0.75rem;
-    }
-    
-    .footer-elements {
-        bottom: 8vmin;
-    }
-}
-
-/* Terminal Modal Responsive */
-@media (max-width: 768px) {
-    .terminal-window {
-        width: 95vw;
-        height: 80vh;
-        border-radius: 8px;
-    }
-    
-    .terminal-header {
-        padding: 10px 12px;
-        font-size: 0.8rem;
-    }
-    
-    .dot {
+    .vinyl-center {
         width: 10px;
         height: 10px;
     }
     
-    .terminal-close {
-        width: 20px;
-        height: 20px;
-        font-size: 1.2rem;
+    .collection-trigger {
+        font-size: 0.75rem;
+        padding: 10px 18px;
     }
 }
 
+/* Collection/Gallery Responsive */
+@media (max-width: 768px) {
+    .sleeve-grid {
+        gap: 20px;
+    }
+    
+    .record-sleeve {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .sleeve-label {
+        font-size: 0.9rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+/* ========================================
+   Bio Section
+   ======================================== */
+.bio-section {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.bio-line {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: #5A5550;
+    margin: 0.4rem 0;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+}
+
+.bio-line.accent {
+    color: #6B5344;
+    font-style: italic;
+}
+
+.bio-line.subtle {
+    color: #8A8580;
+    font-size: 0.8rem;
+}
+
+/* ========================================
+   Music Credit
+   ======================================== */
+.music-credit {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.55rem;
+    font-style: italic;
+    color: rgba(90, 69, 53, 0.5);
+    letter-spacing: 0.3px;
+}
+
+/* ========================================
+   Document Panel - Liner Notes Style
+   ======================================== */
+
+.doc-paper {
+    width: min(90vw, 420px);
+    max-height: 80vh;
+    background: linear-gradient(145deg, #F5F2EB 0%, #EBE7DE 50%, #E2DED5 100%);
+    border-radius: 2px;
+    box-shadow: 
+        0 25px 80px rgba(0, 0, 0, 0.5),
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(12px);
+    transition: transform 0.2s ease;
+}
+
+/* Worn paper edge effect */
+.doc-paper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(90deg, rgba(0,0,0,0.04) 0%, transparent 2%, transparent 98%, rgba(0,0,0,0.04) 100%),
+        linear-gradient(180deg, transparent 0%, transparent 96%, rgba(0,0,0,0.06) 100%);
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+.doc-viewer-overlay.open .doc-paper {
+    transform: translateY(0);
+}
+
+.doc-header {
+    padding: 25px 30px 15px;
+    text-align: center;
+}
+
+.doc-filename {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #7A7570;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.doc-content {
+    padding: 10px 35px 35px;
+    overflow-y: auto;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #3A3530;
+}
+
+.doc-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.doc-content li {
+    position: relative;
+    padding-left: 0;
+    margin-bottom: 1.4rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.doc-content li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.doc-content li strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #2A2520;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.3px;
+}
+
 @media (max-width: 480px) {
-    .terminal-window {
-        width: 98vw;
-        height: 85vh;
-        border-radius: 6px;
+    .doc-paper {
+        width: 95vw;
+        max-height: 85vh;
     }
     
-    .terminal-header {
-        padding: 8px 10px;
-        font-size: 0.75rem;
-    }
-    
-    .dot {
-        width: 8px;
-        height: 8px;
-    }
-    
-    .term-controls {
-        gap: 6px;
-    }
-    
-    .xterm-mount {
-        font-size: 12px;
-    }
-    
-    .terminal-body {
-        overflow-x: auto;
-        overflow-y: auto;
+    .doc-content {
+        padding: 10px 25px 25px;
+        font-size: 0.9rem;
     }
 }
