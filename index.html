@@ -9,8 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm/css/xterm.css">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/index.css?v=35">
 </head>
 <body>
     <div class="container">
@@ -84,16 +83,16 @@
         
         <!-- Bio section -->
         <div class="bio-section">
-            <p class="bio-line">product engineer at luma ai</p>
-            <p class="bio-line">m.s. computer science and b.s. symbolic systems from stanford</p>
-            <p class="bio-line accent">building tools for multimodal creative intelligence</p>
+            <p class="bio-line">product engineer • luma ai</p>
+            <p class="bio-line">m.s. computer science & b.s. symbolic systems • stanford</p>
+            <p class="bio-line accent">building interfaces for multimodal creative intelligence</p>
             <p class="bio-line subtle">dabbling in screenplays, film, and philosophy</p>
         </div>
         
-        <!-- Footer with terminal and socials -->
+        <!-- Footer with collection button and socials -->
         <div class="footer-section">
-            <button id="terminal-trigger" class="terminal-trigger" aria-label="Open terminal">
-                <span class="terminal-prompt">ori@studio ~ % </span><span class="terminal-cursor">_</span>
+            <button id="collection-trigger" class="collection-trigger" aria-label="Browse collection">
+                browse collection
             </button>
             <div class="social-stack">
                 <a class="social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
@@ -102,30 +101,49 @@
         </div>
     </div>
     
-    <!-- Terminal Modal -->
-    <div id="terminal-overlay" class="terminal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
-        <div class="terminal-window" role="document">
-            <div class="terminal-header">
-                <div class="term-controls" aria-hidden="true">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
+    <!-- Shared Modal Backdrop -->
+    <div id="modal-backdrop" class="modal-backdrop" aria-hidden="true"></div>
+    
+    <!-- Collection Panel -->
+    <div id="collection-overlay" class="modal-panel collection-panel" aria-hidden="true">
+        <div class="collection-crate">
+            <h2 class="crate-title">Collection</h2>
+            <div class="sleeve-grid">
+                <!-- Beliefs Sleeve -->
+                <div class="record-sleeve" data-content="beliefs">
+                    <div class="sleeve-cover">
+                        <div class="sleeve-label">BELIEFS</div>
+                        <div class="sleeve-subtitle">some thoughts</div>
+                    </div>
                 </div>
-                <span class="term-title">ori@studio — bash</span>
-                <button class="terminal-close" aria-label="Close terminal">&times;</button>
-            </div>
-            <div id="terminal-body" class="terminal-body">
-                <div id="xterm" class="xterm-mount"></div>
+                <!-- Gallery Sleeve -->
+                <div class="record-sleeve" data-content="gallery">
+                    <div class="sleeve-cover">
+                        <div class="sleeve-label">GALLERY</div>
+                        <div class="sleeve-subtitle">visual works</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
-    <!-- Document Viewer Overlay -->
-    <div id="doc-viewer" class="doc-viewer-overlay" aria-hidden="true">
+    <!-- Gallery Panel -->
+    <div id="gallery-overlay" class="modal-panel gallery-panel" aria-hidden="true">
+        <button class="back-btn gallery-close" aria-label="Back to collection">← back</button>
+        <div class="gallery-container">
+            <h2 class="gallery-title">Gallery</h2>
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Gallery items loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Document Panel -->
+    <div id="doc-viewer" class="modal-panel doc-panel" aria-hidden="true">
+        <button class="back-btn doc-close" aria-label="Back to collection">← back</button>
         <div class="doc-paper">
-            <button class="doc-close" aria-label="Close document">&times;</button>
             <div class="doc-header">
-                <span class="doc-filename">beliefs.txt</span>
+                <span class="doc-filename">LINER NOTES</span>
             </div>
             <div class="doc-content" id="doc-content">
                 <!-- Content loaded dynamically -->
@@ -133,7 +151,6 @@
         </div>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm/lib/xterm.min.js"></script>
-    <script src="assets/js/script.js?v=24"></script>
+    <script src="assets/js/script.js?v=35"></script>
 </body>
 </html>

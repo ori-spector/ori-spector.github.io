@@ -566,21 +566,21 @@ body {
     gap: 1.5rem;
 }
 
-/* Terminal Trigger */
-.terminal-trigger {
+/* Collection Trigger */
+.collection-trigger {
     background: rgba(60,46,32,0.06);
     color: #6B5B4A;
     border: 1px solid rgba(60,46,32,0.15);
-    padding: 10px 18px;
-    font-family: 'JetBrains Mono', 'SF Mono', monospace;
-    font-size: 0.75rem;
+    padding: 12px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 4px;
-    letter-spacing: -0.3px;
+    letter-spacing: 0.5px;
 }
 
-.terminal-trigger:hover {
+.collection-trigger:hover {
     background: rgba(60,46,32,0.1);
     border-color: rgba(60,46,32,0.25);
     color: #4A3D30;
@@ -588,13 +588,193 @@ body {
     box-shadow: 0 4px 12px rgba(60,46,32,0.1);
 }
 
-.terminal-prompt {
-    opacity: 0.7;
+/* ========================================
+   Shared Modal System
+   ======================================== */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 18, 15, 0.92);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
-.terminal-cursor {
-    color: #8B7355;
-    animation: terminalBlink 1s steps(1) infinite;
+.modal-backdrop.open {
+    opacity: 1; 
+    pointer-events: auto;
+}
+
+.modal-panel {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.modal-panel.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-btn {
+    position: fixed;
+    top: 25px;
+    left: 30px;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+.back-btn:hover {
+    color: rgba(255,255,255,0.8);
+}
+
+/* ========================================
+   Collection Panel
+   ======================================== */
+
+.collection-crate {
+    text-align: center;
+}
+
+.crate-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+}
+
+.sleeve-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Record Sleeve */
+.record-sleeve {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.record-sleeve:hover {
+    transform: translateY(-8px) rotate(-2deg);
+}
+
+.sleeve-cover {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #E8E4DC 0%, #D8D4CC 50%, #C8C4BC 100%);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 20px rgba(0,0,0,0.4),
+        0 2px 8px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Worn edge effect */
+.sleeve-cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 3%, transparent 97%, rgba(0,0,0,0.05) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.03) 0%, transparent 5%, transparent 95%, rgba(0,0,0,0.08) 100%);
+    pointer-events: none;
+}
+
+.sleeve-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #3A3530;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.sleeve-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    color: #7A7570;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+/* ========================================
+   Gallery Panel
+   ======================================== */
+.gallery-panel {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 60px 20px;
+}
+
+.gallery-container {
+    max-width: 1300px;
+    width: 100%;
+}
+
+.gallery-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.gallery-item {
+    aspect-ratio: 16 / 9;
+    background: #2A2520;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+.gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @keyframes terminalBlink {
@@ -622,110 +802,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* ========================================
-   Terminal Modal (keeping existing styles)
-   ======================================== */
-body.terminal-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-}
-
-.terminal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 300ms ease;
-    z-index: 1000;
-}
-
-.terminal-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.terminal-window {
-    width: min(85vw, 720px);
-    height: min(70vh, 500px);
-    background: #0a0e14;
-    border-radius: 12px;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transform: translateY(20px);
-    transition: transform 300ms ease;
-}
-
-.terminal-overlay.open .terminal-window {
-    transform: translateY(0);
-}
-
-.terminal-header {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    background: #0e1218;
-    border-bottom: 1px solid #1a1f29;
-    gap: 12px;
-}
-
-.term-controls {
-    display: flex;
-    gap: 8px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.dot.red { background: #ff5f56; }
-.dot.yellow { background: #ffbd2e; }
-.dot.green { background: #27c93f; }
-
-.term-title {
-    flex: 1;
-    text-align: center;
-    color: #8892a0;
-    font-size: 0.875rem;
-}
-
-.terminal-close {
-    background: none;
-    border: none;
-    color: #8892a0;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.2s;
-}
-
-.terminal-close:hover {
-    color: #ff5f56;
-}
-
-.terminal-body {
-    flex: 1;
-    padding: 0;
-    overflow: auto;
-}
-
-.xterm-mount {
-    height: 100%;
-    overflow: auto;
-}
 
 /* ========================================
    Responsive
@@ -808,28 +884,30 @@ body.terminal-open {
         height: 10px;
     }
     
-    .terminal-trigger {
-        font-size: 0.65rem;
-        padding: 8px 14px;
+    .collection-trigger {
+        font-size: 0.75rem;
+        padding: 10px 18px;
     }
 }
 
-/* Terminal Modal Responsive */
+/* Collection/Gallery Responsive */
 @media (max-width: 768px) {
-    .terminal-window {
-        width: 95vw;
-        height: 80vh;
-        border-radius: 8px;
+    .sleeve-grid {
+        gap: 20px;
     }
     
-    .terminal-header {
-        padding: 10px 12px;
-        font-size: 0.8rem;
+    .record-sleeve {
+        width: 150px;
+        height: 150px;
     }
     
-    .dot {
-        width: 10px;
-        height: 10px;
+    .sleeve-label {
+        font-size: 0.9rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 }
 
@@ -877,112 +955,91 @@ body.terminal-open {
 }
 
 /* ========================================
-   Document Viewer (beliefs.txt etc)
+   Document Panel - Liner Notes Style
    ======================================== */
-.doc-viewer-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.doc-viewer-overlay.open {
-    opacity: 1;
-    visibility: visible;
-}
 
 .doc-paper {
-    width: min(90vw, 600px);
+    width: min(90vw, 420px);
     max-height: 80vh;
-    background: #FDFCF9;
-    border-radius: 4px;
+    background: linear-gradient(145deg, #F5F2EB 0%, #EBE7DE 50%, #E2DED5 100%);
+    border-radius: 2px;
     box-shadow: 
-        0 25px 80px rgba(0, 0, 0, 0.4),
-        0 10px 30px rgba(0, 0, 0, 0.3);
+        0 25px 80px rgba(0, 0, 0, 0.5),
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255,255,255,0.6);
     position: relative;
     display: flex;
     flex-direction: column;
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
+    transform: translateY(12px);
+    transition: transform 0.2s ease;
+}
+
+/* Worn paper edge effect */
+.doc-paper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(90deg, rgba(0,0,0,0.04) 0%, transparent 2%, transparent 98%, rgba(0,0,0,0.04) 100%),
+        linear-gradient(180deg, transparent 0%, transparent 96%, rgba(0,0,0,0.06) 100%);
+    pointer-events: none;
+    border-radius: 2px;
 }
 
 .doc-viewer-overlay.open .doc-paper {
     transform: translateY(0);
 }
 
-.doc-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 30px;
-    height: 30px;
-    border: none;
-    background: transparent;
-    font-size: 1.5rem;
-    color: #999;
-    cursor: pointer;
-    transition: color 0.2s ease;
-    z-index: 10;
-}
-
-.doc-close:hover {
-    color: #333;
-}
-
 .doc-header {
-    padding: 20px 30px;
-    border-bottom: 1px solid #E5E5E5;
+    padding: 25px 30px 15px;
+    text-align: center;
 }
 
 .doc-filename {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    color: #666;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #7A7570;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .doc-content {
-    padding: 30px;
+    padding: 10px 35px 35px;
     overflow-y: auto;
-    font-family: 'DM Sans', serif;
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #2A2520;
-}
-
-.doc-content h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    color: #1a1a1a;
-}
-
-.doc-content p {
-    margin-bottom: 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #3A3530;
 }
 
 .doc-content ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .doc-content li {
     position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
+    padding-left: 0;
+    margin-bottom: 1.4rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
-.doc-content li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #8B7355;
+.doc-content li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.doc-content li strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #2A2520;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.3px;
 }
 
 @media (max-width: 480px) {
@@ -992,7 +1049,7 @@ body.terminal-open {
     }
     
     .doc-content {
-        padding: 20px;
-        font-size: 0.95rem;
+        padding: 10px 25px 25px;
+        font-size: 0.9rem;
     }
 }

@@ -30,8 +30,8 @@ function getOrdinalSuffix(day) {
 }
 
 // Initialize datetime
-updateDateTime();
-setInterval(updateDateTime, 1000);
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
 
 // ========================================
 // Record Player Functionality
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayWindow = document.querySelector('.display-window');
     
     // Audio for the record player
-    const recordAudio = new Audio('assets/media/sound-song.MP3');
+    const recordAudio = new Audio('assets/media/audio.MP3');
     recordAudio.loop = true;
     recordAudio.volume = 0.7;
     
@@ -102,262 +102,208 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // ========================================
-    // Terminal Functionality
+    // Modal System with Shared Backdrop
     // ========================================
-    const terminalTrigger = document.getElementById('terminal-trigger');
-    const terminalOverlay = document.getElementById('terminal-overlay');
-    const terminalClose = terminalOverlay ? terminalOverlay.querySelector('.terminal-close') : null;
-    const xtermMount = document.getElementById('xterm');
-    let xtermInstance = null;
-    let currentLine = '';
-    let cursorPosition = 0;
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const collectionTrigger = document.getElementById('collection-trigger');
+    const collectionPanel = document.getElementById('collection-overlay');
+    const sleeves = document.querySelectorAll('.record-sleeve');
     
-    // Command history
-    let commandHistory = [];
-    let historyIndex = -1;
-    let tempCurrentLine = '';
+    // Gallery elements
+    const galleryPanel = document.getElementById('gallery-overlay');
+    const galleryClose = galleryPanel ? galleryPanel.querySelector('.gallery-close') : null;
+    const galleryGrid = document.getElementById('gallery-grid');
     
-    // Available commands for autocomplete
-    const availableCommands = [
-        'open beliefs.txt',
-        'show inspirations',
-        'clear',
-        '/help'
-    ];
-
-    if (terminalTrigger && terminalOverlay && terminalClose && xtermMount) {
-        function openTerminal() {
-            terminalOverlay.classList.add('open');
-            terminalOverlay.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('terminal-open');
-            
-            // Create xterm instance if not exists
-            if (window.Terminal && !xtermInstance) {
-                xtermInstance = new window.Terminal({
-                    cursorBlink: true,
-                    fontFamily: 'JetBrains Mono, SF Mono, Consolas, monospace',
-                    fontSize: 14,
-                    theme: {
-                        background: '#0a0e14',
-                        foreground: '#d4d4d4',
-                        cursor: '#d4d4d4',
-                        black: '#0a0e14',
-                        brightBlack: '#686868',
-                        red: '#ff5f56',
-                        green: '#27c93f',
-                        yellow: '#ffbd2e',
-                        blue: '#5abbed',
-                        magenta: '#ff6ac1',
-                        cyan: '#5abbed',
-                        white: '#d4d4d4'
-                    }
-                });
-                xtermInstance.open(xtermMount);
-                
-                // Handle input
-                xtermInstance.onData((data) => {
-                    const code = data.charCodeAt(0);
-                    
-                    if (data === '\r') { // Enter key
-                        const command = currentLine.trim();
-                        xtermInstance.write('\r\n');
-                        
-                        // Add to history if not empty and different from last
-                        if (command && (commandHistory.length === 0 || commandHistory[commandHistory.length - 1] !== command)) {
-                            commandHistory.push(command);
-                        }
-                        historyIndex = commandHistory.length;
-                        tempCurrentLine = '';
-                        
-                        if (command === '/help') {
-                            xtermInstance.writeln('Available commands:');
-                            xtermInstance.writeln('  open beliefs.txt      - Display my core beliefs');
-                            xtermInstance.writeln('  show inspirations     - Open media inspirations');
-                            xtermInstance.writeln('  clear                 - Clear terminal');
-                        } else if (command === 'open beliefs' || command === 'open beliefs.txt') {
-                            xtermInstance.writeln('Opening beliefs.txt...');
-                            setTimeout(() => {
-                                openDocument('beliefs');
-                            }, 300);
-                        } else if (command === 'show inspirations') {
-                            xtermInstance.writeln('Opening gallery...');
-                            setTimeout(() => {
-                                window.location.href = 'gallery.html';
-                            }, 1000);
-                        } else if (command === 'clear') {
-                            xtermInstance.clear();
-                            xtermInstance.write('ori@studio ~ % ');
-                        } else if (command !== '') {
-                            xtermInstance.writeln(`Command not found: ${command}`);
-                            xtermInstance.writeln('Type /help for available commands');
-                        }
-                        
-                        if (command !== 'clear' && command !== 'show inspirations') {
-                            xtermInstance.write('\r\nori@studio ~ % ');
-                        }
-                        currentLine = '';
-                        cursorPosition = 0;
-                    } else if (data === '\t') { // Tab - autocomplete
-                        const matches = availableCommands.filter(cmd => cmd.startsWith(currentLine));
-                        if (matches.length === 1) {
-                            // Single match - complete it
-                            const completion = matches[0].slice(currentLine.length);
-                            currentLine += completion;
-                            cursorPosition = currentLine.length;
-                            xtermInstance.write(completion);
-                        } else if (matches.length > 1) {
-                            // Multiple matches - show them
-                            xtermInstance.write('\r\n');
-                            matches.forEach(m => xtermInstance.writeln('  ' + m));
-                            xtermInstance.write('ori@studio ~ % ' + currentLine);
-                        }
-                    } else if (data === '\u007F') { // Backspace
-                        if (cursorPosition > 0) {
-                            currentLine = currentLine.slice(0, cursorPosition - 1) + currentLine.slice(cursorPosition);
-                            cursorPosition--;
-                            xtermInstance.write('\b \b');
-                            if (cursorPosition < currentLine.length) {
-                                const remainingText = currentLine.slice(cursorPosition);
-                                xtermInstance.write(remainingText + ' ');
-                                xtermInstance.write('\x1b[' + (remainingText.length + 1) + 'D');
-                            }
-                        }
-                    } else if (data === '\x1b[D') { // Left arrow
-                        if (cursorPosition > 0) {
-                            cursorPosition--;
-                            xtermInstance.write('\x1b[D');
-                        }
-                    } else if (data === '\x1b[C') { // Right arrow
-                        if (cursorPosition < currentLine.length) {
-                            cursorPosition++;
-                            xtermInstance.write('\x1b[C');
-                        }
-                    } else if (data === '\x1b[A') { // Up arrow - history back
-                        if (commandHistory.length > 0 && historyIndex > 0) {
-                            // Save current line if at the end
-                            if (historyIndex === commandHistory.length) {
-                                tempCurrentLine = currentLine;
-                            }
-                            historyIndex--;
-                            // Clear current line
-                            xtermInstance.write('\r\x1b[K');
-                            xtermInstance.write('ori@studio ~ % ');
-                            // Write history command
-                            currentLine = commandHistory[historyIndex];
-                            cursorPosition = currentLine.length;
-                            xtermInstance.write(currentLine);
-                        }
-                    } else if (data === '\x1b[B') { // Down arrow - history forward
-                        if (historyIndex < commandHistory.length) {
-                            historyIndex++;
-                            // Clear current line
-                            xtermInstance.write('\r\x1b[K');
-                            xtermInstance.write('ori@studio ~ % ');
-                            // Write next history or temp line
-                            if (historyIndex === commandHistory.length) {
-                                currentLine = tempCurrentLine;
-                            } else {
-                                currentLine = commandHistory[historyIndex];
-                            }
-                            cursorPosition = currentLine.length;
-                            xtermInstance.write(currentLine);
-                        }
-                    } else if (code >= 32 && code <= 126) { // Printable characters
-                        currentLine = currentLine.slice(0, cursorPosition) + data + currentLine.slice(cursorPosition);
-                        
-                        if (cursorPosition === currentLine.length - 1) {
-                            xtermInstance.write(data);
-                        } else {
-                            const remainingText = currentLine.slice(cursorPosition + 1);
-                            xtermInstance.write(data + remainingText);
-                            if (remainingText.length > 0) {
-                                xtermInstance.write('\x1b[' + remainingText.length + 'D');
-                            }
-                        }
-                        cursorPosition++;
-                    }
-                });
-            }
-            
-            if (xtermInstance) {
-                xtermInstance.clear();
-                // xtermInstance.writeln('Terminal');
-                // xtermInstance.writeln('Type /help to see available commands');
-                xtermInstance.write('\rori@studio ~ % ');
-                currentLine = '';
-                cursorPosition = 0;
-                xtermInstance.focus();
-            }
-        }
-
-        function closeTerminal() {
-            terminalOverlay.classList.remove('open');
-            terminalOverlay.setAttribute('aria-hidden', 'true');
-            document.body.classList.remove('terminal-open');
-        }
-
-        terminalTrigger.addEventListener('click', openTerminal);
-        terminalClose.addEventListener('click', closeTerminal);
-        terminalOverlay.addEventListener('click', (e) => {
-            if (e.target === terminalOverlay) closeTerminal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && terminalOverlay.classList.contains('open')) {
-                closeTerminal();
-            }
-        });
-    }
-    
-    // ========================================
-    // Document Viewer
-    // ========================================
+    // Document elements (declared early for closeAll)
     const docViewer = document.getElementById('doc-viewer');
     const docContent = document.getElementById('doc-content');
     const docClose = docViewer ? docViewer.querySelector('.doc-close') : null;
     const docFilename = docViewer ? docViewer.querySelector('.doc-filename') : null;
     
+    // Gallery items
+    const galleryItems = [
+        { type: 'video', src: 'assets/media/idea-AAcRY7yh.mp4' },
+        { type: 'video', src: 'assets/media/idea-CBzmxQGg.mp4' },
+        { type: 'video', src: 'assets/media/idea-dg9kGVfw.mp4' },
+        { type: 'video', src: 'assets/media/idea-iPr10t.mp4' },
+        { type: 'video', src: 'assets/media/idea-JZJVvGtd.mp4' },
+        { type: 'video', src: 'assets/media/idea-NVh_r19H.mp4' },
+        { type: 'video', src: 'assets/media/idea-S4W_N5TJ.mp4' },
+        { type: 'video', src: 'assets/media/idea-ObT87F19.mp4' },
+        { type: 'video', src: 'assets/media/umbrella.mp4' },
+        { type: 'video', src: 'assets/media/idea-WO1SGHsp.mp4' },
+        { type: 'video', src: 'assets/media/idea-j59n34VS.mp4' },
+        { type: 'video', src: 'assets/media/stairs2.mp4' },
+    ];
+    
+    // Track current panel
+    let currentPanel = null;
+
+    function showBackdrop() {
+        if (!modalBackdrop) return;
+        modalBackdrop.classList.add('open');
+        modalBackdrop.setAttribute('aria-hidden', 'false');
+    }
+    
+    function hideBackdrop() {
+        if (!modalBackdrop) return;
+        modalBackdrop.classList.remove('open');
+        modalBackdrop.setAttribute('aria-hidden', 'true');
+    }
+    
+    function showPanel(panel) {
+        if (!panel) return;
+        // Hide current panel instantly (no transition)
+        if (currentPanel && currentPanel !== panel) {
+            currentPanel.classList.remove('open');
+            currentPanel.setAttribute('aria-hidden', 'true');
+        }
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        currentPanel = panel;
+    }
+    
+    function hidePanel(panel) {
+        if (!panel) return;
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        if (currentPanel === panel) currentPanel = null;
+    }
+
+    function openCollection() {
+        showBackdrop();
+        showPanel(collectionPanel);
+    }
+    
+    function closeAll() {
+        hidePanel(collectionPanel);
+        hidePanel(galleryPanel);
+        hidePanel(docViewer);
+        hideBackdrop();
+        currentPanel = null;
+    }
+    
+    function populateGallery() {
+        if (!galleryGrid || galleryGrid.children.length > 0) return;
+        
+        galleryItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+            
+            if (item.type === 'video') {
+                const video = document.createElement('video');
+                video.src = item.src;
+                video.autoplay = true;
+                video.loop = true;
+                video.muted = true;
+                video.playsInline = true;
+                div.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = item.src;
+                img.alt = '';
+                img.loading = 'lazy';
+                div.appendChild(img);
+            }
+            
+            galleryGrid.appendChild(div);
+        });
+    }
+    
+    function openGallery() {
+        populateGallery();
+        showPanel(galleryPanel);
+    }
+    
+    function backToCollection() {
+        showPanel(collectionPanel);
+    }
+    
+    // Event listeners for collection
+    if (collectionTrigger) {
+        collectionTrigger.addEventListener('click', openCollection);
+    }
+    
+    // Handle sleeve clicks
+    sleeves.forEach(sleeve => {
+        sleeve.addEventListener('click', () => {
+            const content = sleeve.dataset.content;
+            if (content === 'beliefs') {
+                openDocumentPanel('beliefs');
+            } else if (content === 'gallery') {
+                openGallery();
+            }
+        });
+    });
+    
+    // Click off collection panel to close
+    if (collectionPanel) {
+        collectionPanel.addEventListener('click', (e) => {
+            // Only if clicking the panel itself, not the content inside
+            if (e.target === collectionPanel) closeAll();
+        });
+    }
+    
+    // Click off gallery panel to go back
+    if (galleryClose) {
+        galleryClose.addEventListener('click', backToCollection);
+    }
+    
+    if (galleryPanel) {
+        galleryPanel.addEventListener('click', (e) => {
+            if (e.target === galleryPanel) backToCollection();
+        });
+    }
+    
+    // Backdrop click closes all
+    if (modalBackdrop) {
+        modalBackdrop.addEventListener('click', closeAll);
+    }
+    
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && currentPanel) {
+            if (currentPanel === collectionPanel) {
+                closeAll();
+            } else {
+                backToCollection();
+            }
+        }
+    });
+    
+    // ========================================
+    // Document Viewer
+    // ========================================
     // Document contents
     const documents = {
         beliefs: {
-            filename: 'beliefs.txt',
+            filename: '',
             content: `
                 <ul>
                     <li><strong>Mediums matter.</strong> The visual domain is the most powerful alignment tool we have.</li>
-                    <li><strong>New interfaces are necessary</strong> to displace antiquated technology and unlock human potential.</li>
+                    <li><strong>New interfaces are necessary.</strong> To displace antiquated technology and unlock human potential.</li>
                     <li><strong>Nature, media, and art ground us.</strong> We need to use them intentionally.</li>
                 </ul>
             `
         }
     };
     
-    window.openDocument = function(docName) {
+    function openDocumentPanel(docName) {
         if (!docViewer || !docContent || !documents[docName]) return;
         
         const doc = documents[docName];
         docContent.innerHTML = doc.content;
         if (docFilename) docFilename.textContent = doc.filename;
-        docViewer.classList.add('open');
-        docViewer.setAttribute('aria-hidden', 'false');
-    };
-    
-    function closeDocument() {
-        if (!docViewer) return;
-        docViewer.classList.remove('open');
-        docViewer.setAttribute('aria-hidden', 'true');
+        showPanel(docViewer);
     }
     
     if (docClose) {
-        docClose.addEventListener('click', closeDocument);
+        docClose.addEventListener('click', backToCollection);
     }
     
     if (docViewer) {
         docViewer.addEventListener('click', (e) => {
-            if (e.target === docViewer) closeDocument();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && docViewer.classList.contains('open')) {
-                closeDocument();
-            }
+            if (e.target === docViewer) backToCollection();
         });
     }
 });
