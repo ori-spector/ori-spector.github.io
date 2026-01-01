@@ -134,6 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
         { type: 'video', src: 'assets/media/idea-WO1SGHsp.mp4' },
         { type: 'video', src: 'assets/media/idea-j59n34VS.mp4' },
         { type: 'video', src: 'assets/media/stairs2.mp4' },
+        { type: 'video', src: 'assets/media/idea-0Q9mTo49.mp4' },
+        { type: 'video', src: 'assets/media/idea-1dLZE-Qq.mp4' },
+        { type: 'video', src: 'assets/media/idea-90SYxecU.mp4' },
+        { type: 'video', src: 'assets/media/idea-Bd2KcI2I.mp4' },
+        { type: 'video', src: 'assets/media/idea-o60Rud7i.mp4' },
+        { type: 'video', src: 'assets/media/idea-RoZaVLwj.mp4' },
     ];
     
     // Track current panel
@@ -183,10 +189,21 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPanel = null;
     }
     
+    // Fisher-Yates shuffle
+    function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+    
     function populateGallery() {
         if (!galleryGrid || galleryGrid.children.length > 0) return;
         
-        galleryItems.forEach(item => {
+        const shuffledItems = shuffleArray(galleryItems);
+        shuffledItems.forEach(item => {
             const div = document.createElement('div');
             div.className = 'gallery-item';
             
