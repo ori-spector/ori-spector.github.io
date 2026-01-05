@@ -1,3 +1,1 @@
-my website 
-
-[a bit about me](https://ori-spector.github.io/)
+[my site](https://www.orispector.com/)
