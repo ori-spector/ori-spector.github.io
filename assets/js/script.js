@@ -140,6 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { type: 'video', src: 'assets/media/idea-Bd2KcI2I.mp4' },
         { type: 'video', src: 'assets/media/idea-o60Rud7i.mp4' },
         { type: 'video', src: 'assets/media/idea-RoZaVLwj.mp4' },
+        { type: 'video', src: 'assets/media/idea-AaNLd1Za.mp4' },
+        { type: 'video', src: 'assets/media/idea-PwifLOl3.mp4' },
     ];
     
     // Track current panel
