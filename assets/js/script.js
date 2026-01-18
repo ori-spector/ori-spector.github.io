@@ -234,6 +234,26 @@ document.addEventListener('DOMContentLoaded', () => {
         showPanel(galleryPanel);
     }
     
+    // ========================================
+    // Featured Video Thumbnail Click-to-Play
+    // ========================================
+    const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+    
+    videoThumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', () => {
+            const wrapper = thumbnail.closest('.featured-video-wrapper');
+            const iframe = wrapper.querySelector('iframe');
+            
+            // Load the video src if not already loaded
+            if (iframe && !iframe.src && iframe.dataset.src) {
+                iframe.src = iframe.dataset.src;
+            }
+            
+            // Show the video, hide the thumbnail
+            wrapper.classList.add('playing');
+        });
+    });
+    
     function backToCollection() {
         showPanel(collectionPanel);
     }
