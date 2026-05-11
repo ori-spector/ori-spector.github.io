@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
             content: `
                 <ul>
                     <li><strong>Mediums matter.</strong> The visual domain is the most powerful alignment tool we have.</li>
-                    <li><strong>New interfaces are necessary.</strong> Antiquated technologies are disrupted when new tools run freely.</li>
+                    <li><strong>New experiences are necessary.</strong> Disruption is caused by letting the frontier run freely.</li>
                     <li><strong>Nature, media, and art ground us.</strong> We need to use them intentionally.</li>
                 </ul>
             `
