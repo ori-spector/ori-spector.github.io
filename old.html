@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ori Spector</title>
+    <title>Record Player - Ori Spector</title>
     <link rel="icon" href="data:,">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,123 +77,13 @@
                     </div>
                 </div>
 
-                <!-- Link credit -->
-                <a class="music-credit" href="https://ramona.co" target="_blank" rel="noopener">[ ramona.co ]</a>
             </div>
         </div>
 
-        <!-- Bio section -->
-        <div class="bio-section">
-            <p class="bio-line with-label"><span class="bio-label">now</span><span>entrepreneur in residence • lux capital</span></p>
-            <p class="bio-line with-label accent"><span class="bio-label">prev</span><span>luma ai • stanford m.s./b.s.</span></p>
-            <p class="bio-line continuation subtle">dabbling in screenplays, film, and philosophy</p>
-        </div>
-
-        <!-- Footer with collection button and socials -->
         <div class="footer-section">
-            <button id="collection-trigger" class="collection-trigger" aria-label="Browse collection">
-                browse collection
-            </button>
             <div class="social-stack">
                 <a class="social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a class="social-icon" href="https://x.com/orispector" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Shared Modal Backdrop -->
-    <div id="modal-backdrop" class="modal-backdrop" aria-hidden="true"></div>
-
-    <!-- Collection Panel -->
-    <div id="collection-overlay" class="modal-panel collection-panel" aria-hidden="true">
-        <div class="collection-crate">
-            <h2 class="crate-title">Collection</h2>
-            <div class="sleeve-grid">
-                <!-- Beliefs Sleeve -->
-                <div class="record-sleeve" data-content="beliefs">
-                    <div class="sleeve-cover">
-                        <div class="sleeve-label">BELIEFS</div>
-                        <div class="sleeve-subtitle">some thoughts</div>
-                    </div>
-                </div>
-                <!-- Gallery Sleeve -->
-                <div class="record-sleeve" data-content="gallery">
-                    <div class="sleeve-cover">
-                        <div class="sleeve-label">GALLERY</div>
-                        <div class="sleeve-subtitle">visual works</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gallery Panel -->
-    <div id="gallery-overlay" class="modal-panel gallery-panel" aria-hidden="true">
-        <button class="back-btn gallery-close" aria-label="Back to collection">← back</button>
-        <div class="gallery-container">
-            <h2 class="gallery-title">Gallery</h2>
-
-            <!-- Featured Film: By Invitation Only -->
-            <div class="featured-film">
-                <div class="featured-video-wrapper" data-video="https://drive.google.com/file/d/14JFo-Foib5PH3ZIG54cvquxH4-curoP9/preview">
-                    <div class="video-thumbnail">
-                        <img src="assets/media/thumbail-BIO.png" alt="By Invitation Only thumbnail">
-                        <button class="play-btn" aria-label="Play video">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <polygon points="5,3 19,12 5,21" fill="currentColor" stroke="none"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <iframe
-                        data-src="https://drive.google.com/file/d/14JFo-Foib5PH3ZIG54cvquxH4-curoP9/preview"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        frameborder="0"
-                    ></iframe>
-                </div>
-                <h3 class="featured-title"><i>By Invitation Only</i></h3>
-                <p class="featured-subtitle">a short western film</p>
-            </div>
-
-            <!-- Featured Film: NOSTALGIA -->
-            <div class="featured-film">
-                <div class="featured-video-wrapper" data-video="https://drive.google.com/file/d/1SPC8Rd5OV-aMw8omnV87C6FSjjTwd4VO/preview">
-                    <div class="video-thumbnail">
-                        <img src="assets/media/thumbnail-nostalgia.png" alt="NOSTALGIA thumbnail">
-                        <button class="play-btn" aria-label="Play video">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <polygon points="5,3 19,12 5,21" fill="currentColor" stroke="none"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <iframe
-                        data-src="https://drive.google.com/file/d/1SPC8Rd5OV-aMw8omnV87C6FSjjTwd4VO/preview"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        frameborder="0"
-                    ></iframe>
-                </div>
-                <h3 class="featured-title"><i>NOSTALGIA</i></h3>
-                <p class="featured-subtitle">a music video</p>
-            </div>
-
-            <h3 class="section-title">Explorations Vol. 1</h3>
-
-            <div class="gallery-grid" id="gallery-grid">
-                <!-- Gallery items loaded here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Document Panel -->
-    <div id="doc-viewer" class="modal-panel doc-panel" aria-hidden="true">
-        <button class="back-btn doc-close" aria-label="Back to collection">← back</button>
-        <div class="doc-paper">
-            <div class="doc-header">
-                <span class="doc-filename">LINER NOTES</span>
-            </div>
-            <div class="doc-content" id="doc-content">
-                <!-- Content loaded dynamically -->
             </div>
         </div>
     </div>
