@@ -2,201 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ori Spector</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="description" content="Ori Spector's personal homepage.">
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/index.css?v=38">
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Braun-style Record Player -->
-        <div class="record-player">
-            <!-- Main body -->
-            <div class="player-body">
-                <!-- Left section: Speaker -->
-                <div class="speaker-section">
-                    <!-- Glass display window -->
-                    <div class="display-window">
-                        <div class="display-content">
-                            <span class="display-text">NOW PLAYING</span>
-                            <div class="display-bars">
-                                <span class="bar"></span>
-                                <span class="bar"></span>
-                                <span class="bar"></span>
-                                <span class="bar"></span>
-                                <span class="bar"></span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Speaker and indicator grouped at bottom -->
-                    <div class="speaker-bottom">
-                        <div class="speaker-grille">
-                            <!-- Dots generated via CSS -->
-                        </div>
-                        <div class="indicator-light"></div>
-                    </div>
-                </div>
-                
-                <!-- Right section: Turntable -->
-                <div class="turntable-section">
-                    <!-- Vinyl Record -->
-                    <div class="vinyl-container">
-                        <div class="vinyl" id="vinyl">
-                            <div class="vinyl-grooves"></div>
-                            <div class="vinyl-label">
-                                <div class="label-text">
-                                    <!-- Circular text using SVG -->
-                                    <svg viewBox="0 0 130 130" class="circular-text-svg">
-                                        <defs>
-                                            <path id="topArc" d="M 15,65 A 50,50 0 0,1 115,65" fill="none"/>
-                                            <path id="bottomArc" d="M 115,65 A 50,50 0 0,1 15,65" fill="none"/>
-                                        </defs>
-                                        <text class="arc-text arc-text-top">
-                                            <textPath href="#topArc" startOffset="50%" text-anchor="middle">ORI SPECTOR • SF</textPath>
-                                        </text>
-                                        <text class="arc-text arc-text-bottom">
-                                            <textPath id="date-time-path" href="#bottomArc" startOffset="50%" text-anchor="middle"></textPath>
-                                        </text>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="vinyl-center"></div>
-                        </div>
-                        <!-- Tonearm / Stylus -->
-                        <div class="tonearm" id="tonearm">
-                            <div class="tonearm-base"></div>
-                            <div class="tonearm-arm"></div>
-                            <div class="tonearm-head"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Link credit -->
-                <a class="music-credit" href="https://ramona.co" target="_blank" rel="noopener">[ ramona.co ]</a>
-            </div>
-        </div>
-        
-        <!-- Bio section -->
-        <div class="bio-section">
-            <p class="bio-line with-label"><span class="bio-label">now</span><span>entrepreneur in residence • lux capital</span></p>
-            <p class="bio-line with-label accent"><span class="bio-label">prev</span><span>luma ai • stanford m.s./b.s.</span></p>
-            <p class="bio-line continuation subtle">dabbling in screenplays, film, and philosophy</p>
-        </div>
-        
-        <!-- Footer with collection button and socials -->
-        <div class="footer-section">
-            <button id="collection-trigger" class="collection-trigger" aria-label="Browse collection">
-                browse collection
-            </button>
-            <div class="social-stack">
-                <a class="social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a class="social-icon" href="https://x.com/orispector" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Shared Modal Backdrop -->
-    <div id="modal-backdrop" class="modal-backdrop" aria-hidden="true"></div>
-    
-    <!-- Collection Panel -->
-    <div id="collection-overlay" class="modal-panel collection-panel" aria-hidden="true">
-        <div class="collection-crate">
-            <h2 class="crate-title">Collection</h2>
-            <div class="sleeve-grid">
-                <!-- Beliefs Sleeve -->
-                <div class="record-sleeve" data-content="beliefs">
-                    <div class="sleeve-cover">
-                        <div class="sleeve-label">BELIEFS</div>
-                        <div class="sleeve-subtitle">some thoughts</div>
-                    </div>
-                </div>
-                <!-- Gallery Sleeve -->
-                <div class="record-sleeve" data-content="gallery">
-                    <div class="sleeve-cover">
-                        <div class="sleeve-label">GALLERY</div>
-                        <div class="sleeve-subtitle">visual works</div>
-                    </div>
+    <main class="page-shell home-shell">
+        <header class="home-header">
+            <h1 class="site-name">Ori Spector</h1>
+
+            <div class="header-meta">
+                <div class="view-switch" aria-label="Homepage view">
+                    <button class="view-button" type="button" data-view-button="markdown" aria-pressed="false">markdown</button>
+                    <span aria-hidden="true">/</span>
+                    <button class="view-button is-active" type="button" data-view-button="gallery" aria-pressed="true">gallery</button>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- Gallery Panel -->
-    <div id="gallery-overlay" class="modal-panel gallery-panel" aria-hidden="true">
-        <button class="back-btn gallery-close" aria-label="Back to collection">← back</button>
-        <div class="gallery-container">
-            <h2 class="gallery-title">Gallery</h2>
-            
-            <!-- Featured Film: By Invitation Only -->
-            <div class="featured-film">
-                <div class="featured-video-wrapper" data-video="https://drive.google.com/file/d/14JFo-Foib5PH3ZIG54cvquxH4-curoP9/preview">
-                    <div class="video-thumbnail">
-                        <img src="assets/media/thumbail-BIO.png" alt="By Invitation Only thumbnail">
-                        <button class="play-btn" aria-label="Play video">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <polygon points="5,3 19,12 5,21" fill="currentColor" stroke="none"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <iframe 
-                        data-src="https://drive.google.com/file/d/14JFo-Foib5PH3ZIG54cvquxH4-curoP9/preview"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        frameborder="0"
-                    ></iframe>
-                </div>
-                <h3 class="featured-title"><i>By Invitation Only</i></h3>
-                <p class="featured-subtitle">a short western film</p>
+        </header>
+
+        <section class="home-view home-markdown" data-home-view="markdown" aria-label="Markdown" hidden>
+            <pre class="markdown-copy"><code>san francisco, ca
+
+<em class="markdown-label">now</em>
+  entrepreneur in residence, <a href="https://luxcapital.com" target="_blank" rel="noopener">lux capital</a>
+  <a href="https://ramona.co" target="_blank" rel="noopener">ramona.co</a>
+
+<em class="markdown-label">before</em>
+  <a href="https://lumalabs.ai" target="_blank" rel="noopener">luma ai</a>
+  stanford, m.s. / b.s.
+
+<em class="markdown-label">talk to me about</em>
+  screenplays / film / philosophy
+  nature
+  traveling
+
+<em class="markdown-label">elsewhere</em>
+  <a href="shorts.html">shorts</a>  <a href="record.html">record</a>  <a href="beliefs.html">beliefs</a></code></pre>
+            <nav class="home-social-stack" aria-label="Elsewhere">
+                <a class="home-social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a class="home-social-icon" href="https://x.com/orispector" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+            </nav>
+        </section>
+
+        <section class="home-view home-gallery is-active" data-home-view="gallery" aria-label="Gallery">
+            <div class="home-video-grid">
+                <video class="hover-preview" src="assets/media/idea-AAcRY7yh.mp4" muted loop playsinline preload="metadata" aria-label="idea-AAcRY7yh"></video>
+                <video class="hover-preview" src="assets/media/idea-CBzmxQGg.mp4" muted loop playsinline preload="metadata" aria-label="idea-CBzmxQGg"></video>
+                <video class="hover-preview" src="assets/media/idea-dg9kGVfw.mp4" muted loop playsinline preload="metadata" aria-label="idea-dg9kGVfw"></video>
+                <video class="hover-preview" src="assets/media/idea-iPr10t.mp4" muted loop playsinline preload="metadata" aria-label="idea-iPr10t"></video>
+                <video class="hover-preview" src="assets/media/idea-JZJVvGtd.mp4" muted loop playsinline preload="metadata" aria-label="idea-JZJVvGtd"></video>
+                <video class="hover-preview" src="assets/media/idea-NVh_r19H.mp4" muted loop playsinline preload="metadata" aria-label="idea-NVh_r19H"></video>
+                <video class="hover-preview" src="assets/media/idea-S4W_N5TJ.mp4" muted loop playsinline preload="metadata" aria-label="idea-S4W_N5TJ"></video>
+                <video class="hover-preview" src="assets/media/idea-ObT87F19.mp4" muted loop playsinline preload="metadata" aria-label="idea-ObT87F19"></video>
+                <video class="hover-preview" src="assets/media/umbrella.mp4" muted loop playsinline preload="metadata" aria-label="umbrella"></video>
+                <video class="hover-preview" src="assets/media/idea-WO1SGHsp.mp4" muted loop playsinline preload="metadata" aria-label="idea-WO1SGHsp"></video>
+                <video class="hover-preview" src="assets/media/idea-j59n34VS.mp4" muted loop playsinline preload="metadata" aria-label="idea-j59n34VS"></video>
+                <video class="hover-preview" src="assets/media/stairs2.mp4" muted loop playsinline preload="metadata" aria-label="stairs2"></video>
+                <video class="hover-preview" src="assets/media/idea-0Q9mTo49.mp4" muted loop playsinline preload="metadata" aria-label="idea-0Q9mTo49"></video>
+                <video class="hover-preview" src="assets/media/idea-1dLZE-Qq.mp4" muted loop playsinline preload="metadata" aria-label="idea-1dLZE-Qq"></video>
+                <video class="hover-preview" src="assets/media/idea-90SYxecU.mp4" muted loop playsinline preload="metadata" aria-label="idea-90SYxecU"></video>
+                <video class="hover-preview" src="assets/media/idea-Bd2KcI2I.mp4" muted loop playsinline preload="metadata" aria-label="idea-Bd2KcI2I"></video>
+                <video class="hover-preview" src="assets/media/idea-o60Rud7i.mp4" muted loop playsinline preload="metadata" aria-label="idea-o60Rud7i"></video>
+                <video class="hover-preview" src="assets/media/idea-RoZaVLwj.mp4" muted loop playsinline preload="metadata" aria-label="idea-RoZaVLwj"></video>
+                <video class="hover-preview" src="assets/media/idea-AaNLd1Za.mp4" muted loop playsinline preload="metadata" aria-label="idea-AaNLd1Za"></video>
+                <video class="hover-preview" src="assets/media/idea-PwifLOl3.mp4" muted loop playsinline preload="metadata" aria-label="idea-PwifLOl3"></video>
+                <video class="hover-preview" src="assets/media/idea_itTLXJJ8.mp4" muted loop playsinline preload="metadata" aria-label="idea itTLXJJ8"></video>
+                <video class="hover-preview" src="assets/media/idea_WHYepjsD.mp4" muted loop playsinline preload="metadata" aria-label="idea WHYepjsD"></video>
             </div>
-            
-            <!-- Featured Film: NOSTALGIA -->
-            <div class="featured-film">
-                <div class="featured-video-wrapper" data-video="https://drive.google.com/file/d/1SPC8Rd5OV-aMw8omnV87C6FSjjTwd4VO/preview">
-                    <div class="video-thumbnail">
-                        <img src="assets/media/thumbnail-nostalgia.png" alt="NOSTALGIA thumbnail">
-                        <button class="play-btn" aria-label="Play video">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <polygon points="5,3 19,12 5,21" fill="currentColor" stroke="none"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <iframe 
-                        data-src="https://drive.google.com/file/d/1SPC8Rd5OV-aMw8omnV87C6FSjjTwd4VO/preview"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        frameborder="0"
-                    ></iframe>
-                </div>
-                <h3 class="featured-title"><i>NOSTALGIA</i></h3>
-                <p class="featured-subtitle">a music video</p>
+            <div class="home-link-stack">
+                <nav class="home-secondary-links" aria-label="Site">
+                    <a href="shorts.html">shorts</a>
+                    <a href="record.html">record</a>
+                    <a href="beliefs.html">beliefs</a>
+                </nav>
+                <nav class="home-social-stack" aria-label="Elsewhere">
+                    <a class="home-social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a class="home-social-icon" href="https://x.com/orispector" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                </nav>
             </div>
-            
-            <h3 class="section-title">Explorations Vol. 1</h3>
-            
-            <div class="gallery-grid" id="gallery-grid">
-                <!-- Gallery items loaded here -->
-            </div>
-        </div>
-    </div>
-    
-    <!-- Document Panel -->
-    <div id="doc-viewer" class="modal-panel doc-panel" aria-hidden="true">
-        <button class="back-btn doc-close" aria-label="Back to collection">← back</button>
-        <div class="doc-paper">
-            <div class="doc-header">
-                <span class="doc-filename">LINER NOTES</span>
-            </div>
-            <div class="doc-content" id="doc-content">
-                <!-- Content loaded dynamically -->
-            </div>
-        </div>
-    </div>
-    
-    <script src="assets/js/script.js?v=38"></script>
+        </section>
+    </main>
+
+    <script src="assets/js/previews.js"></script>
+    <script src="assets/js/home.js"></script>
 </body>
 </html>
