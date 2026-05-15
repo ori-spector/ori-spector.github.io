@@ -10,30 +10,76 @@
 </head>
 <body>
     <main class="page-shell home-shell">
-        <pre class="terminal title-block"><code>ORI SPECTOR</code></pre>
+        <header class="home-header">
+            <div>
+                <h1 class="site-name">Ori Spector</h1>
+                <nav class="home-links" aria-label="Elsewhere">
+                    <a href="gallery.html">gallery</a>
+                    <a href="record.html">record</a>
+                    <a href="https://github.com/ori-spector" target="_blank" rel="noopener">github</a>
+                    <a href="https://x.com/orispector" target="_blank" rel="noopener">x</a>
+                </nav>
+            </div>
 
-        <a class="home-visual" href="gallery.html" aria-label="Open gallery">
-            <video src="assets/media/umbrella.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        </a>
+            <div class="view-switch" aria-label="Homepage view">
+                <button class="view-button" type="button" data-view-button="notes" aria-pressed="false">liner notes</button>
+                <span aria-hidden="true">/</span>
+                <button class="view-button is-active" type="button" data-view-button="sheet" aria-pressed="true">contact sheet</button>
+            </div>
+        </header>
 
-        <pre class="terminal body-block"><code>San Francisco, CA
+        <section class="home-view home-notes" data-home-view="notes" aria-label="Liner notes" hidden>
+            <p>
+                Entrepreneur in residence at <a href="https://luxcapital.com" target="_blank" rel="noopener">Lux Capital</a>.
+                Previously <a href="https://lumalabs.ai" target="_blank" rel="noopener">Luma AI</a> and Stanford.
+                Dabbling in screenplays, film, and philosophy.
+            </p>
 
-CURRENT:
-- Entrepreneur in Residence @ <a href="https://luxcapital.com" target="_blank" rel="noopener">Lux Capital</a>
-- <a href="https://ramona.co" target="_blank" rel="noopener">ramona.co</a>
+            <dl class="note-list">
+                <div>
+                    <dt>now</dt>
+                    <dd>AI, storytelling, visual tools</dd>
+                </div>
+                <div>
+                    <dt>misc</dt>
+                    <dd><a href="gallery.html">visual assets and experiments</a></dd>
+                </div>
+                <div>
+                    <dt>side room</dt>
+                    <dd><a href="record.html">record player</a></dd>
+                </div>
+            </dl>
+        </section>
 
-PREVIOUS:
-- <a href="https://lumalabs.ai" target="_blank" rel="noopener">Luma AI</a>
-- Stanford, M.S. / B.S.
-
-MISC:
-- screenplays, film, philosophy
-- <a href="gallery.html">gallery</a>
-- <a href="record.html">record player</a>
-
-ELSEWHERE:
-- <a href="https://github.com/ori-spector" target="_blank" rel="noopener">github</a>
-- <a href="https://x.com/orispector" target="_blank" rel="noopener">x</a></code></pre>
+        <section class="home-view home-sheet is-active" data-home-view="sheet" aria-label="Contact sheet">
+            <div class="home-video-grid">
+                <video class="hover-preview" src="assets/media/idea-AAcRY7yh.mp4" muted loop playsinline preload="metadata" aria-label="idea-AAcRY7yh"></video>
+                <video class="hover-preview" src="assets/media/idea-CBzmxQGg.mp4" muted loop playsinline preload="metadata" aria-label="idea-CBzmxQGg"></video>
+                <video class="hover-preview" src="assets/media/idea-dg9kGVfw.mp4" muted loop playsinline preload="metadata" aria-label="idea-dg9kGVfw"></video>
+                <video class="hover-preview" src="assets/media/idea-iPr10t.mp4" muted loop playsinline preload="metadata" aria-label="idea-iPr10t"></video>
+                <video class="hover-preview" src="assets/media/idea-JZJVvGtd.mp4" muted loop playsinline preload="metadata" aria-label="idea-JZJVvGtd"></video>
+                <video class="hover-preview" src="assets/media/idea-NVh_r19H.mp4" muted loop playsinline preload="metadata" aria-label="idea-NVh_r19H"></video>
+                <video class="hover-preview" src="assets/media/idea-S4W_N5TJ.mp4" muted loop playsinline preload="metadata" aria-label="idea-S4W_N5TJ"></video>
+                <video class="hover-preview" src="assets/media/idea-ObT87F19.mp4" muted loop playsinline preload="metadata" aria-label="idea-ObT87F19"></video>
+                <video class="hover-preview" src="assets/media/umbrella.mp4" muted loop playsinline preload="metadata" aria-label="umbrella"></video>
+                <video class="hover-preview" src="assets/media/idea-WO1SGHsp.mp4" muted loop playsinline preload="metadata" aria-label="idea-WO1SGHsp"></video>
+                <video class="hover-preview" src="assets/media/idea-j59n34VS.mp4" muted loop playsinline preload="metadata" aria-label="idea-j59n34VS"></video>
+                <video class="hover-preview" src="assets/media/stairs2.mp4" muted loop playsinline preload="metadata" aria-label="stairs2"></video>
+                <video class="hover-preview" src="assets/media/idea-0Q9mTo49.mp4" muted loop playsinline preload="metadata" aria-label="idea-0Q9mTo49"></video>
+                <video class="hover-preview" src="assets/media/idea-1dLZE-Qq.mp4" muted loop playsinline preload="metadata" aria-label="idea-1dLZE-Qq"></video>
+                <video class="hover-preview" src="assets/media/idea-90SYxecU.mp4" muted loop playsinline preload="metadata" aria-label="idea-90SYxecU"></video>
+                <video class="hover-preview" src="assets/media/idea-Bd2KcI2I.mp4" muted loop playsinline preload="metadata" aria-label="idea-Bd2KcI2I"></video>
+                <video class="hover-preview" src="assets/media/idea-o60Rud7i.mp4" muted loop playsinline preload="metadata" aria-label="idea-o60Rud7i"></video>
+                <video class="hover-preview" src="assets/media/idea-RoZaVLwj.mp4" muted loop playsinline preload="metadata" aria-label="idea-RoZaVLwj"></video>
+                <video class="hover-preview" src="assets/media/idea-AaNLd1Za.mp4" muted loop playsinline preload="metadata" aria-label="idea-AaNLd1Za"></video>
+                <video class="hover-preview" src="assets/media/idea-PwifLOl3.mp4" muted loop playsinline preload="metadata" aria-label="idea-PwifLOl3"></video>
+                <video class="hover-preview" src="assets/media/idea_itTLXJJ8.mp4" muted loop playsinline preload="metadata" aria-label="idea itTLXJJ8"></video>
+                <video class="hover-preview" src="assets/media/idea_WHYepjsD.mp4" muted loop playsinline preload="metadata" aria-label="idea WHYepjsD"></video>
+            </div>
+        </section>
     </main>
+
+    <script src="assets/js/gallery.js"></script>
+    <script src="assets/js/home.js"></script>
 </body>
 </html>
