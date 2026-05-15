@@ -1,7 +1,12 @@
 const viewButtons = document.querySelectorAll('[data-view-button]');
 const homeViews = document.querySelectorAll('[data-home-view]');
+const homeShell = document.querySelector('.home-shell');
 
 function setHomeView(viewName) {
+    if (homeShell) {
+        homeShell.dataset.currentView = viewName;
+    }
+
     viewButtons.forEach(button => {
         const isActive = button.dataset.viewButton === viewName;
         button.classList.toggle('is-active', isActive);
