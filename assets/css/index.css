@@ -3,135 +3,109 @@
 }
 
 :root {
-    --bg: #fbfaf7;
-    --ink: #24292f;
-    --muted: #57606a;
-    --line: #d8dee4;
-    --surface: #ffffff;
-    --accent: #0969da;
-    --accent-soft: #ddf4ff;
-    color-scheme: light;
+    --bg: #e5e5e2;
+    --dot: #d7d7d3;
+    --ink: #050505;
+    --muted: #4f4f4a;
 }
 
 html {
-    font-size: 16px;
+    min-height: 100%;
 }
 
 body {
+    min-height: 100vh;
     margin: 0;
-    background: var(--bg);
+    padding: 40px;
+    background-color: var(--bg);
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 16px 16px;
     color: var(--ink);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    line-height: 1.65;
+    font-size: 12px;
+    line-height: 1.5;
 }
 
-a {
-    color: var(--accent);
+a:link,
+a:visited {
+    color: var(--ink);
+    text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
+    text-underline-offset: 2px;
 }
 
 a:hover {
-    background: var(--accent-soft);
+    text-decoration: none;
 }
 
-.markdown-shell {
-    width: min(720px, calc(100% - 32px));
-    margin: 0 auto;
-    padding: 56px 0 72px;
+.page-shell {
+    max-width: 980px;
 }
 
-.markdown-shell-wide {
-    width: min(1080px, calc(100% - 32px));
+.home-shell {
+    max-width: 620px;
 }
 
-.masthead {
-    margin: 0 0 28px;
-}
-
-.kicker {
-    margin: 0 0 10px;
-    color: var(--muted);
-    font-size: 0.84rem;
-}
-
-h1,
-h2 {
+.terminal {
     margin: 0;
-    line-height: 1.25;
-    letter-spacing: 0;
+    white-space: pre-wrap;
+}
+
+.terminal code {
+    font: inherit;
+}
+
+.title-block {
+    margin-bottom: 6px;
+}
+
+.body-block {
+    margin-top: 8px;
+}
+
+.home-visual {
+    display: block;
+    width: min(100%, 280px);
+    margin: 0 0 8px;
+    text-decoration: none;
+}
+
+.home-visual:hover {
+    text-decoration: none;
+}
+
+.home-visual video {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background: #d0d0cc;
+}
+
+section {
+    margin-top: 32px;
 }
 
 h1 {
-    font-size: clamp(2rem, 8vw, 3.5rem);
-    font-weight: 700;
-}
-
-h2 {
-    margin-top: 34px;
-    font-size: 1.12rem;
-    font-weight: 700;
-}
-
-p,
-ul,
-figure {
-    margin: 14px 0 0;
-}
-
-ul {
-    padding-left: 1.4rem;
-}
-
-li + li {
-    margin-top: 6px;
-}
-
-hr {
-    height: 1px;
-    margin: 30px 0;
-    border: 0;
-    background: var(--line);
-}
-
-.top-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 18px;
-    margin-bottom: 36px;
-    font-size: 0.92rem;
-}
-
-.link-list {
-    list-style: "- ";
+    margin: 0 0 10px;
+    font: inherit;
+    font-weight: 400;
+    letter-spacing: 0;
 }
 
 .asset-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-    margin-top: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px 16px;
 }
 
 .featured-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .asset-item,
 .audio-item {
     margin: 0;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--surface);
-}
-
-.asset-item a {
-    display: block;
-}
-
-.asset-item a:hover {
-    background: transparent;
 }
 
 .asset-item img,
@@ -140,7 +114,7 @@ hr {
     width: 100%;
     aspect-ratio: 4 / 3;
     border: 0;
-    background: #f1f3f5;
+    background: #d0d0cc;
     object-fit: cover;
 }
 
@@ -153,30 +127,20 @@ hr {
 }
 
 figcaption {
-    padding: 10px 12px;
-    border-top: 1px solid var(--line);
+    margin-top: 5px;
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: 11px;
     overflow-wrap: anywhere;
 }
 
-.audio-item {
-    padding: 12px;
-}
-
 .audio-item audio {
-    width: 100%;
+    display: block;
+    width: min(100%, 420px);
 }
 
-.audio-item figcaption {
-    margin-top: 8px;
-    padding: 8px 0 0;
-}
-
-@media (max-width: 520px) {
-    .markdown-shell {
-        width: min(720px, calc(100% - 24px));
-        padding-top: 34px;
+@media (max-width: 620px) {
+    body {
+        padding: 28px 22px;
     }
 
     .asset-grid,
