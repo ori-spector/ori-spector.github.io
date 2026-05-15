@@ -118,6 +118,14 @@ h1 {
     object-fit: cover;
 }
 
+.asset-item video.hover-preview {
+    cursor: default;
+}
+
+.asset-item video.hover-preview.is-playing {
+    outline: 1px solid rgba(5, 5, 5, 0.35);
+}
+
 .featured-grid .asset-item img {
     aspect-ratio: 16 / 9;
 }

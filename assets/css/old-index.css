@@ -25,6 +25,26 @@ body {
     gap: 3rem;
 }
 
+.record-nav {
+    position: fixed;
+    top: 22px;
+    left: 24px;
+    z-index: 50;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2px;
+}
+
+.record-nav a {
+    color: rgba(90, 69, 53, 0.7);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.record-nav a:hover {
+    color: rgba(90, 69, 53, 0.95);
+}
+
 /* ========================================
    Record Player
    ======================================== */
