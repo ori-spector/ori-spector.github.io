@@ -87,10 +87,8 @@ a:hover {
 .header-meta {
     display: grid;
     justify-items: end;
-    gap: 9px;
 }
 
-.home-links,
 .view-switch {
     display: flex;
     flex-wrap: wrap;
@@ -170,9 +168,62 @@ a:hover {
 .home-secondary-links {
     display: flex;
     gap: 12px;
-    margin-top: 12px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     font-size: 11px;
+}
+
+.home-link-stack {
+    display: grid;
+    justify-items: start;
+    gap: 10px;
+    margin-top: 13px;
+}
+
+.home-social-stack {
+    display: flex;
+    gap: 13px;
+    margin-top: 13px;
+}
+
+.home-link-stack .home-social-stack {
+    margin-top: 0;
+}
+
+.home-social-icon {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1;
+    opacity: 0.66;
+    text-decoration: none;
+    transition: color 160ms ease, opacity 160ms ease, transform 160ms ease;
+}
+
+.home-social-icon:link,
+.home-social-icon:visited {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.home-social-icon:hover {
+    color: var(--ink);
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.beliefs-shell {
+    max-width: 680px;
+}
+
+.belief-copy {
+    max-width: 35rem;
+    margin-top: 34px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.belief-copy p {
+    margin: 0 0 18px;
 }
 
 section {
