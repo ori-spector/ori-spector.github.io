@@ -84,6 +84,12 @@ a:hover {
     line-height: 0.96;
 }
 
+.header-meta {
+    display: grid;
+    justify-items: end;
+    gap: 9px;
+}
+
 .home-links,
 .view-switch {
     display: flex;
@@ -241,6 +247,10 @@ figcaption {
     .home-header {
         display: grid;
         gap: 18px;
+    }
+
+    .header-meta {
+        justify-items: start;
     }
 
     .view-switch {
