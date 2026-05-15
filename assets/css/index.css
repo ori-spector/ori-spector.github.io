@@ -143,6 +143,13 @@ a:hover {
     white-space: pre-wrap;
 }
 
+.markdown-label {
+    display: block;
+    margin-left: 2ch;
+    color: var(--muted);
+    font-style: italic;
+}
+
 .home-video-grid {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
