@@ -78,23 +78,10 @@ a:hover {
 .site-name {
     margin: 0 0 6px;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(30px, 5vw, 58px);
+    font-size: clamp(24px, 3.4vw, 40px);
     font-weight: 400;
     letter-spacing: 0;
-    line-height: 0.96;
-    transition: color 180ms ease, font-size 180ms ease, line-height 180ms ease;
-}
-
-.home-shell[data-current-view="markdown"] .home-header {
-    margin-bottom: 10px;
-}
-
-.home-shell[data-current-view="markdown"] .site-name {
-    color: var(--muted);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    font-size: 12px;
-    line-height: 1.4;
-    text-transform: lowercase;
+    line-height: 1.02;
 }
 
 .header-meta {
@@ -221,6 +208,12 @@ a:hover {
     color: var(--ink);
     opacity: 1;
     transform: translateY(-1px);
+}
+
+.subpage-nav {
+    margin-bottom: 34px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 11px;
 }
 
 .beliefs-shell {
