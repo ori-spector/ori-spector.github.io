@@ -145,7 +145,6 @@ a:hover {
 
 .markdown-label {
     display: block;
-    margin-left: 2ch;
     color: var(--muted);
     font-style: italic;
 }
