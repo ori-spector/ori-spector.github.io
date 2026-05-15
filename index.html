@@ -14,41 +14,33 @@
             <div>
                 <h1 class="site-name">Ori Spector</h1>
                 <nav class="home-links" aria-label="Elsewhere">
-                    <a href="gallery.html">gallery</a>
-                    <a href="record.html">record</a>
                     <a href="https://github.com/ori-spector" target="_blank" rel="noopener">github</a>
                     <a href="https://x.com/orispector" target="_blank" rel="noopener">x</a>
                 </nav>
             </div>
 
             <div class="view-switch" aria-label="Homepage view">
-                <button class="view-button" type="button" data-view-button="notes" aria-pressed="false">liner notes</button>
+                <button class="view-button" type="button" data-view-button="markdown" aria-pressed="false">markdown</button>
                 <span aria-hidden="true">/</span>
                 <button class="view-button is-active" type="button" data-view-button="sheet" aria-pressed="true">contact sheet</button>
             </div>
         </header>
 
-        <section class="home-view home-notes" data-home-view="notes" aria-label="Liner notes" hidden>
-            <p>
-                Entrepreneur in residence at <a href="https://luxcapital.com" target="_blank" rel="noopener">Lux Capital</a>.
-                Previously <a href="https://lumalabs.ai" target="_blank" rel="noopener">Luma AI</a> and Stanford.
-                Dabbling in screenplays, film, and philosophy.
-            </p>
+        <section class="home-view home-markdown" data-home-view="markdown" aria-label="Markdown" hidden>
+            <pre class="markdown-copy"><code>San Francisco, CA
 
-            <dl class="note-list">
-                <div>
-                    <dt>now</dt>
-                    <dd>AI, storytelling, visual tools</dd>
-                </div>
-                <div>
-                    <dt>misc</dt>
-                    <dd><a href="gallery.html">visual assets and experiments</a></dd>
-                </div>
-                <div>
-                    <dt>side room</dt>
-                    <dd><a href="record.html">record player</a></dd>
-                </div>
-            </dl>
+CURRENT:
+- Entrepreneur in Residence @ <a href="https://luxcapital.com" target="_blank" rel="noopener">Lux Capital</a>
+- <a href="https://ramona.co" target="_blank" rel="noopener">ramona.co</a>
+
+PREVIOUS:
+- <a href="https://lumalabs.ai" target="_blank" rel="noopener">Luma AI</a>
+- Stanford, M.S. / B.S.
+
+MISC:
+- screenplays, film, philosophy
+- <a href="films.html">short films</a>
+- <a href="record.html">record</a></code></pre>
         </section>
 
         <section class="home-view home-sheet is-active" data-home-view="sheet" aria-label="Contact sheet">
@@ -76,10 +68,14 @@
                 <video class="hover-preview" src="assets/media/idea_itTLXJJ8.mp4" muted loop playsinline preload="metadata" aria-label="idea itTLXJJ8"></video>
                 <video class="hover-preview" src="assets/media/idea_WHYepjsD.mp4" muted loop playsinline preload="metadata" aria-label="idea WHYepjsD"></video>
             </div>
+            <nav class="home-secondary-links" aria-label="Site">
+                <a href="films.html">short films</a>
+                <a href="record.html">record</a>
+            </nav>
         </section>
     </main>
 
-    <script src="assets/js/gallery.js"></script>
+    <script src="assets/js/previews.js"></script>
     <script src="assets/js/home.js"></script>
 </body>
 </html>
