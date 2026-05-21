@@ -2,7 +2,14 @@ document.querySelectorAll('video.hover-preview').forEach(video => {
     video.muted = true;
     video.tabIndex = 0;
 
+    const load = () => {
+        if (video.getAttribute('src') || !video.dataset.src) return;
+        video.src = video.dataset.src;
+        video.load();
+    };
+
     const play = () => {
+        load();
         video.play().catch(() => {});
     };
 
