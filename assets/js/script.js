@@ -269,9 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sleeves.forEach(sleeve => {
         sleeve.addEventListener('click', () => {
             const content = sleeve.dataset.content;
-            if (content === 'beliefs') {
-                openDocumentPanel('beliefs');
-            } else if (content === 'gallery') {
+            if (content === 'gallery') {
                 openGallery();
             }
         });
@@ -315,19 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================
     // Document Viewer
     // ========================================
-    // Document contents
-    const documents = {
-        beliefs: {
-            filename: '',
-            content: `
-                <ul>
-                    <li><strong>Mediums matter.</strong> The visual domain is the most powerful alignment tool we have.</li>
-                    <li><strong>New experiences are necessary.</strong> Disruption is caused by letting the frontier run freely.</li>
-                    <li><strong>Nature, media, and art ground us.</strong> We need to use them intentionally.</li>
-                </ul>
-            `
-        }
-    };
+    const documents = {};
     
     function openDocumentPanel(docName) {
         if (!docViewer || !docContent || !documents[docName]) return;

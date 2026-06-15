@@ -222,22 +222,6 @@ a:hover {
     font-size: 11px;
 }
 
-.beliefs-shell {
-    max-width: 680px;
-}
-
-.belief-copy {
-    max-width: 35rem;
-    margin-top: 34px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    font-size: 13px;
-    line-height: 1.55;
-}
-
-.belief-copy p {
-    margin: 0 0 18px;
-}
-
 section {
     margin-top: 32px;
 }
