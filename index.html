@@ -16,14 +16,14 @@
 
             <div class="header-meta">
                 <div class="view-switch" aria-label="Homepage view">
-                    <button class="view-button" type="button" data-view-button="markdown" aria-pressed="false">markdown</button>
+                    <button class="view-button is-active" type="button" data-view-button="markdown" aria-pressed="true">markdown</button>
                     <span aria-hidden="true">/</span>
-                    <button class="view-button is-active" type="button" data-view-button="gallery" aria-pressed="true">gallery</button>
+                    <button class="view-button" type="button" data-view-button="gallery" aria-pressed="false">gallery</button>
                 </div>
             </div>
         </header>
 
-        <section class="home-view home-markdown" data-home-view="markdown" aria-label="Markdown" hidden>
+        <section class="home-view home-markdown is-active" data-home-view="markdown" aria-label="Markdown">
             <pre class="markdown-copy"><code>san francisco, ca
 
 <em class="markdown-label">now</em>
@@ -44,10 +44,11 @@
             <nav class="home-social-stack" aria-label="Elsewhere">
                 <a class="home-social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a class="home-social-icon" href="https://x.com/orispector" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a class="home-social-icon" href="https://www.linkedin.com/in/ori-spector-a96ba01aa/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </nav>
         </section>
 
-        <section class="home-view home-gallery is-active" data-home-view="gallery" aria-label="Gallery">
+        <section class="home-view home-gallery" data-home-view="gallery" aria-label="Gallery" hidden>
             <div class="home-video-grid">
                 <video class="hover-preview" data-src="assets/media/idea-AAcRY7yh.mp4" poster="assets/media/thumbnails/idea-AAcRY7yh.jpg" muted loop playsinline preload="none" aria-label="idea-AAcRY7yh"></video>
                 <video class="hover-preview" data-src="assets/media/idea-CBzmxQGg.mp4" poster="assets/media/thumbnails/idea-CBzmxQGg.jpg" muted loop playsinline preload="none" aria-label="idea-CBzmxQGg"></video>
@@ -80,6 +81,7 @@
                 <nav class="home-social-stack" aria-label="Elsewhere">
                     <a class="home-social-icon" href="https://github.com/ori-spector" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a class="home-social-icon" href="https://x.com/orispector" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a class="home-social-icon" href="https://www.linkedin.com/in/ori-spector-a96ba01aa/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </nav>
             </div>
         </section>
